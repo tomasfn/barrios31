@@ -12,9 +12,11 @@
 		4542CCEB212C4FDE00EE5D3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCE9212C4FDE00EE5D3F /* Main.storyboard */; };
 		4542CCED212C4FE400EE5D3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCEC212C4FE400EE5D3F /* Assets.xcassets */; };
 		4542CCF0212C4FE400EE5D3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCEE212C4FE400EE5D3F /* LaunchScreen.storyboard */; };
+		E3172AED30899E1B251288AC /* Pods_Barrio31.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FAE5871C7A53CD76A60031 /* Pods_Barrio31.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33FAE5871C7A53CD76A60031 /* Pods_Barrio31.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Barrio31.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4542CCE2212C4FDE00EE5D3F /* Barrio31.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Barrio31.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4542CCE5212C4FDE00EE5D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4542CCE7212C4FDE00EE5D3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,8 @@
 		4542CCEC212C4FE400EE5D3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4542CCEF212C4FE400EE5D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4542CCF1212C4FE400EE5D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		904E8A04AF1E2F73D36B58E2 /* Pods-Barrio31.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.debug.xcconfig"; sourceTree = "<group>"; };
+		975ECE4043BDEAB515CB6780 /* Pods-Barrio31.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.release.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3172AED30899E1B251288AC /* Pods_Barrio31.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06CA1F4EF2BFB2D50A6614D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				33FAE5871C7A53CD76A60031 /* Pods_Barrio31.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0FEED906B67E4F552DE02ABB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				904E8A04AF1E2F73D36B58E2 /* Pods-Barrio31.debug.xcconfig */,
+				975ECE4043BDEAB515CB6780 /* Pods-Barrio31.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		4542CCD9212C4FDE00EE5D3F = {
 			isa = PBXGroup;
 			children = (
 				4542CCE4212C4FDE00EE5D3F /* Barrio31 */,
 				4542CCE3212C4FDE00EE5D3F /* Products */,
+				0FEED906B67E4F552DE02ABB /* Pods */,
+				06CA1F4EF2BFB2D50A6614D8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4542CCF4212C4FE400EE5D3F /* Build configuration list for PBXNativeTarget "Barrio31" */;
 			buildPhases = (
+				03F60B61EC9DDE425ECA737E /* [CP] Check Pods Manifest.lock */,
 				4542CCDE212C4FDE00EE5D3F /* Sources */,
 				4542CCDF212C4FDE00EE5D3F /* Frameworks */,
 				4542CCE0212C4FDE00EE5D3F /* Resources */,
+				5C30E57B9BC9E45F7584F60D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +155,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		03F60B61EC9DDE425ECA737E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Barrio31-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C30E57B9BC9E45F7584F60D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4542CCDE212C4FDE00EE5D3F /* Sources */ = {
@@ -278,15 +343,13 @@
 		};
 		4542CCF5212C4FE400EE5D3F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 904E8A04AF1E2F73D36B58E2 /* Pods-Barrio31.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHT59S24UX;
 				INFOPLIST_FILE = Barrio31/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = candoit.Barrio31;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -296,15 +359,13 @@
 		};
 		4542CCF6212C4FE400EE5D3F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 975ECE4043BDEAB515CB6780 /* Pods-Barrio31.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHT59S24UX;
 				INFOPLIST_FILE = Barrio31/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = candoit.Barrio31;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
