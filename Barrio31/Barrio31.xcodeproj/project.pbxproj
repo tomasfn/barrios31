@@ -7,23 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45151C2F212DE69300222656 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C2B212DE69300222656 /* AppColors.swift */; };
+		45151C31212DE69300222656 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C2D212DE69300222656 /* AppFonts.swift */; };
+		45151C32212DE69300222656 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C2E212DE69300222656 /* AppImages.swift */; };
+		45151C34212DE93900222656 /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C33212DE93800222656 /* Commons.swift */; };
+		45151C36212DEA6F00222656 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C35212DEA6E00222656 /* BaseViewController.swift */; };
+		45151C3A212DF65100222656 /* EVExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C37212DF65000222656 /* EVExtensions.swift */; };
+		45151C3B212DF65100222656 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C38212DF65000222656 /* NibLoadableView.swift */; };
+		45151C3C212DF65100222656 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C39212DF65000222656 /* ReusableView.swift */; };
 		4542CCE6212C4FDE00EE5D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CCE5212C4FDE00EE5D3F /* AppDelegate.swift */; };
-		4542CCE8212C4FDE00EE5D3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CCE7212C4FDE00EE5D3F /* ViewController.swift */; };
-		4542CCEB212C4FDE00EE5D3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCE9212C4FDE00EE5D3F /* Main.storyboard */; };
+		4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CCE7212C4FDE00EE5D3F /* MapViewController.swift */; };
 		4542CCED212C4FE400EE5D3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCEC212C4FE400EE5D3F /* Assets.xcassets */; };
 		4542CCF0212C4FE400EE5D3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCEE212C4FE400EE5D3F /* LaunchScreen.storyboard */; };
+		45CF59102136E3FE00E2A858 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF590F2136E3FE00E2A858 /* Models.swift */; };
+		45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F23A1921359B7500F22C1C /* Main.storyboard */; };
+		45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F23A1D2135D9D400F22C1C /* APIManager.swift */; };
 		E3172AED30899E1B251288AC /* Pods_Barrio31.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FAE5871C7A53CD76A60031 /* Pods_Barrio31.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		33FAE5871C7A53CD76A60031 /* Pods_Barrio31.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Barrio31.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45151C2B212DE69300222656 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		45151C2D212DE69300222656 /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
+		45151C2E212DE69300222656 /* AppImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
+		45151C33212DE93800222656 /* Commons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commons.swift; sourceTree = "<group>"; };
+		45151C35212DEA6E00222656 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		45151C37212DF65000222656 /* EVExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EVExtensions.swift; sourceTree = "<group>"; };
+		45151C38212DF65000222656 /* NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
+		45151C39212DF65000222656 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		4542CCE2212C4FDE00EE5D3F /* Barrio31.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Barrio31.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4542CCE5212C4FDE00EE5D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4542CCE7212C4FDE00EE5D3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4542CCEA212C4FDE00EE5D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4542CCE7212C4FDE00EE5D3F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4542CCEC212C4FE400EE5D3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4542CCEF212C4FE400EE5D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4542CCF1212C4FE400EE5D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45CF590F2136E3FE00E2A858 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		45F23A1A21359B7500F22C1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		45F23A1D2135D9D400F22C1C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		904E8A04AF1E2F73D36B58E2 /* Pods-Barrio31.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.debug.xcconfig"; sourceTree = "<group>"; };
 		975ECE4043BDEAB515CB6780 /* Pods-Barrio31.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.release.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +77,29 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		45151C2A212DE0EE00222656 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				45151C37212DF65000222656 /* EVExtensions.swift */,
+				45151C38212DF65000222656 /* NibLoadableView.swift */,
+				45151C39212DF65000222656 /* ReusableView.swift */,
+				45151C35212DEA6E00222656 /* BaseViewController.swift */,
+				45151C33212DE93800222656 /* Commons.swift */,
+				45151C2B212DE69300222656 /* AppColors.swift */,
+				45151C2D212DE69300222656 /* AppFonts.swift */,
+				45151C2E212DE69300222656 /* AppImages.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		45151C3D212DF66600222656 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				4542CCE7212C4FDE00EE5D3F /* MapViewController.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		4542CCD9212C4FDE00EE5D3F = {
 			isa = PBXGroup;
 			children = (
@@ -78,14 +121,25 @@
 		4542CCE4212C4FDE00EE5D3F /* Barrio31 */ = {
 			isa = PBXGroup;
 			children = (
+				45F23A1C2135D5F800F22C1C /* Manager-Models */,
+				45151C3D212DF66600222656 /* Screens */,
+				45151C2A212DE0EE00222656 /* Utils */,
 				4542CCE5212C4FDE00EE5D3F /* AppDelegate.swift */,
-				4542CCE7212C4FDE00EE5D3F /* ViewController.swift */,
-				4542CCE9212C4FDE00EE5D3F /* Main.storyboard */,
 				4542CCEC212C4FE400EE5D3F /* Assets.xcassets */,
 				4542CCEE212C4FE400EE5D3F /* LaunchScreen.storyboard */,
+				45F23A1921359B7500F22C1C /* Main.storyboard */,
 				4542CCF1212C4FE400EE5D3F /* Info.plist */,
 			);
 			path = Barrio31;
+			sourceTree = "<group>";
+		};
+		45F23A1C2135D5F800F22C1C /* Manager-Models */ = {
+			isa = PBXGroup;
+			children = (
+				45F23A1D2135D9D400F22C1C /* APIManager.swift */,
+				45CF590F2136E3FE00E2A858 /* Models.swift */,
+			);
+			path = "Manager-Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,9 +202,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */,
 				4542CCF0212C4FE400EE5D3F /* LaunchScreen.storyboard in Resources */,
 				4542CCED212C4FE400EE5D3F /* Assets.xcassets in Resources */,
-				4542CCEB212C4FDE00EE5D3F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +254,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4542CCE8212C4FDE00EE5D3F /* ViewController.swift in Sources */,
+				45151C3A212DF65100222656 /* EVExtensions.swift in Sources */,
+				45151C3C212DF65100222656 /* ReusableView.swift in Sources */,
+				45151C32212DE69300222656 /* AppImages.swift in Sources */,
+				45CF59102136E3FE00E2A858 /* Models.swift in Sources */,
+				45151C31212DE69300222656 /* AppFonts.swift in Sources */,
+				45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */,
+				45151C3B212DF65100222656 /* NibLoadableView.swift in Sources */,
+				45151C2F212DE69300222656 /* AppColors.swift in Sources */,
+				4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */,
+				45151C34212DE93900222656 /* Commons.swift in Sources */,
+				45151C36212DEA6F00222656 /* BaseViewController.swift in Sources */,
 				4542CCE6212C4FDE00EE5D3F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,20 +272,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4542CCE9212C4FDE00EE5D3F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4542CCEA212C4FDE00EE5D3F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4542CCEE212C4FE400EE5D3F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4542CCEF212C4FE400EE5D3F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		45F23A1921359B7500F22C1C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45F23A1A21359B7500F22C1C /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -349,7 +413,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHT59S24UX;
 				INFOPLIST_FILE = Barrio31/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = candoit.Barrio31;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -365,7 +432,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHT59S24UX;
 				INFOPLIST_FILE = Barrio31/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = candoit.Barrio31;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

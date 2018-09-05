@@ -1,0 +1,6 @@
+framework module Pods_Barrio31 {
+  umbrella header "Pods-Barrio31-umbrella.h"
+
+  export *
+  module * { export * }
+}
