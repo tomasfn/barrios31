@@ -10,10 +10,41 @@ import UIKit
 
 //MARK: App Images
 extension UIImage {
+    
+  class func iconHome() -> UIImage! {
+    return UIImage(named: "menu-ic")
+  }
   
-  //MARK: Bottom Bar
-  class func bottomBarHomeOff() -> UIImage! {
-    return UIImage(named: "bottom-bar-inicio-off-ios")
+  class func espacioPublicoOn() -> UIImage! {
+    return UIImage(named: "ic-espacio-publico")
+  }
+  
+  class func espacioPublicoOff() -> UIImage! {
+    return UIImage(named: "ic-espacio-publico-off")
+  }
+  
+  class func iconInfraOn() -> UIImage! {
+    return UIImage(named: "ic-infraestructura")
+  }
+  
+  class func iconInfraOff() -> UIImage! {
+    return UIImage(named: "ic-infraestructura-off")
+  }
+  
+  class func iconSocialOn() -> UIImage! {
+    return UIImage(named: "ic-equipamiento-soc")
+  }
+  
+  class func iconSocialOff() -> UIImage! {
+    return UIImage(named: "ic-equipamiento-soc-off")
+  }
+  
+  class func iconMundoOn() -> UIImage! {
+    return UIImage(named: "ic-mundo")
+  }
+  
+  class func iconMundoOff() -> UIImage! {
+    return UIImage(named: "ic-mundo-off")
   }
   
 }

@@ -19,6 +19,10 @@
 		4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CCE7212C4FDE00EE5D3F /* MapViewController.swift */; };
 		4542CCED212C4FE400EE5D3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCEC212C4FE400EE5D3F /* Assets.xcassets */; };
 		4542CCF0212C4FE400EE5D3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCEE212C4FE400EE5D3F /* LaunchScreen.storyboard */; };
+		45CB1076214ADF2900E856E2 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CB1072214ADF2700E856E2 /* Montserrat-Bold.ttf */; };
+		45CB1077214ADF2900E856E2 /* Chalet NewYorkNineteenEighty.otf in Resources */ = {isa = PBXBuildFile; fileRef = 45CB1073214ADF2800E856E2 /* Chalet NewYorkNineteenEighty.otf */; };
+		45CB1078214ADF2900E856E2 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CB1074214ADF2800E856E2 /* Montserrat-Regular.ttf */; };
+		45CB1079214ADF2900E856E2 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CB1075214ADF2900E856E2 /* Montserrat-SemiBold.ttf */; };
 		45CF59102136E3FE00E2A858 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF590F2136E3FE00E2A858 /* Models.swift */; };
 		45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F23A1921359B7500F22C1C /* Main.storyboard */; };
 		45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F23A1D2135D9D400F22C1C /* APIManager.swift */; };
@@ -41,6 +45,10 @@
 		4542CCEC212C4FE400EE5D3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4542CCEF212C4FE400EE5D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4542CCF1212C4FE400EE5D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45CB1072214ADF2700E856E2 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		45CB1073214ADF2800E856E2 /* Chalet NewYorkNineteenEighty.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chalet NewYorkNineteenEighty.otf"; sourceTree = "<group>"; };
+		45CB1074214ADF2800E856E2 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		45CB1075214ADF2900E856E2 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		45CF590F2136E3FE00E2A858 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		45F23A1A21359B7500F22C1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45F23A1D2135D9D400F22C1C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -125,12 +133,24 @@
 				45151C3D212DF66600222656 /* Screens */,
 				45151C2A212DE0EE00222656 /* Utils */,
 				4542CCE5212C4FDE00EE5D3F /* AppDelegate.swift */,
+				45CB1071214ADDB000E856E2 /* Resources */,
 				4542CCEC212C4FE400EE5D3F /* Assets.xcassets */,
 				4542CCEE212C4FE400EE5D3F /* LaunchScreen.storyboard */,
 				45F23A1921359B7500F22C1C /* Main.storyboard */,
 				4542CCF1212C4FE400EE5D3F /* Info.plist */,
 			);
 			path = Barrio31;
+			sourceTree = "<group>";
+		};
+		45CB1071214ADDB000E856E2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				45CB1073214ADF2800E856E2 /* Chalet NewYorkNineteenEighty.otf */,
+				45CB1072214ADF2700E856E2 /* Montserrat-Bold.ttf */,
+				45CB1074214ADF2800E856E2 /* Montserrat-Regular.ttf */,
+				45CB1075214ADF2900E856E2 /* Montserrat-SemiBold.ttf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		45F23A1C2135D5F800F22C1C /* Manager-Models */ = {
@@ -202,6 +222,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45CB1078214ADF2900E856E2 /* Montserrat-Regular.ttf in Resources */,
+				45CB1077214ADF2900E856E2 /* Chalet NewYorkNineteenEighty.otf in Resources */,
+				45CB1076214ADF2900E856E2 /* Montserrat-Bold.ttf in Resources */,
+				45CB1079214ADF2900E856E2 /* Montserrat-SemiBold.ttf in Resources */,
 				45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */,
 				4542CCF0212C4FE400EE5D3F /* LaunchScreen.storyboard in Resources */,
 				4542CCED212C4FE400EE5D3F /* Assets.xcassets in Resources */,
@@ -410,6 +434,7 @@
 			baseConfigurationReference = 904E8A04AF1E2F73D36B58E2 /* Pods-Barrio31.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHT59S24UX;
 				INFOPLIST_FILE = Barrio31/Info.plist;
@@ -429,6 +454,7 @@
 			baseConfigurationReference = 975ECE4043BDEAB515CB6780 /* Pods-Barrio31.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHT59S24UX;
 				INFOPLIST_FILE = Barrio31/Info.plist;

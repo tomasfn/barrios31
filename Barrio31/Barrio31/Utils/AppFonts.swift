@@ -10,7 +10,7 @@ import UIKit
 
 extension UIFont {
   
-  class func LibreBaskervilleRegular(fontSize: Float!) -> UIFont {
+  class func chalet(fontSize: Float!) -> UIFont {
     /*for family in UIFont.familyNames {
       print("\(family)")
       
@@ -18,7 +18,7 @@ extension UIFont {
         print("   \(name)")
       }
     }*/
-    return UIFont.init(name: "Baskerville", size: CGFloat(fontSize))!
+    return UIFont.init(name: "Chalet-NewYorkNineteenEighty", size: CGFloat(fontSize))!
   }
   
   class func LibreBaskervilleBold(fontSize: Float!) -> UIFont {

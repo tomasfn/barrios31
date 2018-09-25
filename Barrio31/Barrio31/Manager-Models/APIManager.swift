@@ -9,7 +9,10 @@
 import Foundation
 import Alamofire
 
-typealias AlamofireCompletionBlock = ([Category]?, Error?) -> Void
+typealias CategorysCompletionBlock = ([Category]?, Error?) -> Void
+typealias PolygonsCompletionBlock = ([Polygon]?, Error?) -> Void
+typealias PolygonsDetailCompletionBlock = (PolygonDetail?, Error?) -> Void
+
 
 public let apiServer = "http://barrio31.candoit.com.ar/api/"//"http://64.251.25.64:8083/api" //
 private var mainHeader = ["Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.F0jfyuausMz2uHyzVWaXDExMGQfcgMAZRn-wVv540zCVlknYjSjg3fAatsru9HVOL7xiqpZcUB4eHQjlSIWpUw"]
@@ -20,29 +23,60 @@ class APIManager: NSObject {
   
   // MARK: REcorre services
   
-  class func getUser(completionBlock: @escaping AlamofireCompletionBlock) {
-    
+  class func getCategorys(completionBlock: @escaping CategorysCompletionBlock) {
     let url = apiServer + "recorre/categorias"
-    
     Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
-      
       if let data = response.data, response.error == nil {
-        print("Data: \(data)") // original server data as UTF8 string
-        
         do {
           let response = try JSONDecoder().decode([Category].self, from: data)
           completionBlock(response, nil)
-
         } catch {
           completionBlock(nil, ErrorManager.serverError())
         }
-
       }
       else {
         completionBlock(nil, ErrorManager.serverError())
       }
     }
-    
+  }
+  
+  class func getPolygons(completionBlock: @escaping PolygonsCompletionBlock) {
+    let url = apiServer + "recorre"
+    Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+      if let data = response.result.value, response.error == nil {
+        if let dic = data as? Dictionary<String, AnyObject> {
+          if let array = dic["features"] as? Array<Dictionary<String, AnyObject>> {
+            var polygons = [Polygon]()
+            for item in array {
+              let pol = Polygon.init(JSON: item)
+              polygons.append(pol)
+            }
+            completionBlock(polygons, nil)
+
+          }
+        }
+      }
+      else {
+        completionBlock(nil, ErrorManager.serverError())
+      }
+    }
+  }
+  
+  class func getPolygonsDetails(withId: String , completionBlock: @escaping PolygonsDetailCompletionBlock) {
+    let url = apiServer + "recorre/detalle/\(withId)"
+    Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+      if let data = response.data, response.error == nil {
+        do {
+          let response = try JSONDecoder().decode(PolygonDetail.self, from: data)
+          completionBlock(response, nil)
+        } catch {
+          completionBlock(nil, ErrorManager.serverError())
+        }
+      }
+      else {
+        completionBlock(nil, ErrorManager.serverError())
+      }
+    }
   }
   
 }
@@ -52,7 +86,7 @@ class ErrorManager {
   static let APIErrorDomain = "ar.com.barrio31.APIError"
   
   class func unknownError() -> NSError {
-    return apiErrorWithCode(code: -999, andLocalizedDescription: "Error al recibir los datos. Por favor intente nuevamente.")
+    return apiErrorWithCode(code: -989, andLocalizedDescription: "Error al recibir los datos. Por favor intente nuevamente.")
   }
   
   class func credentialError() -> NSError {

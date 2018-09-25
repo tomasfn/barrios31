@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let nv = UINavigationController(rootViewController: vc)
     nv.navigationBar.isTranslucent = false
     window?.rootViewController = nv*/
+    
+    setUpAppearance()
+    
     return true
   }
 
@@ -47,6 +50,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+  }
+  
+  func setUpAppearance() {
+    let mainColor = UIColor.hexStringToUIColor(hex: "#de316a")
+    UINavigationBar.appearance().tintColor = UIColor.black
+    UINavigationBar.appearance().barTintColor = UIColor.white
+    
+    let titleTextAttributes = [NSAttributedStringKey.foregroundColor : mainColor,
+                               NSAttributedStringKey.font : UIFont.chalet(fontSize: 17)]
+    UINavigationBar.appearance().titleTextAttributes  = titleTextAttributes
+    
   }
 
 

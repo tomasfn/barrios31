@@ -70,25 +70,10 @@ extension UIView {
     set { frame = CGRect(origin: newValue, size: size) }
   }
   
-  public func roundView(updateLayout layoutIfNeeded: Bool = true) {
-    if layoutIfNeeded { self.layoutIfNeeded() }
-    roundCorners(radius: min(width, height)/2)
-  }
   
   public func roundCorners(radius: CGFloat) {
     layer.cornerRadius = radius
     layer.masksToBounds = radius > 0
-  }
-  
-  public func takeSnapshot() -> UIImage? {
-    UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
-    
-    drawHierarchy(in: bounds, afterScreenUpdates: true)
-    //    layer.renderInContext(UIGraphicsGetCurrentContext())
-    
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    return image
   }
     
 }
@@ -134,11 +119,7 @@ extension Array {
 }
 
 
-extension Bool {
-  static func randomValue() -> Bool {
-    return arc4random_uniform(2) == 0 ? false : true
-  }
-}
+
 
 extension Dictionary {
   func removeNulls() -> Dictionary {
