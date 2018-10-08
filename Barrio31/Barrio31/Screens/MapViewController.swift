@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SVProgressHUD
 
 class MapViewController: BaseViewController , UICollectionViewDataSource , UICollectionViewDelegate, MKMapViewDelegate {
   
@@ -35,7 +36,12 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     mapView.delegate = self
     
     self.view.addSubview(mapView)
-    mapView.anchor(view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom:view.bottomAnchor, trailing: view.trailingAnchor , padding: .init(top: 80, left: 0, bottom: 0, right: 0))
+    if #available(iOS 11.0, *) {
+      mapView.anchor(view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom:view.bottomAnchor, trailing: view.trailingAnchor , padding: .init(top: 80, left: 0, bottom: 0, right: 0))
+    } else {
+      // Fallback on earlier versions
+      mapView.anchor(view.topAnchor, leading: view.leadingAnchor, bottom:view.bottomAnchor, trailing: view.trailingAnchor , padding: .init(top: 80, left: 0, bottom: 0, right: 0))
+    }
     addMenuButton()
     let flowLayout = UICollectionViewFlowLayout()
     collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
@@ -47,7 +53,12 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     flowLayout.minimumLineSpacing = 0
     flowLayout.sectionInset = UIEdgeInsetsMake(0.0, 0.0,00,0);
     self.view.addSubview(collectionView)
-    collectionView.anchor(view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom:mapView.topAnchor, trailing: view.trailingAnchor)
+    if #available(iOS 11.0, *) {
+      collectionView.anchor(view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom:mapView.topAnchor, trailing: view.trailingAnchor)
+    } else {
+      // Fallback on earlier versions
+      collectionView.anchor(view.topAnchor, leading: view.leadingAnchor, bottom:mapView.topAnchor, trailing: view.trailingAnchor)
+    }
     collectionView.backgroundColor = UIColor.white
     collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "collectionCell")
     loadData()
@@ -60,8 +71,11 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     infoView = InfoView()
     infoView.backgroundColor = UIColor.white
     self.view.addSubview(infoView)
-    infoView.anchor(nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 10, bottom: -20 , right: 10), size: .init(355, 80))
+    infoView.anchor(nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 10, bottom: -20 , right: 10), size: .init(355, 80))
     infoView.alpha = 0.0
+    
+    let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapViewController.infoViewPressed))
+    infoView.addGestureRecognizer(tap)
   }
   
   func centerMapOnLocation(location: CLLocation) {
@@ -70,6 +84,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
   }
   
   func loadData() {
+    SVProgressHUD.show()
     APIManager.getCategorys { (cats, error) in
       if let _ = cats {
         self.categorys = cats!
@@ -78,22 +93,27 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
       }
       else {
         //Show Error
+        SVProgressHUD.dismiss()
+        SVProgressHUD.showError(withStatus: "Error al descargar datos")
       }
     }
   }
   
   func loadPolygons() {
     APIManager.getPolygons { (pols, error) in
-      if let polygons = pols , polygons.count > 0 {
+      if let polys = pols , polys.count > 0 {
         self.polygons.removeAll()
-        for pol in pols! {
+        for pol in polys {
           self.polygons.append(pol)
           self.loadPolygonsDetails("\(pol.id!)")
+          //print(" id a descrgar \(pol.id!)")
         }
-        
+        SVProgressHUD.dismiss()
       }
       else {
         //Show Error
+        SVProgressHUD.dismiss()
+        SVProgressHUD.showError(withStatus: "Error al descargar datos")
       }
     }
   }
@@ -105,6 +125,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
       }
       else {
         //Show Error
+        SVProgressHUD.showError(withStatus: "Error al descargar datos")
       }
     }
     )
@@ -180,15 +201,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     if let polyline = overlay as? B31Polyline {
       polygonRenderer.fillColor = polyline.color!
     }
-
-    /*for index in selectedIndexs {
-      let item = categorys [index]
-      for pol in polygons {
-        if pol.category == item.slug {
-          polygonRenderer.fillColor = item.getColor()
-        }
-      }
-    }*/
     
     return polygonRenderer
   }
@@ -216,6 +228,10 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     }
     drawMap()
     collectionView.reloadData()
+  }
+  
+  @objc func infoViewPressed () {
+    
   }
   
   

@@ -18,7 +18,7 @@ struct Category : Decodable {
   var slug : String?
 
   func getColor() -> UIColor {
-    switch hexaColor {
+    /*switch hexaColor {
     case "blue":
       return UIColor.hexStringToUIColor(hex: "006fb6")
     case "red":
@@ -30,8 +30,9 @@ struct Category : Decodable {
     /*case "blue":
       return UIColor.hexStringToUIColor(hex: "006fb6")*/
     default:
-      return UIColor.white
-    }
+      return UIColor.brown
+    }*/
+    return UIColor.hexStringToUIColor(hex: hexaColor!)
   }
   
   func getImageOff() -> UIImage! {
@@ -44,6 +45,16 @@ struct Category : Decodable {
       return UIImage.iconInfraOff()
     case "empate":
       return UIImage.iconMundoOff()
+    case "salud":
+      return #imageLiteral(resourceName: "ic-salud-inactivo")
+    case "educacion":
+      return #imageLiteral(resourceName: "ic-educacion-inactivo")
+    case "trabajo":
+      return #imageLiteral(resourceName: "ic-trabajo-inactivo")
+    case "habitat":
+      return #imageLiteral(resourceName: "ic-habitat-inactivo")
+    case "parque-en-altura":
+      return #imageLiteral(resourceName: "ic-alto-parque-inactivo")
     default:
       return #imageLiteral(resourceName: "ic-info")
     }
@@ -59,6 +70,16 @@ struct Category : Decodable {
       return UIImage.iconInfraOn()
     case "empate":
       return UIImage.iconMundoOn()
+    case "salud":
+      return #imageLiteral(resourceName: "ic-salud-inactivo")
+    case "educacion":
+      return #imageLiteral(resourceName: "ic-educacion-inactivo")
+    case "trabajo":
+      return #imageLiteral(resourceName: "ic-trabajo-inactivo")
+    case "habitat":
+      return #imageLiteral(resourceName: "ic-habitat-inactivo")
+    case "parque-en-altura":
+      return #imageLiteral(resourceName: "ic-alto-parque-inactivo")
     default:
       return #imageLiteral(resourceName: "ic-info")
     }
@@ -114,8 +135,8 @@ struct PolygonDetail : Decodable {
   var amount : Int?
   var categoryName : String?
   var categorySlug : String?
-  var neighbors : Int?
-  var m2 : Int?
+  var neighbors : String?
+  var m2 : String?
   var state : String?
   //var drone : Dictionary<String : String>?
   //var street : Dictionary<String : String>?

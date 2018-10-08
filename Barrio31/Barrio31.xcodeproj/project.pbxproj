@@ -15,6 +15,7 @@
 		45151C3A212DF65100222656 /* EVExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C37212DF65000222656 /* EVExtensions.swift */; };
 		45151C3B212DF65100222656 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C38212DF65000222656 /* NibLoadableView.swift */; };
 		45151C3C212DF65100222656 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C39212DF65000222656 /* ReusableView.swift */; };
+		453CB2662167B85B00DEF65B /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453CB2652167B85B00DEF65B /* MapDetailViewController.swift */; };
 		4542CCE6212C4FDE00EE5D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CCE5212C4FDE00EE5D3F /* AppDelegate.swift */; };
 		4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CCE7212C4FDE00EE5D3F /* MapViewController.swift */; };
 		4542CCED212C4FE400EE5D3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCEC212C4FE400EE5D3F /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		45151C37212DF65000222656 /* EVExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EVExtensions.swift; sourceTree = "<group>"; };
 		45151C38212DF65000222656 /* NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
 		45151C39212DF65000222656 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		453CB2652167B85B00DEF65B /* MapDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		4542CCE2212C4FDE00EE5D3F /* Barrio31.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Barrio31.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4542CCE5212C4FDE00EE5D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4542CCE7212C4FDE00EE5D3F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				4542CCE7212C4FDE00EE5D3F /* MapViewController.swift */,
+				453CB2652167B85B00DEF65B /* MapDetailViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -261,10 +264,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -280,6 +285,7 @@
 			files = (
 				45151C3A212DF65100222656 /* EVExtensions.swift in Sources */,
 				45151C3C212DF65100222656 /* ReusableView.swift in Sources */,
+				453CB2662167B85B00DEF65B /* MapDetailViewController.swift in Sources */,
 				45151C32212DE69300222656 /* AppImages.swift in Sources */,
 				45CF59102136E3FE00E2A858 /* Models.swift in Sources */,
 				45151C31212DE69300222656 /* AppFonts.swift in Sources */,
@@ -438,11 +444,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHT59S24UX;
 				INFOPLIST_FILE = Barrio31/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = candoit.Barrio31;
+				PRODUCT_BUNDLE_IDENTIFIER = com.candoit.barrio31;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -458,11 +465,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHT59S24UX;
 				INFOPLIST_FILE = Barrio31/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = candoit.Barrio31;
+				PRODUCT_BUNDLE_IDENTIFIER = com.candoit.barrio31;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

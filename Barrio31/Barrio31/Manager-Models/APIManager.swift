@@ -67,8 +67,8 @@ class APIManager: NSObject {
     Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
       if let data = response.data, response.error == nil {
         do {
-          let response = try JSONDecoder().decode(PolygonDetail.self, from: data)
-          completionBlock(response, nil)
+          let detail = try JSONDecoder().decode(PolygonDetail.self, from: data)
+          completionBlock(detail, nil)
         } catch {
           completionBlock(nil, ErrorManager.serverError())
         }
