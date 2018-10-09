@@ -8,6 +8,6 @@ target 'Barrio31' do
   # Pods for Barrio31
 pod 'Alamofire'
 pod 'SVProgressHUD'
-
+pod 'SideMenuSwift'
 
 end

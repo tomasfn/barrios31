@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenuSwift
 
 class BaseViewController: UIViewController {
   
@@ -34,7 +35,11 @@ class BaseViewController: UIViewController {
   }
   
   @objc func menuPressed() {
-    
+    if (self.sideMenuController?.isMenuRevealed)! {
+      self.sideMenuController?.hideMenu()
+    } else {
+      self.sideMenuController?.revealMenu()
+    }
   }
   
 }

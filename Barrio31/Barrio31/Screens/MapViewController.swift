@@ -231,7 +231,9 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
   }
   
   @objc func infoViewPressed () {
-    
+    let map = MapDetailViewController()
+    map.detail = infoView.detail
+    self.navigationController?.pushViewController(map, animated: true)
   }
   
   

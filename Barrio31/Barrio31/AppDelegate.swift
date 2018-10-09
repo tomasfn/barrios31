@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenuSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,13 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     
-    /*let vc = UIViewController()
-    vc.view.backgroundColor = UIColor.red
+    let contentViewController = MapViewController()
+    let menuViewController = MenuViewController()
+    let menuNav = UINavigationController.init(rootViewController: menuViewController)
+    let nav = UINavigationController.init(rootViewController: contentViewController)
     window = UIWindow(frame: UIScreen.main.bounds)
+    window?.rootViewController = SideMenuController(contentViewController: nav,
+                                                    menuViewController: menuNav)
+    
     window?.makeKeyAndVisible()
-    let nv = UINavigationController(rootViewController: vc)
-    nv.navigationBar.isTranslucent = false
-    window?.rootViewController = nv*/
+    
     
     setUpAppearance()
     
