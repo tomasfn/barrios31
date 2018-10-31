@@ -8,6 +8,7 @@
 
 import UIKit
 import SideMenuSwift
+import SVProgressHUD
 
 class BaseViewController: UIViewController {
   

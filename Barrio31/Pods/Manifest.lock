@@ -1,24 +1,29 @@
 PODS:
   - Alamofire (4.7.2)
+  - AlamofireImage (3.3.1):
+    - Alamofire (~> 4.5)
   - SideMenuSwift (0.4.0)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Alamofire
+  - AlamofireImage
   - SideMenuSwift
   - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AlamofireImage
     - SideMenuSwift
     - SVProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   SideMenuSwift: 620bebef86c04680ada5f15f9dee928fd740adf4
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 926d293cc7a328be126809becaf6191af038f0d0
+PODFILE CHECKSUM: 96b93592b989c8fe18d84abb538f802cdeb503ea
 
 COCOAPODS: 1.5.3

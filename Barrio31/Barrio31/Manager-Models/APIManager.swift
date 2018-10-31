@@ -12,6 +12,9 @@ import Alamofire
 typealias CategorysCompletionBlock = ([Category]?, Error?) -> Void
 typealias PolygonsCompletionBlock = ([Polygon]?, Error?) -> Void
 typealias PolygonsDetailCompletionBlock = (PolygonDetail?, Error?) -> Void
+typealias DisfrutaCompletionBlock = ([DisfrutaItem]?, Error?) -> Void
+typealias DisfrutaDetailCompletionBlock = (DisfrutaDetail?, Error?) -> Void
+
 
 
 public let apiServer = "http://barrio31.candoit.com.ar/api/"//"http://64.251.25.64:8083/api" //
@@ -52,7 +55,6 @@ class APIManager: NSObject {
               polygons.append(pol)
             }
             completionBlock(polygons, nil)
-
           }
         }
       }
@@ -65,10 +67,44 @@ class APIManager: NSObject {
   class func getPolygonsDetails(withId: String , completionBlock: @escaping PolygonsDetailCompletionBlock) {
     let url = apiServer + "recorre/detalle/\(withId)"
     Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+      if let value = response.result.value as? [String : AnyObject], response.error == nil {
+        let detail = PolygonDetail.init(JSON: value)
+        completionBlock(detail, nil)
+      }
+      else {
+        completionBlock(nil, ErrorManager.serverError())
+      }
+    }
+  }
+  
+  class func getDisfruta(completionBlock: @escaping DisfrutaCompletionBlock) {
+    let url = apiServer + "disfruta"
+    Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+      if let data = response.result.value, response.error == nil {
+        if let dic = data as? Dictionary<String, AnyObject> {
+          if let array = dic["features"] as? Array<Dictionary<String, AnyObject>> {
+            var dis = [DisfrutaItem]()
+            for item in array {
+              let obj = DisfrutaItem.init(JSON: item)
+              dis.append(obj)
+            }
+            completionBlock(dis, nil)
+          }
+        }
+      }
+      else {
+        completionBlock(nil, ErrorManager.serverError())
+      }
+    }
+  }
+  
+  class func getDisfrutaDetails(withId: String , completionBlock: @escaping DisfrutaDetailCompletionBlock) {
+    let url = apiServer + "disfruta/detalle/\(withId)"
+    Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
       if let data = response.data, response.error == nil {
         do {
-          let detail = try JSONDecoder().decode(PolygonDetail.self, from: data)
-          completionBlock(detail, nil)
+          let response = try JSONDecoder().decode(DisfrutaDetail.self, from: data)
+          completionBlock(response, nil)
         } catch {
           completionBlock(nil, ErrorManager.serverError())
         }

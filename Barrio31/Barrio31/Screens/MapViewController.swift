@@ -120,8 +120,12 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
   
   func loadPolygonsDetails(_ id:String) {
     APIManager.getPolygonsDetails(withId: id, completionBlock: { (details, error) in
-      if let det = details {
+      if var det = details {
+        if let pol = self.polygons.first(where: {$0.id == det.id}) {
+          det.color = pol.color
+        }
         self.polygonsDetails.append(det)
+
       }
       else {
         //Show Error
@@ -131,7 +135,15 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     )
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.title = "RECORRE"
+  }
   
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    self.title = ""
+  }
   
   //MARK: MAPVIEW Methods
   
@@ -300,7 +312,7 @@ class CategoryCell: UICollectionViewCell {
     //label.anchor(imgView.bottomAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor)
     label.anchor(nil, leading: nil, bottom:bottomAnchor, trailing:nil,size: .init(88, 30.0))
     label.anchorCenterXToSuperview()
-    imgView.anchor(topAnchor, leading: leadingAnchor, bottom:label.topAnchor, trailing:trailingAnchor)
+    imgView.anchor(topAnchor, leading: leadingAnchor, bottom:label.topAnchor, trailing:trailingAnchor , padding: .init(top: 5, left: 5, bottom: -5, right: -5))
     imgView.anchorCenterXToSuperview()
   }
   
@@ -337,6 +349,17 @@ class InfoView: UIView {
 
     }
   }
+  
+  var disfrutaDetail : DisfrutaDetail? {
+    didSet {
+      labelName.text = disfrutaDetail?.name
+      labelCategory.text = disfrutaDetail?.shortDescription
+      labelDescription.text = disfrutaDetail?.price
+      //labelName.sizeToFit()
+      
+    }
+  }
+  
   
   let labelName: UILabel = {
     let label = UILabel()

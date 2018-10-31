@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		450081A1217A68810036A086 /* DisfrutaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450081A0217A68810036A086 /* DisfrutaViewController.swift */; };
 		45151C2F212DE69300222656 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C2B212DE69300222656 /* AppColors.swift */; };
 		45151C31212DE69300222656 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C2D212DE69300222656 /* AppFonts.swift */; };
 		45151C32212DE69300222656 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C2E212DE69300222656 /* AppImages.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		33FAE5871C7A53CD76A60031 /* Pods_Barrio31.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Barrio31.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		450081A0217A68810036A086 /* DisfrutaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisfrutaViewController.swift; sourceTree = "<group>"; };
 		45151C2B212DE69300222656 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		45151C2D212DE69300222656 /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		45151C2E212DE69300222656 /* AppImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				4542CCE7212C4FDE00EE5D3F /* MapViewController.swift */,
 				453CB2652167B85B00DEF65B /* MapDetailViewController.swift */,
 				453CB267216BDE9400DEF65B /* MenuViewController.swift */,
+				450081A0217A68810036A086 /* DisfrutaViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -267,12 +270,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenuSwift/SideMenuSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuSwift.framework",
 			);
@@ -294,6 +299,7 @@
 				453CB268216BDE9400DEF65B /* MenuViewController.swift in Sources */,
 				45151C32212DE69300222656 /* AppImages.swift in Sources */,
 				45CF59102136E3FE00E2A858 /* Models.swift in Sources */,
+				450081A1217A68810036A086 /* DisfrutaViewController.swift in Sources */,
 				45151C31212DE69300222656 /* AppFonts.swift in Sources */,
 				45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */,
 				45151C3B212DF65100222656 /* NibLoadableView.swift in Sources */,

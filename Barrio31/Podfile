@@ -9,5 +9,6 @@ target 'Barrio31' do
 pod 'Alamofire'
 pod 'SVProgressHUD'
 pod 'SideMenuSwift'
+pod 'AlamofireImage'
 
 end

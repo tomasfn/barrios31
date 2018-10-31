@@ -78,7 +78,20 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-    print("eligió")
+    switch indexPath.row {
+    case 0:
+      let map = MapViewController()
+      let nav = UINavigationController.init(rootViewController: map)
+      sideMenuController?.contentViewController = nav
+    case 1:
+      let dis = DisfrutaViewController()
+      let nav = UINavigationController.init(rootViewController: dis)
+      sideMenuController?.contentViewController = nav
+    default:
+      return
+    }
+    
+    sideMenuController?.hideMenu()
   }
 }
 

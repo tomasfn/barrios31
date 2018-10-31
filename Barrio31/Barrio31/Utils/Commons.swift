@@ -113,12 +113,6 @@ extension UIView {
     }
   }
   
-  /*public func anchor(_ top: NSLayoutYAxisAnchor? = nil, left: NSLayoutXAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, right: NSLayoutXAxisAnchor? = nil, topConstant: CGFloat = 0, leftConstant: CGFloat = 0, bottomConstant: CGFloat = 0, rightConstant: CGFloat = 0, widthConstant: CGFloat = 0, heightConstant: CGFloat = 0) {
-    translatesAutoresizingMaskIntoConstraints = false
-    
-    _ = anchorWithReturnAnchors(top, left: left, bottom: bottom, right: right, topConstant: topConstant, leftConstant: leftConstant, bottomConstant: bottomConstant, rightConstant: rightConstant, widthConstant: widthConstant, heightConstant: heightConstant)
-  }*/
-  
   public func anchorWithReturnAnchors(_ top: NSLayoutYAxisAnchor? = nil, left: NSLayoutXAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, right: NSLayoutXAxisAnchor? = nil, topConstant: CGFloat = 0, leftConstant: CGFloat = 0, bottomConstant: CGFloat = 0, rightConstant: CGFloat = 0, widthConstant: CGFloat = 0, heightConstant: CGFloat = 0) -> [NSLayoutConstraint] {
     translatesAutoresizingMaskIntoConstraints = false
     
@@ -171,8 +165,22 @@ extension UIView {
     anchorCenterXToSuperview()
     anchorCenterYToSuperview()
   }
-
-    
+  
+  public func roundCorners(_ radius: CGFloat) {
+    layer.cornerRadius = radius
+    layer.masksToBounds = radius > 0
+  }
+  
+  func setCellShadow() {
+    self.layer.shadowColor = UIColor.darkGray.cgColor
+    self.layer.shadowOffset = CGSize(width: 0, height: 1)
+    self.layer.shadowOpacity = 1
+    self.layer.shadowRadius = 1.0
+    self.layer.masksToBounds = false
+    self.clipsToBounds = false
+    self.layer.cornerRadius = 10
+  }
+  
 }
 
 extension CAGradientLayer {
@@ -389,27 +397,6 @@ extension UIButton {
   
   public func titleUniformMargin(_ margin: CGFloat) {
     titleEdgeInsets = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
-  }
-  
-}
-
-
-
-extension UIView {
-  
-  public func roundCorners(_ radius: CGFloat) {
-    layer.cornerRadius = radius
-    layer.masksToBounds = radius > 0
-  }
-  
-  func setCellShadow() {
-    self.layer.shadowColor = UIColor.darkGray.cgColor
-    self.layer.shadowOffset = CGSize(width: 0, height: 1)
-    self.layer.shadowOpacity = 1
-    self.layer.shadowRadius = 1.0
-    self.layer.masksToBounds = false
-    self.clipsToBounds = false
-    self.layer.cornerRadius = 10
   }
   
 }
