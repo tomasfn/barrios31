@@ -43,6 +43,8 @@ class BaseViewController: UIViewController {
     }
   }
   
+  
+  
 }
 
 //MARK: Private configuration

@@ -24,10 +24,13 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
   let villa31 = CLLocation(latitude: -34.582800, longitude: -58.379679)
   let regionRadius: CLLocationDistance = 1000
   
+  //MARK: Life Cycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     setupViews()
+    setUpAppearance()
   }
   
   func setupViews () {
@@ -145,6 +148,17 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     self.title = ""
   }
   
+  func setUpAppearance() {
+    let mainColor = UIColor.hexStringToUIColor(hex: "#f9a61d")
+    UINavigationBar.appearance().tintColor = UIColor.black
+    UINavigationBar.appearance().barTintColor = UIColor.white
+    
+    let titleTextAttributes = [NSAttributedStringKey.foregroundColor : mainColor,
+                               NSAttributedStringKey.font : UIFont.chalet(fontSize: 17)]
+    UINavigationBar.appearance().titleTextAttributes  = titleTextAttributes
+    
+  }
+  
   //MARK: MAPVIEW Methods
   
   func drawMap() {
@@ -251,76 +265,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
   
   
 }
-//MARK: CollectionViewCell
 
-class CategoryCell: UICollectionViewCell {
-  
-  var item : Category? {
-    didSet {
-      if isPressed {
-        container.backgroundColor = item!.getColor()
-        label.textColor = UIColor.white
-        imgView.image = item!.getImageOn()
-      }
-      else {
-        container.backgroundColor = UIColor.white
-        label.textColor = UIColor.gray
-        imgView.image = item!.getImageOff()
-      }
-      label.text = item!.name
-    }
-  }
-  
-  var isPressed = false
-  
-  let imgView: UIImageView = {
-    let iv = UIImageView()
-    iv.clipsToBounds = true
-    iv.contentMode = .scaleAspectFit
-    iv.backgroundColor = UIColor.clear
-    return iv
-  }()
-  
-  let container: UIView = {
-    let iv = UIView()
-    iv.backgroundColor = UIColor.clear
-    return iv
-  }()
-  
-  let label: UILabel = {
-    let label = UILabel()
-    label.textColor = UIColor.darkGray
-    label.font = UIFont.systemFont(ofSize: 12)
-    label.textAlignment = .center
-    label.numberOfLines = 0
-    return label
-  }()
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    
-    setup()
-  }
-  
-  func setup() {
-    //setCellShadow()
-    addSubview(container)
-    addSubview(imgView)
-    addSubview(label)
-    container.anchor(topAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor,size: .init(100, 80.0))
-    
-    //label.anchor(imgView.bottomAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor)
-    label.anchor(nil, leading: nil, bottom:bottomAnchor, trailing:nil,size: .init(88, 30.0))
-    label.anchorCenterXToSuperview()
-    imgView.anchor(topAnchor, leading: leadingAnchor, bottom:label.topAnchor, trailing:trailingAnchor , padding: .init(top: 5, left: 5, bottom: -5, right: -5))
-    imgView.anchorCenterXToSuperview()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-}
 
 //MARK: MKPolygon
 
@@ -329,99 +274,3 @@ class B31Polyline: MKPolygon {
   var category: Category?
   var polygon: Polygon?
 }
-
-//MARK: infoView
-
-class InfoView: UIView {
-  
-  var category : Category? {
-    didSet {
-      labelName.backgroundColor = category!.getColor()
-    }
-  }
-  
-  var detail : PolygonDetail? {
-    didSet {
-      labelName.text = detail?.name
-      labelCategory.text = detail?.categoryName
-      labelDescription.text = detail?.shortDescription
-      //labelName.sizeToFit()
-
-    }
-  }
-  
-  var disfrutaDetail : DisfrutaDetail? {
-    didSet {
-      labelName.text = disfrutaDetail?.name
-      labelCategory.text = disfrutaDetail?.shortDescription
-      labelDescription.text = disfrutaDetail?.price
-      //labelName.sizeToFit()
-      
-    }
-  }
-  
-  
-  let labelName: UILabel = {
-    let label = UILabel()
-    label.textColor = UIColor.white
-    label.backgroundColor = UIColor.darkGray
-    label.font = UIFont.chalet(fontSize: 20)
-    label.text = ""
-    return label
-  }()
-  
-  let labelCategory: UILabel = {
-    let label = UILabel()
-    label.textColor = UIColor.darkGray
-    label.font = UIFont.chalet(fontSize: 15)
-    label.textAlignment = .left
-    label.text = ""
-    return label
-  }()
-  let labelDescription: UILabel = {
-    let label = UILabel()
-    label.textColor = UIColor.black
-    label.font = UIFont.chalet(fontSize: 15)
-    label.text = ""
-    return label
-  }()
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setup()
-  }
-  
-  func setup() {
-    backgroundColor = UIColor.white
-    setCellShadow()
-    addSubview(labelName)
-    addSubview(labelCategory)
-    addSubview(labelDescription)
-    labelCategory.anchor(topAnchor,
-                         leading: centerXAnchor,
-                         bottom:nil,
-                         trailing:trailingAnchor,
-                         padding: .init(top: 10, left: 10, bottom: -10, right: -10),
-                         size: .init(frame.size.width/2, 30))
-    labelName.anchor(topAnchor,
-                     leading:leadingAnchor,
-                     bottom:nil,
-                     trailing:centerXAnchor,
-                     padding: .init(top: 10, left: 10, bottom: -10, right: -10),
-                     size: .init(frame.size.width/2, 30))
-    
-    labelDescription.anchor(nil,
-                            leading: leadingAnchor,
-                            bottom:bottomAnchor,
-                            trailing:trailingAnchor,
-                            padding:.init(top: 10, left: 10, bottom: -10, right: -10),
-                            size: .init(0, 30))
-
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-}
-

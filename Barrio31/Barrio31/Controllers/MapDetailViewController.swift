@@ -25,6 +25,8 @@ class MapDetailViewController: BaseViewController {
   var infoButton : UIButton!
   var videoButton : UIButton!
   var infoView : UIView!
+  
+  //MARK: Life Cycle
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -150,7 +152,7 @@ class MapDetailViewController: BaseViewController {
     infoView = UIView()
     self.view.addSubview(infoView)
     infoView.backgroundColor = UIColor.white
-    infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 10.0, bottom: -10.0, right: -10.0))
+    infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: -80, left: 10.0, bottom: -10.0, right: -10.0))
     
     let imgView = UIImageView()
     imgView.image = #imageLiteral(resourceName: "pattern-alto-parque")
@@ -183,7 +185,7 @@ class MapDetailViewController: BaseViewController {
     descriptionLabel.textColor = UIColor.white
     descriptionLabel.textAlignment = .left
     descriptionLabel.font = UIFont.chalet(fontSize: 16)
-    descriptionLabel.numberOfLines = 0
+    descriptionLabel.numberOfLines = 2
     descriptionLabel.lineBreakMode = .byWordWrapping
     descriptionLabel.setContentHuggingPriority(.required, for: .vertical)
     imgView.addSubview(descriptionLabel)
@@ -192,6 +194,80 @@ class MapDetailViewController: BaseViewController {
     
     imgView.clipsToBounds = true
     imgView.anchor(infoView.topAnchor, leading: infoView.leadingAnchor, bottom: descriptionLabel.bottomAnchor, trailing: infoView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 10.0, right: 0))
+    
+    
+    
+    
+    let dateImgView = UIImageView()
+    dateImgView.image = UIImage.init(named: "ic-fechas")
+    dateImgView.contentMode = .scaleAspectFit
+    infoView.addSubview(dateImgView)
+    dateImgView.anchor(imgView.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(20, 20.0))
+    
+    let dateLabel = UILabel()
+    dateLabel.text = "Inicio: \(detail.started!) | Finalizado: \(detail.ended!)"
+    dateLabel.textColor = UIColor.lightGray
+    dateLabel.textAlignment = .left
+    dateLabel.font = UIFont.chalet(fontSize: 14)
+    infoView.addSubview(dateLabel)
+    dateLabel.anchor(imgView.bottomAnchor, leading: dateImgView.trailingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 10, left: 10, bottom: 0, right: 0) ,size: .init(0, 20.0))
+    
+    let montoImgView = UIImageView()
+    montoImgView.image = UIImage.init(named: "ic-montos")
+    montoImgView.contentMode = .scaleAspectFit
+    infoView.addSubview(montoImgView)
+    montoImgView.anchor(dateLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(20, 20.0))
+    
+    let montoLabel = UILabel()
+    montoLabel.text = "Monto: $\(detail.amount!).00"
+    montoLabel.textColor = UIColor.lightGray
+    montoLabel.textAlignment = .left
+    montoLabel.font = UIFont.chalet(fontSize: 14)
+    infoView.addSubview(montoLabel)
+    montoLabel.anchor(dateImgView.bottomAnchor, leading: montoImgView.trailingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 10, left: 10, bottom: 0, right: 0) ,size: .init(0, 20.0))
+    
+    let line = UIView()
+    line.backgroundColor = UIColor.lightGray
+    infoView.addSubview(line)
+    line.anchor(montoLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 20, left: 20, bottom: 0, right: -20), size: .init(width: 0, height: 0.5))
+    
+    
+    let neighborsLabel = UILabel()
+    neighborsLabel.text = detail.neighbors
+    neighborsLabel.textColor = detail.getColor()
+    neighborsLabel.textAlignment = .left
+    neighborsLabel.font = UIFont.chalet(fontSize: 28)
+    infoView.addSubview(neighborsLabel)
+    neighborsLabel.anchor(line.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 30, left: 10, bottom: 0, right: 10) ,size: .init(width: 0, height: 30))
+    
+    let neighborsTextLabel = UILabel()
+    neighborsTextLabel.text = detail.neighborsText
+    neighborsTextLabel.textColor = UIColor.black
+    neighborsTextLabel.textAlignment = .left
+    neighborsTextLabel.font = UIFont.chalet(fontSize: 16)
+    neighborsTextLabel.numberOfLines = 2
+    infoView.addSubview(neighborsTextLabel)
+    neighborsTextLabel.anchor(neighborsLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 0, left: 10, bottom: 0, right: -10) ,size: .init(width: 0, height: 34))
+    
+    let m2Label = UILabel()
+    m2Label.text = detail.m2
+    m2Label.textColor = detail.getColor()
+    m2Label.textAlignment = .left
+    m2Label.font = UIFont.chalet(fontSize: 28)
+    infoView.addSubview(m2Label)
+    m2Label.anchor(neighborsTextLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 30, left: 10, bottom: 0, right: 10) ,size: .init(width: 0, height: 30))
+    
+    let m2LabelTextLabel = UILabel()
+    m2LabelTextLabel.text = detail.m2Text
+    m2LabelTextLabel.textColor = UIColor.black
+    m2LabelTextLabel.textAlignment = .left
+    m2LabelTextLabel.font = UIFont.chalet(fontSize: 16)
+    m2LabelTextLabel.numberOfLines = 2
+    infoView.addSubview(m2LabelTextLabel)
+    m2LabelTextLabel.anchor(m2Label.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 0, left: 10, bottom: 0, right: -10) ,size: .init(width: 0, height: 34))
+    
+    
+    
     infoView.setCellShadow()
     let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapDetailViewController.infoViewPressed))
     infoView.addGestureRecognizer(tap)

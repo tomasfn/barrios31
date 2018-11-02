@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func setUpAppearance() {
-    let mainColor = UIColor.hexStringToUIColor(hex: "#de316a")
+    let mainColor = UIColor.hexStringToUIColor(hex: "#f9a61d")
     UINavigationBar.appearance().tintColor = UIColor.black
     UINavigationBar.appearance().barTintColor = UIColor.white
     

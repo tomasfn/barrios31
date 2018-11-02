@@ -145,6 +145,10 @@ struct PolygonDetail {
   var m2Text : String?
   var neighborsText : String?
   var color : String?
+  var started : String?
+  var ended : String?
+
+  //var polygon
   
   func getColor() -> UIColor {
     if let col = color {
@@ -183,6 +187,14 @@ struct PolygonDetail {
     
     if let categorySlugOK = JSON["categorySlug"] as? String {
       categorySlug = categorySlugOK
+    }
+    
+    if let startedOK = JSON["started"] as? String {
+      started = startedOK
+    }
+    
+    if let endedOK = JSON["ended"] as? String {
+      ended = endedOK
     }
     
     if let neighborsOK = JSON["neighbors"] as? String {

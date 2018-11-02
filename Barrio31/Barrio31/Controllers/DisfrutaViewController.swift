@@ -21,6 +21,7 @@ class DisfrutaViewController: BaseViewController {
 
   var items = [DisfrutaItem]()
   var details = [DisfrutaDetail]()
+  var currentDetail : DisfrutaDetail?
 
   
   override func viewDidLoad() {
@@ -31,6 +32,8 @@ class DisfrutaViewController: BaseViewController {
     tableView.dataSource = self
     addMenuButton()
     self.title = "DISFRUTÁ"
+    setUpAppearance() 
+    
     self.loadData()
     
     mapView = MKMapView()
@@ -72,6 +75,21 @@ class DisfrutaViewController: BaseViewController {
     let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapViewController.infoViewPressed))
     infoView.addGestureRecognizer(tap)
     
+    tableView.register(DisfrutaTableViewCell.self, forCellReuseIdentifier: "cell")
+    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.estimatedRowHeight = 140
+    tableView.separatorStyle = .none
+    
+  }
+  
+  func setUpAppearance() {
+    let mainColor = UIColor.hexStringToUIColor(hex: "#de316a")
+    UINavigationBar.appearance().tintColor = UIColor.black
+    UINavigationBar.appearance().barTintColor = UIColor.white
+    
+    let titleTextAttributes = [NSAttributedStringKey.foregroundColor : mainColor,
+                               NSAttributedStringKey.font : UIFont.chalet(fontSize: 17)]
+    UINavigationBar.appearance().titleTextAttributes  = titleTextAttributes
   }
   
   @objc func mapButtonpressed () {
@@ -90,6 +108,7 @@ class DisfrutaViewController: BaseViewController {
       mapButton.isSelected = false
       mapView.alpha = 0.0
       tableView.alpha = 1.0
+      infoView.alpha = 0.0
     }
   }
   
@@ -117,13 +136,13 @@ class DisfrutaViewController: BaseViewController {
       APIManager.getDisfrutaDetails(withId: "\(String(describing: item.id!))") { (disf, error) in
         if error == nil {
           self.details.append(disf!)
-          if self.details.count == self.items.count , counter == 0{
+          if self.details.count == self.items.count , counter == 0 {
             SVProgressHUD.dismiss()
             self.tableView.reloadData()
             self.addPins()
           }
           else {
-            if counter == 0 {
+            if counter != 0 {
               SVProgressHUD.dismiss()
               SVProgressHUD.showError(withStatus: ErrorManager.unknownError().localizedDescription)
             }
@@ -152,10 +171,10 @@ class DisfrutaViewController: BaseViewController {
   }
   
   @objc func infoViewPressed () {
-    print("infoViewPressed")
-    //let map = MapDetailViewController()
+    //print("infoViewPressed")
+    let det = DisfrutaDetailViewController()
     //map.detail = infoView.detail
-    //self.navigationController?.pushViewController(map, animated: true)
+    self.navigationController?.pushViewController(det, animated: true)
   }
   
 }
@@ -163,8 +182,10 @@ class DisfrutaViewController: BaseViewController {
 extension DisfrutaViewController : UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell()
-    cell.textLabel?.text = items[indexPath.row].category
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! DisfrutaTableViewCell
+    cell.dateLabel.text = details[indexPath.row].ended
+    cell.item = details[indexPath.row]
+    cell.selectionStyle = .none
     return cell
   }
   
@@ -222,91 +243,6 @@ class DisfrutaAnnotation: NSObject, MKAnnotation {
   }
 }
 
-class DisfrutaInfoView: UIView {
-  
-  /*var category : Category? {
-    didSet {
-      labelName.backgroundColor = category!.getColor()
-    }
-  }*/
-  
-  
-  
-  var disfrutaDetail : DisfrutaDetail! {
-    didSet {
-      labelName.text = disfrutaDetail.name
-      labelDescription.text = disfrutaDetail.shortDescription
-      labelDate.text = disfrutaDetail.started! + " - " + disfrutaDetail.ended!
-      //labelName.sizeToFit()
-      
-    }
-  }
-  
-  
-  let labelName: UILabel = {
-    let label = UILabel()
-    label.textColor = UIColor.white
-    label.backgroundColor = UIColor.darkGray
-    label.font = UIFont.chalet(fontSize: 20)
-    label.text = ""
-    return label
-  }()
-  
-  let labelDate: UILabel = {
-    let label = UILabel()
-    label.textColor = UIColor.darkGray
-    label.font = UIFont.chalet(fontSize: 15)
-    label.textAlignment = .left
-    label.text = ""
-    return label
-  }()
-  
-  let labelDescription: UILabel = {
-    let label = UILabel()
-    label.textColor = UIColor.black
-    label.font = UIFont.chalet(fontSize: 15)
-    label.text = ""
-    return label
-  }()
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setup()
-  }
-  
-  func setup() {
-    backgroundColor = UIColor.white
-    setCellShadow()
-    addSubview(labelName)
-    addSubview(labelDate)
-    addSubview(labelDescription)
-    labelDate.anchor(topAnchor,
-                         leading: centerXAnchor,
-                         bottom:nil,
-                         trailing:trailingAnchor,
-                         padding: .init(top: 10, left: 10, bottom: -10, right: -10),
-                         size: .init(frame.size.width/2, 30))
-    labelName.anchor(topAnchor,
-                     leading:leadingAnchor,
-                     bottom:nil,
-                     trailing:centerXAnchor,
-                     padding: .init(top: 10, left: 10, bottom: -10, right: -10),
-                     size: .init(frame.size.width/2, 30))
-    
-    labelDescription.anchor(nil,
-                            leading: leadingAnchor,
-                            bottom:bottomAnchor,
-                            trailing:trailingAnchor,
-                            padding:.init(top: 10, left: 10, bottom: -10, right: -10),
-                            size: .init(0, 30))
-    
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-}
 
 
 

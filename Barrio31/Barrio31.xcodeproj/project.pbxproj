@@ -16,6 +16,11 @@
 		45151C3A212DF65100222656 /* EVExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C37212DF65000222656 /* EVExtensions.swift */; };
 		45151C3B212DF65100222656 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C38212DF65000222656 /* NibLoadableView.swift */; };
 		45151C3C212DF65100222656 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45151C39212DF65000222656 /* ReusableView.swift */; };
+		452CE2EE218C8C3D00590678 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CE2ED218C8C3D00590678 /* InfoView.swift */; };
+		452CE2F0218C8C8100590678 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CE2EF218C8C8100590678 /* CategoryCell.swift */; };
+		452CE2F2218C97A600590678 /* DisfrutaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CE2F1218C97A600590678 /* DisfrutaDetailViewController.swift */; };
+		452CE2F4218C9AD800590678 /* DisfrutaInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CE2F3218C9AD800590678 /* DisfrutaInfoView.swift */; };
+		452CE2F7218CF69000590678 /* PopupMapDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CE2F6218CF69000590678 /* PopupMapDetailView.swift */; };
 		453CB2662167B85B00DEF65B /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453CB2652167B85B00DEF65B /* MapDetailViewController.swift */; };
 		453CB268216BDE9400DEF65B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453CB267216BDE9400DEF65B /* MenuViewController.swift */; };
 		4542CCE6212C4FDE00EE5D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CCE5212C4FDE00EE5D3F /* AppDelegate.swift */; };
@@ -27,6 +32,7 @@
 		45CB1078214ADF2900E856E2 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CB1074214ADF2800E856E2 /* Montserrat-Regular.ttf */; };
 		45CB1079214ADF2900E856E2 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CB1075214ADF2900E856E2 /* Montserrat-SemiBold.ttf */; };
 		45CF59102136E3FE00E2A858 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF590F2136E3FE00E2A858 /* Models.swift */; };
+		45D2D6702189F8F100638440 /* DisfrutaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D2D66F2189F8F100638440 /* DisfrutaTableViewCell.swift */; };
 		45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F23A1921359B7500F22C1C /* Main.storyboard */; };
 		45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F23A1D2135D9D400F22C1C /* APIManager.swift */; };
 		E3172AED30899E1B251288AC /* Pods_Barrio31.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FAE5871C7A53CD76A60031 /* Pods_Barrio31.framework */; };
@@ -43,6 +49,11 @@
 		45151C37212DF65000222656 /* EVExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EVExtensions.swift; sourceTree = "<group>"; };
 		45151C38212DF65000222656 /* NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
 		45151C39212DF65000222656 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		452CE2ED218C8C3D00590678 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		452CE2EF218C8C8100590678 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		452CE2F1218C97A600590678 /* DisfrutaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisfrutaDetailViewController.swift; sourceTree = "<group>"; };
+		452CE2F3218C9AD800590678 /* DisfrutaInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisfrutaInfoView.swift; sourceTree = "<group>"; };
+		452CE2F6218CF69000590678 /* PopupMapDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMapDetailView.swift; sourceTree = "<group>"; };
 		453CB2652167B85B00DEF65B /* MapDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		453CB267216BDE9400DEF65B /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		4542CCE2212C4FDE00EE5D3F /* Barrio31.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Barrio31.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +67,7 @@
 		45CB1074214ADF2800E856E2 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		45CB1075214ADF2900E856E2 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		45CF590F2136E3FE00E2A858 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		45D2D66F2189F8F100638440 /* DisfrutaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisfrutaTableViewCell.swift; sourceTree = "<group>"; };
 		45F23A1A21359B7500F22C1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45F23A1D2135D9D400F22C1C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		904E8A04AF1E2F73D36B58E2 /* Pods-Barrio31.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.debug.xcconfig"; sourceTree = "<group>"; };
@@ -106,15 +118,26 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		45151C3D212DF66600222656 /* Screens */ = {
+		45151C3D212DF66600222656 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				4542CCE7212C4FDE00EE5D3F /* MapViewController.swift */,
 				453CB2652167B85B00DEF65B /* MapDetailViewController.swift */,
 				453CB267216BDE9400DEF65B /* MenuViewController.swift */,
 				450081A0217A68810036A086 /* DisfrutaViewController.swift */,
+				452CE2F1218C97A600590678 /* DisfrutaDetailViewController.swift */,
 			);
-			path = Screens;
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		452CE2EC218C89EE00590678 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				452CE2ED218C8C3D00590678 /* InfoView.swift */,
+				452CE2F6218CF69000590678 /* PopupMapDetailView.swift */,
+				452CE2F3218C9AD800590678 /* DisfrutaInfoView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		4542CCD9212C4FDE00EE5D3F = {
@@ -139,9 +162,11 @@
 			isa = PBXGroup;
 			children = (
 				45F23A1C2135D5F800F22C1C /* Manager-Models */,
-				45151C3D212DF66600222656 /* Screens */,
+				45151C3D212DF66600222656 /* Controllers */,
 				45151C2A212DE0EE00222656 /* Utils */,
 				4542CCE5212C4FDE00EE5D3F /* AppDelegate.swift */,
+				452CE2EC218C89EE00590678 /* Views */,
+				45D2D66E2189F8CB00638440 /* Cells */,
 				45CB1071214ADDB000E856E2 /* Resources */,
 				4542CCEC212C4FE400EE5D3F /* Assets.xcassets */,
 				4542CCEE212C4FE400EE5D3F /* LaunchScreen.storyboard */,
@@ -160,6 +185,15 @@
 				45CB1075214ADF2900E856E2 /* Montserrat-SemiBold.ttf */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		45D2D66E2189F8CB00638440 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				45D2D66F2189F8F100638440 /* DisfrutaTableViewCell.swift */,
+				452CE2EF218C8C8100590678 /* CategoryCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		45F23A1C2135D5F800F22C1C /* Manager-Models */ = {
@@ -297,16 +331,22 @@
 				45151C3C212DF65100222656 /* ReusableView.swift in Sources */,
 				453CB2662167B85B00DEF65B /* MapDetailViewController.swift in Sources */,
 				453CB268216BDE9400DEF65B /* MenuViewController.swift in Sources */,
+				452CE2F2218C97A600590678 /* DisfrutaDetailViewController.swift in Sources */,
+				452CE2EE218C8C3D00590678 /* InfoView.swift in Sources */,
+				452CE2F0218C8C8100590678 /* CategoryCell.swift in Sources */,
 				45151C32212DE69300222656 /* AppImages.swift in Sources */,
 				45CF59102136E3FE00E2A858 /* Models.swift in Sources */,
 				450081A1217A68810036A086 /* DisfrutaViewController.swift in Sources */,
 				45151C31212DE69300222656 /* AppFonts.swift in Sources */,
 				45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */,
+				452CE2F7218CF69000590678 /* PopupMapDetailView.swift in Sources */,
 				45151C3B212DF65100222656 /* NibLoadableView.swift in Sources */,
 				45151C2F212DE69300222656 /* AppColors.swift in Sources */,
+				45D2D6702189F8F100638440 /* DisfrutaTableViewCell.swift in Sources */,
 				4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */,
 				45151C34212DE93900222656 /* Commons.swift in Sources */,
 				45151C36212DEA6F00222656 /* BaseViewController.swift in Sources */,
+				452CE2F4218C9AD800590678 /* DisfrutaInfoView.swift in Sources */,
 				4542CCE6212C4FDE00EE5D3F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
