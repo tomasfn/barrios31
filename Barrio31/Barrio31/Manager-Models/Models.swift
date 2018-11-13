@@ -37,51 +37,51 @@ struct Category : Decodable {
   
   func getImageOff() -> UIImage! {
     switch slug {
-    case "espacio-publico":
-      return #imageLiteral(resourceName: "ic-espacio-publico-off")
-    case "equip-social":
-      return #imageLiteral(resourceName: "ic-equipamiento-soc-off")
-    case "infraestructura":
+    case "espacio-publico"?:
+      return UIImage.espacioPublicoOff()
+    case "equip-social"?:
+      return UIImage.iconSocialOff()
+    case "infraestructura"?:
       return UIImage.iconInfraOff()
-    case "empate":
+    case "empate"?:
       return UIImage.iconMundoOff()
-    case "salud":
-      return #imageLiteral(resourceName: "ic-salud-inactivo")
-    case "educacion":
-      return #imageLiteral(resourceName: "ic-educacion-inactivo")
-    case "trabajo":
-      return #imageLiteral(resourceName: "ic-trabajo-inactivo")
-    case "habitat":
-      return #imageLiteral(resourceName: "ic-habitat-inactivo")
-    case "parque-en-altura":
-      return #imageLiteral(resourceName: "ic-alto-parque-inactivo")
+    case "salud"?:
+      return UIImage.iconSaludOff()
+    case "educacion"?:
+      return UIImage.iconEducationOff()
+    case "trabajo"?:
+      return UIImage.iconJobOff()
+    case "habitat"?:
+      return UIImage.iconHabitatOff()
+    case "parque-en-altura"?:
+      return UIImage.iconParkOff()
     default:
-      return #imageLiteral(resourceName: "ic-info")
+        return UIImage.iconInfo()
     }
   }
   
   func getImageOn() -> UIImage! {
     switch slug {
-    case "espacio-publico":
-      return #imageLiteral(resourceName: "ic-espacio-publico")
-    case "equip-social":
-      return #imageLiteral(resourceName: "ic-equipamiento-soc")
-    case "infraestructura":
+    case "espacio-publico"?:
+      return UIImage.espacioPublicoOn()
+    case "equip-social"?:
+      return UIImage.iconSocialOn()
+    case "infraestructura"?:
       return UIImage.iconInfraOn()
-    case "empate":
+    case "empate"?:
       return UIImage.iconMundoOn()
-    case "salud":
-      return #imageLiteral(resourceName: "ic-salud-inactivo")
-    case "educacion":
-      return #imageLiteral(resourceName: "ic-educacion-inactivo")
-    case "trabajo":
-      return #imageLiteral(resourceName: "ic-trabajo-inactivo")
-    case "habitat":
-      return #imageLiteral(resourceName: "ic-habitat-inactivo")
-    case "parque-en-altura":
-      return #imageLiteral(resourceName: "ic-alto-parque-inactivo")
+    case "salud"?:
+    return UIImage.iconSaludOn()
+    case "educacion"?:
+        return UIImage.iconEducationOn()
+    case "trabajo"?:
+        return UIImage.iconJobOn()
+    case "habitat"?:
+        return UIImage.iconHabitatOn()
+    case "parque-en-altura"?:
+        return UIImage.iconParkOn()
     default:
-      return #imageLiteral(resourceName: "ic-info")
+      return UIImage.iconInfo()
     }
   }
 }

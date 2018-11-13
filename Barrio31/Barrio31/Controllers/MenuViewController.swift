@@ -22,8 +22,8 @@ class MenuViewController: BaseViewController {
     view.addSubview(tableView)
     tableView.anchor(self.view.topAnchor, leading: nil, bottom: self.view.bottomAnchor, trailing: self.view.trailingAnchor , size: .init(300, 0))
     tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
-    tableView.estimatedRowHeight = 64.0
-    tableView.rowHeight = 64.0
+    tableView.estimatedRowHeight = 100.0
+    tableView.rowHeight = 100.0
     tableView.separatorStyle = .none
     
     let barButton = UIBarButtonItem.init(title: "BA Integración", style: .plain, target: self, action: #selector(MenuViewController.menuPressed))
@@ -61,7 +61,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     let cell = tableView.dequeueReusableCell(withIdentifier:"cell")
     cell?.textLabel?.text = sections[indexPath.row]
     cell?.textLabel?.textColor = colors[indexPath.row]
-    cell?.textLabel?.font = UIFont.chalet(fontSize: 17)
+    cell?.textLabel?.font = UIFont.chalet(fontSize: 38)
     
     return cell!
   }

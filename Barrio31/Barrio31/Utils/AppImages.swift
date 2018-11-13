@@ -46,7 +46,50 @@ extension UIImage {
   class func iconMundoOff() -> UIImage! {
     return UIImage(named: "ic-mundo-off")
   }
-  
+    
+    class func iconSaludOn() -> UIImage! {
+        return UIImage(named: "ic-salud-inactivo-blanco")
+    }
+    
+    class func iconSaludOff() -> UIImage! {
+        return UIImage(named: "ic-salud-inactivo")
+    }
+    
+    class func iconEducationOff() -> UIImage! {
+        return UIImage(named: "ic-educacion-inactivo")
+    }
+    
+    class func iconEducationOn() -> UIImage! {
+        return UIImage(named: "ic-educacion-inactivo-blanco")
+    }
+    
+    class func iconJobOff() -> UIImage! {
+        return UIImage(named: "ic-trabajo-inactivo")
+    }
+    
+    class func iconJobOn() -> UIImage! {
+        return UIImage(named: "ic-trabajo-inactivo-blanco")
+    }
+    
+    class func iconHabitatOff() -> UIImage! {
+        return UIImage(named: "ic-habitat-inactivo")
+    }
+    
+    class func iconHabitatOn() -> UIImage! {
+        return UIImage(named: "ic-habitat-inactivo-blanco")
+    }
+    
+    class func iconParkOff() -> UIImage! {
+        return UIImage(named: "ic-alto-parque-inactivo")
+    }
+    
+    class func iconParkOn() -> UIImage! {
+        return UIImage(named: "ic-alto-parque-inactivo-blanco")
+    }
+    
+    class func iconInfo() -> UIImage! {
+        return UIImage(named: "ic-info")
+    }
 }
 
 

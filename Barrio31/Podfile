@@ -8,7 +8,16 @@ target 'Barrio31' do
   # Pods for Barrio31
 pod 'Alamofire'
 pod 'SVProgressHUD'
-pod 'SideMenuSwift'
+pod 'SideMenuSwift', '0.4.0'
 pod 'AlamofireImage'
 
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '4.0'
+            config.build_settings['DEBUG_INFORMATION_FORMAT'] = 'dwarf'
+        end
+    end
 end

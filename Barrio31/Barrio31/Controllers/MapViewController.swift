@@ -188,7 +188,12 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     
     for polygon in mapView.overlays as! [B31Polyline] {
       if polygon.intersects(mapRect) {//Touch in polygon
-        infoView.alpha = 1.0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.infoView.alpha = 1
+            self.infoView.center.y -= self.infoView.frame.height
+        }
+        
         infoView.category = polygon.category
         if let det = polygonsDetails.first(where: {$0.id == polygon.polygon?.id}) {
           infoView.detail = det
@@ -196,7 +201,10 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         return
       }
       else {
-        infoView.alpha = 0.0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.infoView.alpha = 0.0
+        }
       }
     }
   }

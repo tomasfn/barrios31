@@ -44,7 +44,7 @@ class MapDetailViewController: BaseViewController {
         Alamofire.request(url).responseImage { [weak self] response in
           SVProgressHUD.dismiss()
           if let image = response.result.value {
-            self!.imgView.image = image
+            self?.imgView.image = image
           }
         }
       }
