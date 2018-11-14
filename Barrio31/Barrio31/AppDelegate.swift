@@ -8,6 +8,7 @@
 
 import UIKit
 import SideMenuSwift
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = SideMenuController(contentViewController: nav,
                                                     menuViewController: menuNav)
+
     
     window?.makeKeyAndVisible()
     
@@ -64,6 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let titleTextAttributes = [NSAttributedStringKey.foregroundColor : mainColor,
                                NSAttributedStringKey.font : UIFont.chalet(fontSize: 17)]
     UINavigationBar.appearance().titleTextAttributes  = titleTextAttributes
+    
+    SVProgressHUD.setDefaultStyle(.custom)
+    SVProgressHUD.setDefaultMaskType(.custom)
     
   }
 
