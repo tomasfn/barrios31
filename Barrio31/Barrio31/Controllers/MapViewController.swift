@@ -19,9 +19,8 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
   var categorys = [Category]()
   var polygons = [Polygon]()
   var polygonsDetails = [PolygonDetail]()
-    
-    var currentPolygonId: Int!
-
+  
+    var lastInfoViewId: Int!
   var selectedIndexs = [Int]()
   let villa31 = CLLocation(latitude: -34.582800, longitude: -58.379679)
   let regionRadius: CLLocationDistance = 1000
@@ -184,26 +183,28 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     let touchLocation = sender.location(in: mapView)
     let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
     
-    
     let point = MKMapPointForCoordinate(locationCoordinate)
     let mapRect = MKMapRectMake(point.x, point.y, 0, 0);
     
     for polygon in mapView.overlays as! [B31Polyline] {
+        
       if polygon.intersects(mapRect) {//Touch in polygon
         
-        if currentPolygonId != polygon.polygon?.id || infoView.alpha == 0 {
-            UIView.animate(withDuration: 0.3) {
-                self.infoView.alpha = 1
-                self.infoView.center.y -= self.infoView.frame.height
-            }
-            
-            infoView.category = polygon.category
-            if let det = polygonsDetails.first(where: {$0.id == polygon.polygon?.id}) {
-                infoView.detail = det
-            }
+        infoView.category = polygon.category
+        if let det = polygonsDetails.first(where: {$0.id == polygon.polygon?.id}) {
+          infoView.detail = det
         }
         
-        currentPolygonId = polygon.polygon?.id
+        UIView.animate(withDuration: 0.3) {
+            self.infoView.alpha = 1
+            
+            if self.infoView.detail?.id != self.lastInfoViewId {
+            self.infoView.center.y -= self.infoView.frame.height
+            }
+            
+        }
+        
+        lastInfoViewId = polygon.polygon?.id
         return
       }
       else {
