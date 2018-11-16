@@ -220,7 +220,7 @@ class MapDetailViewController: BaseViewController {
     montoImgView.anchor(dateLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(20, 20.0))
     
     let montoLabel = UILabel()
-    montoLabel.text = "Monto: $\(detail.amountStr!).00"
+    montoLabel.text = "Monto: $\(detail.amountStr!)"
     montoLabel.textColor = UIColor.lightGray
     montoLabel.textAlignment = .left
     montoLabel.font = UIFont.chalet(fontSize: 14)
