@@ -134,6 +134,7 @@ struct PolygonDetail {
   var id : Int?
   var name : String?
   var amount : Int?
+    var amountStr : String?
   var categoryName : String?
   var categorySlug : String?
   var neighbors : String?
@@ -172,6 +173,10 @@ struct PolygonDetail {
     
     if let amountOK = JSON["amount"] as? Int {
       amount = amountOK
+    }
+    
+    if let amountStrOK = JSON["amountFormat"] as? String {
+        amountStr = amountStrOK
     }
     
     if let droneOK = JSON["drone"] as? [String : String] {
