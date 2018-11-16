@@ -42,6 +42,7 @@
 		8AB35FE9219F0E6F00E4394D /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FE8219F0E6F00E4394D /* RealmHelper.swift */; };
 		8AB35FED219F11A100E4394D /* Drone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FEC219F11A100E4394D /* Drone.swift */; };
 		8AB35FEF219F11BB00E4394D /* Street.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FEE219F11BB00E4394D /* Street.swift */; };
+		8AB35FF2219F272600E4394D /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FF1219F272600E4394D /* PaddingLabel.swift */; };
 		B9631DB48E780CD0E206A39A /* Pods_Barrio31.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87925E620ED962C1D59629D4 /* Pods_Barrio31.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		8AB35FE8219F0E6F00E4394D /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		8AB35FEC219F11A100E4394D /* Drone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drone.swift; sourceTree = "<group>"; };
 		8AB35FEE219F11BB00E4394D /* Street.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
+		8AB35FF1219F272600E4394D /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		A5F59669DBE4A55B921151E8 /* Pods-Barrio31.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.release.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.release.xcconfig"; sourceTree = "<group>"; };
 		FAD8B302D123058E3BA65FD7 /* Pods-Barrio31.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +160,7 @@
 		4542CCE4212C4FDE00EE5D3F /* Barrio31 */ = {
 			isa = PBXGroup;
 			children = (
+				8AB35FF0219F270F00E4394D /* Classes */,
 				8AB35FE7219F0E6300E4394D /* Helpers */,
 				8AB35FE0219F08EA00E4394D /* Protocols */,
 				45F23A1C2135D5F800F22C1C /* Manager-Models */,
@@ -239,6 +242,14 @@
 				8AB35FEE219F11BB00E4394D /* Street.swift */,
 			);
 			path = SubModels;
+			sourceTree = "<group>";
+		};
+		8AB35FF0219F270F00E4394D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8AB35FF1219F272600E4394D /* PaddingLabel.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		D99365C1C434852C7CE705F4 /* Frameworks */ = {
@@ -342,7 +353,6 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -355,7 +365,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -416,6 +425,7 @@
 				45151C2F212DE69300222656 /* AppColors.swift in Sources */,
 				45D2D6702189F8F100638440 /* DisfrutaTableViewCell.swift in Sources */,
 				8AB35FE4219F0A5500E4394D /* PolygonDetail.swift in Sources */,
+				8AB35FF2219F272600E4394D /* PaddingLabel.swift in Sources */,
 				8AB35FDF219F08B000E4394D /* Polygon.swift in Sources */,
 				4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */,
 				45151C34212DE93900222656 /* Commons.swift in Sources */,

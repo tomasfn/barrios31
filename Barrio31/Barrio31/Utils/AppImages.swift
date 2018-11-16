@@ -11,42 +11,78 @@ import UIKit
 //MARK: App Images
 extension UIImage {
     
-  class func iconHome() -> UIImage! {
-    return UIImage(named: "menu-ic")
-  }
-  
-  class func espacioPublicoOn() -> UIImage! {
-    return UIImage(named: "ic-espacio-publico")
-  }
-  
-  class func espacioPublicoOff() -> UIImage! {
-    return UIImage(named: "ic-espacio-publico-off")
-  }
-  
-  class func iconInfraOn() -> UIImage! {
-    return UIImage(named: "ic-infraestructura")
-  }
-  
-  class func iconInfraOff() -> UIImage! {
-    return UIImage(named: "ic-infraestructura-off")
-  }
-  
-  class func iconSocialOn() -> UIImage! {
-    return UIImage(named: "ic-equipamiento-soc")
-  }
-  
-  class func iconSocialOff() -> UIImage! {
-    return UIImage(named: "ic-equipamiento-soc-off")
-  }
-  
-  class func iconMundoOn() -> UIImage! {
-    return UIImage(named: "ic-mundo")
-  }
-  
-  class func iconMundoOff() -> UIImage! {
-    return UIImage(named: "ic-mundo-off")
-  }
     
+    //MARK: Category Image Patterns
+    class func patternHighPark() -> UIImage! {
+        return UIImage(named: "pattern-alto-parque")
+    }
+    
+    class func patternEducation() -> UIImage! {
+        return UIImage(named: "pattern-educacion")
+    }
+    
+    class func patternSocialEquip() -> UIImage! {
+        return UIImage(named: "pattern-equipamiento-social")
+    }
+    
+    class func patternPublicSpace() -> UIImage! {
+        return UIImage(named: "pattern-espacio-publico")
+    }
+    
+    class func patternHabitat() -> UIImage! {
+        return UIImage(named: "pattern-habitat")
+    }
+    
+    class func patternInfrastructure() -> UIImage! {
+        return UIImage(named: "pattern-infraestructura")
+    }
+    
+    class func patternHealth() -> UIImage! {
+        return UIImage(named: "pattern-salud")
+    }
+
+    class func patternJob() -> UIImage! {
+        return UIImage(named: "pattern-trabajo")
+    }
+
+    
+    //MARK: Category Icons
+    class func iconHome() -> UIImage! {
+        return UIImage(named: "menu-ic")
+    }
+    
+    class func espacioPublicoOn() -> UIImage! {
+        return UIImage(named: "ic-espacio-publico")
+    }
+    
+    class func espacioPublicoOff() -> UIImage! {
+        return UIImage(named: "ic-espacio-publico-off")
+    }
+    
+    class func iconInfraOn() -> UIImage! {
+        return UIImage(named: "ic-infraestructura")
+    }
+    
+    class func iconInfraOff() -> UIImage! {
+        return UIImage(named: "ic-infraestructura-off")
+    }
+    
+    class func iconSocialOn() -> UIImage! {
+        return UIImage(named: "ic-equipamiento-soc")
+    }
+
+    class func iconSocialOff() -> UIImage! {
+        return UIImage(named: "ic-equipamiento-soc-off")
+    }
+    
+    class func iconMundoOn() -> UIImage! {
+        return UIImage(named: "ic-mundo")
+    }
+    
+    class func iconMundoOff() -> UIImage! {
+        return UIImage(named: "ic-mundo-off")
+    }
+
     class func iconSaludOn() -> UIImage! {
         return UIImage(named: "ic-salud-inactivo-blanco")
     }

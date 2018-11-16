@@ -40,12 +40,12 @@ class MapDetailViewController: BaseViewController {
     if let street = detail.street {
       if let before = street["beforeLink"] {
         let url = "http://barrio31.candoit.com.ar" + before
+        
+        SVProgressHUD.setForegroundColor(detail!.getColor())
         SVProgressHUD.show()
-        
-        
-        
         Alamofire.request(url).responseImage { [weak self] response in
           SVProgressHUD.dismiss()
+            SVProgressHUD.setForegroundColor(UIColor.black)
           if let image = response.result.value {
             self?.imgView.image = image
           }
@@ -150,7 +150,6 @@ class MapDetailViewController: BaseViewController {
   }
 
   
-  
   func createInfoView() {
     infoView = UIView()
     self.view.addSubview(infoView)
@@ -158,12 +157,13 @@ class MapDetailViewController: BaseViewController {
     infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: -80, left: 10.0, bottom: -10.0, right: -10.0))
     
     let imgView = UIImageView()
-    imgView.image = #imageLiteral(resourceName: "pattern-alto-parque")
+    imgView.image = setImagePatternForCategory(categorySlug: detail.categorySlug!)
     imgView.contentMode = .scaleAspectFill
     infoView.addSubview(imgView)
     
     let tagLabel = UILabel()
     tagLabel.text = detail.categoryName
+    tagLabel.font = UIFont.boldSystemFont(ofSize: 18)
     tagLabel.textColor = UIColor.white
     tagLabel.textAlignment = .left
     //tagLabel.font = UIFont.chalet(fontSize: 16)
@@ -173,6 +173,7 @@ class MapDetailViewController: BaseViewController {
     let nameLabel = UILabel()
     nameLabel.text = detail.name
     nameLabel.textColor = detail.getColor()
+    nameLabel.padding = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     nameLabel.backgroundColor = UIColor.white
     nameLabel.textAlignment = .left
     nameLabel.font = UIFont.chalet(fontSize: 18)
@@ -180,7 +181,7 @@ class MapDetailViewController: BaseViewController {
     nameLabel.lineBreakMode = .byWordWrapping
     nameLabel.setContentHuggingPriority(.required, for: .vertical)
     imgView.addSubview(nameLabel)
-    nameLabel.anchor(tagLabel.bottomAnchor, leading: imgView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(0, 18.0))
+    nameLabel.anchor(tagLabel.bottomAnchor, leading: imgView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(0, 20.0))
     nameLabel.sizeToFit()
     
     let descriptionLabel = UILabel()
@@ -197,9 +198,6 @@ class MapDetailViewController: BaseViewController {
     
     imgView.clipsToBounds = true
     imgView.anchor(infoView.topAnchor, leading: infoView.leadingAnchor, bottom: descriptionLabel.bottomAnchor, trailing: infoView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 10.0, right: 0))
-    
-    
-    
     
     let dateImgView = UIImageView()
     dateImgView.image = UIImage.init(named: "ic-fechas")
@@ -248,7 +246,10 @@ class MapDetailViewController: BaseViewController {
     neighborsTextLabel.textColor = UIColor.black
     neighborsTextLabel.textAlignment = .left
     neighborsTextLabel.font = UIFont.chalet(fontSize: 16)
-    neighborsTextLabel.numberOfLines = 2
+    neighborsTextLabel.numberOfLines = 0
+    neighborsTextLabel.adjustsFontSizeToFitWidth = true
+    neighborsTextLabel.minimumScaleFactor = 0.5
+    
     infoView.addSubview(neighborsTextLabel)
     neighborsTextLabel.anchor(neighborsLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 0, left: 10, bottom: 0, right: -10) ,size: .init(width: 0, height: 34))
     
@@ -280,6 +281,33 @@ class MapDetailViewController: BaseViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+    
+    func setImagePatternForCategory(categorySlug: String) -> UIImage {
+        
+        switch categorySlug {
+        case "espacio-publico":
+            return UIImage.patternPublicSpace()
+        case "equip-social":
+            return UIImage.patternSocialEquip()
+        case "infraestructura":
+            return UIImage.patternInfrastructure()
+        case "empate":
+            return UIImage.iconMundoOff().imageWithColor(color1: .lightGray)
+        case "salud":
+            return UIImage.patternHealth()
+        case "educacion":
+            return UIImage.patternEducation()
+        case "trabajo":
+            return UIImage.patternJob()
+        case "habitat":
+            return UIImage.patternHabitat()
+        case "parque-en-altura":
+            return UIImage.patternHighPark()
+        default:
+            return UIImage.iconInfo()
+        }
+        
+    }
   
   
   /*

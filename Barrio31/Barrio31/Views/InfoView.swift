@@ -49,6 +49,7 @@ class InfoView: UIView {
     label.textAlignment = .center
     label.adjustsFontSizeToFitWidth = true
     label.minimumScaleFactor = 0.5
+    label.padding = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     label.text = ""
     return label
   }()
