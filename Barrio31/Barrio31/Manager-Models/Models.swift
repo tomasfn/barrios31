@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import RealmSwift
 
 struct Category : Decodable {
   var name : String?
@@ -86,7 +87,7 @@ struct Category : Decodable {
   }
 }
 
-struct Polygon  {
+struct PolygonStr  {
   var type : String?
   var color : String?
   var category : String?
@@ -229,7 +230,7 @@ struct PolygonDetail {
   
 }
 
-struct DisfrutaItem {
+struct DisfrutaItemStr {
   var id : Int?
   var color : String?
   var category : String?

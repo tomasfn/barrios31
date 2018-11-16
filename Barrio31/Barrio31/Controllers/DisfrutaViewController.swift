@@ -133,7 +133,7 @@ class DisfrutaViewController: BaseViewController {
     for item in items {
       counter = counter - 1
       //print("\(counter)")
-      APIManager.getDisfrutaDetails(withId: "\(String(describing: item.id!))") { (disf, error) in
+        APIManager.getDisfrutaDetails(withId: "\(String(describing: item.id))") { (disf, error) in
         if error == nil {
           self.details.append(disf!)
           if self.details.count == self.items.count , counter == 0 {

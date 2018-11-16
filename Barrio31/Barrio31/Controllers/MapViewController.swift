@@ -109,7 +109,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         self.polygons.removeAll()
         for pol in polys {
           self.polygons.append(pol)
-          self.loadPolygonsDetails("\(pol.id!)")
+            self.loadPolygonsDetails("\(pol.id)")
           //print(" id a descrgar \(pol.id!)")
         }
         SVProgressHUD.dismiss()

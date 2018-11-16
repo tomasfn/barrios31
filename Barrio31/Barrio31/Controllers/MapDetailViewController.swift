@@ -41,6 +41,9 @@ class MapDetailViewController: BaseViewController {
       if let before = street["beforeLink"] {
         let url = "http://barrio31.candoit.com.ar" + before
         SVProgressHUD.show()
+        
+        
+        
         Alamofire.request(url).responseImage { [weak self] response in
           SVProgressHUD.dismiss()
           if let image = response.result.value {

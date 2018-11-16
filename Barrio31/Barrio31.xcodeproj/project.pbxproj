@@ -35,6 +35,13 @@
 		45D2D6702189F8F100638440 /* DisfrutaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D2D66F2189F8F100638440 /* DisfrutaTableViewCell.swift */; };
 		45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F23A1921359B7500F22C1C /* Main.storyboard */; };
 		45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F23A1D2135D9D400F22C1C /* APIManager.swift */; };
+		8AB35FDF219F08B000E4394D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FDE219F08B000E4394D /* Polygon.swift */; };
+		8AB35FE2219F08F500E4394D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FE1219F08F500E4394D /* Protocols.swift */; };
+		8AB35FE4219F0A5500E4394D /* PolygonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FE3219F0A5500E4394D /* PolygonDetail.swift */; };
+		8AB35FE6219F0BAC00E4394D /* DisfrutaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FE5219F0BAC00E4394D /* DisfrutaItem.swift */; };
+		8AB35FE9219F0E6F00E4394D /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FE8219F0E6F00E4394D /* RealmHelper.swift */; };
+		8AB35FED219F11A100E4394D /* Drone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FEC219F11A100E4394D /* Drone.swift */; };
+		8AB35FEF219F11BB00E4394D /* Street.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FEE219F11BB00E4394D /* Street.swift */; };
 		B9631DB48E780CD0E206A39A /* Pods_Barrio31.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87925E620ED962C1D59629D4 /* Pods_Barrio31.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +77,13 @@
 		45F23A1A21359B7500F22C1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45F23A1D2135D9D400F22C1C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		87925E620ED962C1D59629D4 /* Pods_Barrio31.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Barrio31.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AB35FDE219F08B000E4394D /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
+		8AB35FE1219F08F500E4394D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		8AB35FE3219F0A5500E4394D /* PolygonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonDetail.swift; sourceTree = "<group>"; };
+		8AB35FE5219F0BAC00E4394D /* DisfrutaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisfrutaItem.swift; sourceTree = "<group>"; };
+		8AB35FE8219F0E6F00E4394D /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		8AB35FEC219F11A100E4394D /* Drone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drone.swift; sourceTree = "<group>"; };
+		8AB35FEE219F11BB00E4394D /* Street.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
 		A5F59669DBE4A55B921151E8 /* Pods-Barrio31.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.release.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.release.xcconfig"; sourceTree = "<group>"; };
 		FAD8B302D123058E3BA65FD7 /* Pods-Barrio31.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +158,8 @@
 		4542CCE4212C4FDE00EE5D3F /* Barrio31 */ = {
 			isa = PBXGroup;
 			children = (
+				8AB35FE7219F0E6300E4394D /* Helpers */,
+				8AB35FE0219F08EA00E4394D /* Protocols */,
 				45F23A1C2135D5F800F22C1C /* Manager-Models */,
 				45151C3D212DF66600222656 /* Controllers */,
 				45151C2A212DE0EE00222656 /* Utils */,
@@ -182,10 +198,47 @@
 		45F23A1C2135D5F800F22C1C /* Manager-Models */ = {
 			isa = PBXGroup;
 			children = (
+				8AB35FDD219F08A100E4394D /* Models */,
 				45F23A1D2135D9D400F22C1C /* APIManager.swift */,
 				45CF590F2136E3FE00E2A858 /* Models.swift */,
 			);
 			path = "Manager-Models";
+			sourceTree = "<group>";
+		};
+		8AB35FDD219F08A100E4394D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8AB35FEA219F119200E4394D /* SubModels */,
+				8AB35FDE219F08B000E4394D /* Polygon.swift */,
+				8AB35FE3219F0A5500E4394D /* PolygonDetail.swift */,
+				8AB35FE5219F0BAC00E4394D /* DisfrutaItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8AB35FE0219F08EA00E4394D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8AB35FE1219F08F500E4394D /* Protocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		8AB35FE7219F0E6300E4394D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8AB35FE8219F0E6F00E4394D /* RealmHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8AB35FEA219F119200E4394D /* SubModels */ = {
+			isa = PBXGroup;
+			children = (
+				8AB35FEC219F11A100E4394D /* Drone.swift */,
+				8AB35FEE219F11BB00E4394D /* Street.swift */,
+			);
+			path = SubModels;
 			sourceTree = "<group>";
 		};
 		D99365C1C434852C7CE705F4 /* Frameworks */ = {
@@ -289,8 +342,10 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenuSwift/SideMenuSwift.framework",
 			);
@@ -300,8 +355,10 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuSwift.framework",
 			);
@@ -340,9 +397,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				45151C3A212DF65100222656 /* EVExtensions.swift in Sources */,
+				8AB35FE2219F08F500E4394D /* Protocols.swift in Sources */,
 				45151C3C212DF65100222656 /* ReusableView.swift in Sources */,
 				453CB2662167B85B00DEF65B /* MapDetailViewController.swift in Sources */,
 				453CB268216BDE9400DEF65B /* MenuViewController.swift in Sources */,
+				8AB35FE6219F0BAC00E4394D /* DisfrutaItem.swift in Sources */,
+				8AB35FEF219F11BB00E4394D /* Street.swift in Sources */,
 				452CE2F2218C97A600590678 /* DisfrutaDetailViewController.swift in Sources */,
 				452CE2EE218C8C3D00590678 /* InfoView.swift in Sources */,
 				452CE2F0218C8C8100590678 /* CategoryCell.swift in Sources */,
@@ -355,11 +415,15 @@
 				45151C3B212DF65100222656 /* NibLoadableView.swift in Sources */,
 				45151C2F212DE69300222656 /* AppColors.swift in Sources */,
 				45D2D6702189F8F100638440 /* DisfrutaTableViewCell.swift in Sources */,
+				8AB35FE4219F0A5500E4394D /* PolygonDetail.swift in Sources */,
+				8AB35FDF219F08B000E4394D /* Polygon.swift in Sources */,
 				4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */,
 				45151C34212DE93900222656 /* Commons.swift in Sources */,
 				45151C36212DEA6F00222656 /* BaseViewController.swift in Sources */,
 				452CE2F4218C9AD800590678 /* DisfrutaInfoView.swift in Sources */,
+				8AB35FED219F11A100E4394D /* Drone.swift in Sources */,
 				4542CCE6212C4FDE00EE5D3F /* AppDelegate.swift in Sources */,
+				8AB35FE9219F0E6F00E4394D /* RealmHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,7 +573,10 @@
 				DEVELOPMENT_TEAM = GHT59S24UX;
 				INFOPLIST_FILE = Barrio31/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.candoit.barrio31;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -527,7 +594,10 @@
 				DEVELOPMENT_TEAM = GHT59S24UX;
 				INFOPLIST_FILE = Barrio31/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.candoit.barrio31;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
