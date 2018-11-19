@@ -17,9 +17,13 @@ class MapDetailViewController: BaseViewController {
   
   var detail : PolygonDetail!
     
-var imageOne : UIImageView!
-var imageTwo : UIImageView!
-var imageThree : UIImageView!
+    var imageArray = [UIImage]() {
+        didSet {
+            if imageArray.count > 1 {
+                setupImages(imageArray)
+            }
+        }
+    }
     
 //  var imgView: UIImageView!
   var bottomView : UIView!
@@ -31,23 +35,27 @@ var imageThree : UIImageView!
   var videoButton : UIButton!
   var infoView : UIView!
     
-    var scrollView : UIScrollView!
-  
+    let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.isPagingEnabled = true
+        scroll.showsVerticalScrollIndicator = false
+        scroll.showsHorizontalScrollIndicator = false
+        scroll.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        return scroll
+    }()
+    
   //MARK: Life Cycle
     
     
     override func viewDidLayoutSubviews() {
-        
-        scrollView.contentSize = CGSize(scrollView.frame.width * 4, scrollView.frame.height)
-        imageOne.frame.size.height = scrollView.frame.height
-        imageTwo.frame.size.height = scrollView.frame.height
-        imageThree.frame.size.height = scrollView.frame.height
     }
-
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
+    
+    setScrollViewAndImages()
     
     bottomView = UIView()
     self.view.addSubview(bottomView)
@@ -75,7 +83,6 @@ var imageThree : UIImageView!
     videoButton.addTarget(self, action: #selector(MapDetailViewController.videoPressed), for: .touchUpInside)
     videoButton.anchor(bottomView.topAnchor, leading: infoButton.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/2, 60))
     
-    pageControl = UIPageControl()
     self.view.addSubview(pageControl)
     if #available(iOS 11.0, *) {
       pageControl.anchor(view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor , size : .init(0, 40))
@@ -112,7 +119,6 @@ var imageThree : UIImageView!
     self.view.addSubview(mañanaLabel)
     mañanaLabel.anchor(pageControl.bottomAnchor, leading: hoyLabel.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/3, 30))
     
-    setScrollViewAndImages()
   }
   
   @objc func videoPressed() {
@@ -150,10 +156,7 @@ var imageThree : UIImageView!
     
     func setScrollViewAndImages() {
         
-        imageOne = UIImageView()
-        imageTwo = UIImageView()
-        imageThree = UIImageView()
-        scrollView = UIScrollView()
+        pageControl = UIPageControl()
         
         scrollView.fillSuperview()
         scrollView.backgroundColor = UIColor.white
@@ -164,28 +167,48 @@ var imageThree : UIImageView!
         
         scrollView.frame = CGRect(0, 0, self.view.frame.width,self.view.frame.height)
         
-        let scrollViewWidth = scrollView.frame.width
-        let scrollViewHeight = scrollView.frame.height
-        
         if let street = detail.street {
             if let before = street["beforeLink"] {
                 let url = "http://barrio31.candoit.com.ar" + before
                 
-                SVProgressHUD.setForegroundColor(detail!.getColor())
-                self.imageOne.load(url: URL(string: url)!, placeholder: nil)
-                self.imageTwo.load(url: URL(string: url)!, placeholder: nil)
-                self.imageThree.load(url: URL(string: url)!, placeholder: nil)
-
+                Alamofire.request(url).responseImage { [weak self] response in
+                    SVProgressHUD.setForegroundColor(UIColor.black)
+                    if let image = response.result.value {
+                        self!.imageArray.append(image)
+                    }
+                }
+            }
+            
+            if let after = street["afterLink"] {
+                let url = "http://barrio31.candoit.com.ar" + after
+                
+                Alamofire.request(url).responseImage { [weak self] response in
+                    SVProgressHUD.setForegroundColor(UIColor.black)
+                    if let image = response.result.value {
+                        self!.imageArray.append(image)
+                    }
+                }
             }
         }
         
-        imageOne = UIImageView(frame: CGRect(0, 0,scrollViewWidth, scrollViewHeight))
-        imageTwo = UIImageView(frame: CGRect(scrollViewWidth*1, 0,scrollViewWidth, scrollViewHeight))
-        imageThree = UIImageView(frame: CGRect(scrollViewWidth*2, 0,scrollViewWidth, scrollViewHeight))
+        view.addSubview(scrollView)
+    }
+    
+    func setupImages(_ images: [UIImage]){
         
-        scrollView.addSubview(imageOne)
-        scrollView.addSubview(imageTwo)
-        scrollView.addSubview(imageThree)
+        for i in 0..<images.count {
+            
+            let imageView = UIImageView()
+            imageView.image = images[i]
+            let xPosition = UIScreen.main.bounds.width * CGFloat(i)
+            imageView.frame = CGRect(x: xPosition, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
+            imageView.contentMode = .scaleAspectFit
+            
+            scrollView.contentSize.width = scrollView.frame.width * CGFloat(i + 1)
+            scrollView.addSubview(imageView)
+            scrollView.delegate = self
+            
+        }
     }
 
   
