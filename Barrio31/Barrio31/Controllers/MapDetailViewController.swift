@@ -57,12 +57,6 @@ class MapDetailViewController: BaseViewController {
 
     // Do any additional setup after loading the view.
     
-    let image1 = UIImage()
-    let image2 = UIImage()
-    
-    imageArray.append(image1)
-    imageArray.append(image2)
-    
     setScrollViewAndImages()
     
     bottomView = UIView()
@@ -195,17 +189,17 @@ class MapDetailViewController: BaseViewController {
                     
                     Alamofire.request(url).responseImage { [weak self] response in
                         if let image = response.result.value {
-                            self?.imageArray.insert(image, at: 0)
+                            self?.imageArray.append(image)
                         }
                     }
-                }
-                
-                if let afteriPadLink = street["ipadAfterLink"] {
-                    let url = "http://barrio31.candoit.com.ar" + afteriPadLink
                     
-                    Alamofire.request(url).responseImage { [weak self] response in
-                        if let image = response.result.value {
-                            self?.imageArray.insert(image, at: 1)
+                    if let afteriPadLink = street["ipadAfterLink"] {
+                        let url = "http://barrio31.candoit.com.ar" + afteriPadLink
+                        
+                        Alamofire.request(url).responseImage { [weak self] response in
+                            if let image = response.result.value {
+                                self?.imageArray.append(image)
+                            }
                         }
                     }
                 }
@@ -217,19 +211,20 @@ class MapDetailViewController: BaseViewController {
                     
                     Alamofire.request(url).responseImage { [weak self] response in
                         if let image = response.result.value {
-                            self?.imageArray.insert(image, at: 0)
+                            self?.imageArray.append(image)
+                        }
+                        
+                        if let after = street["afterLink"] {
+                            let url = "http://barrio31.candoit.com.ar" + after
+                            
+                            Alamofire.request(url).responseImage { [weak self] response in
+                                if let image = response.result.value {
+                                    self?.imageArray.append(image)
+                                }
+                            }
                         }
                     }
-                }
-                
-                if let after = street["afterLink"] {
-                    let url = "http://barrio31.candoit.com.ar" + after
                     
-                    Alamofire.request(url).responseImage { [weak self] response in
-                        if let image = response.result.value {
-                            self?.imageArray.insert(image, at: 1)
-                        }
-                    }
                 }
             }
         }
