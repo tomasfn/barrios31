@@ -19,8 +19,10 @@ class MapDetailViewController: BaseViewController {
     
     var imageArray = [UIImage]() {
         didSet {
-            if imageArray.count > 1 {
+            if imageArray.count >= 2 {
                 setupImages(imageArray)
+                SVProgressHUD.dismiss()
+                SVProgressHUD.setForegroundColor(UIColor.black)
             }
         }
     }
@@ -52,8 +54,14 @@ class MapDetailViewController: BaseViewController {
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     // Do any additional setup after loading the view.
+    
+    let image1 = UIImage()
+    let image2 = UIImage()
+    
+    imageArray.append(image1)
+    imageArray.append(image2)
     
     setScrollViewAndImages()
     
@@ -90,9 +98,10 @@ class MapDetailViewController: BaseViewController {
       // Fallback on earlier versions
       pageControl.anchor(view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor , size : .init(0, 40))
     }
-    pageControl.currentPage = 2
-    pageControl.numberOfPages = 3
-    pageControl.pageIndicatorTintColor = UIColor.white
+    
+    pageControl.numberOfPages = 2
+    pageControl.currentPageIndicatorTintColor = .white
+    pageControl.pageIndicatorTintColor = .lightGray
     
     ayerLabel = UILabel()
     ayerLabel.text = "AYER"
@@ -103,21 +112,27 @@ class MapDetailViewController: BaseViewController {
 
     ayerLabel.anchor(pageControl.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, size : .init(view.width/3, 30))
     
-    hoyLabel = UILabel()
-    hoyLabel.text = "HOY"
-    hoyLabel.textColor = UIColor.white
-    hoyLabel.textAlignment = .center
-    hoyLabel.font = UIFont.chalet(fontSize: 16)
-    self.view.addSubview(hoyLabel)
-    hoyLabel.anchor(pageControl.bottomAnchor, leading: ayerLabel.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/3, 30))
+//    hoyLabel = UILabel()
+//    hoyLabel.text = "HOY"
+//    hoyLabel.textColor = UIColor.white
+//    hoyLabel.textAlignment = .center
+//    hoyLabel.font = UIFont.chalet(fontSize: 16)
+//    self.view.addSubview(hoyLabel)
+//    hoyLabel.anchor(pageControl.bottomAnchor, leading: ayerLabel.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/3, 30))
     
     mañanaLabel = UILabel()
-    mañanaLabel.text = "MAÑANA"
+    
+    if dateIsBeforeCurrent(dateString: detail.ended!) {
+        mañanaLabel.text = "HOY"
+    } else {
+        mañanaLabel.text = "MAÑANA"
+    }
+    
     mañanaLabel.textColor = UIColor.white
     mañanaLabel.textAlignment = .center
     mañanaLabel.font = UIFont.chalet(fontSize: 16)
     self.view.addSubview(mañanaLabel)
-    mañanaLabel.anchor(pageControl.bottomAnchor, leading: hoyLabel.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/3, 30))
+    mañanaLabel.anchor(pageControl.bottomAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, size : .init(view.width/3, 30))
     
   }
   
@@ -161,31 +176,59 @@ class MapDetailViewController: BaseViewController {
         scrollView.fillSuperview()
         scrollView.backgroundColor = UIColor.white
         
-        scrollView.contentSize = CGSize(width:self.scrollView.frame.width * 4, height:self.scrollView.frame.height)
+        scrollView.contentMode = .scaleAspectFit
+        
+        scrollView.contentSize = CGSize(width:self.scrollView.frame.width * 4, height:1)
         scrollView.delegate = self
         pageControl.currentPage = 0
         
         scrollView.frame = CGRect(0, 0, self.view.frame.width,self.view.frame.height)
         
         if let street = detail.street {
-            if let before = street["beforeLink"] {
-                let url = "http://barrio31.candoit.com.ar" + before
+            
+            SVProgressHUD.setForegroundColor(detail.getColor())
+            SVProgressHUD.show()
+            if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
                 
-                Alamofire.request(url).responseImage { [weak self] response in
-                    SVProgressHUD.setForegroundColor(UIColor.black)
-                    if let image = response.result.value {
-                        self!.imageArray.append(image)
+                if let beforeiPadLink = street["ipadBeforeLink"] {
+                    let url = "http://barrio31.candoit.com.ar" + beforeiPadLink
+                    
+                    Alamofire.request(url).responseImage { [weak self] response in
+                        if let image = response.result.value {
+                            self?.imageArray.insert(image, at: 0)
+                        }
                     }
                 }
-            }
-            
-            if let after = street["afterLink"] {
-                let url = "http://barrio31.candoit.com.ar" + after
                 
-                Alamofire.request(url).responseImage { [weak self] response in
-                    SVProgressHUD.setForegroundColor(UIColor.black)
-                    if let image = response.result.value {
-                        self!.imageArray.append(image)
+                if let afteriPadLink = street["ipadAfterLink"] {
+                    let url = "http://barrio31.candoit.com.ar" + afteriPadLink
+                    
+                    Alamofire.request(url).responseImage { [weak self] response in
+                        if let image = response.result.value {
+                            self?.imageArray.insert(image, at: 1)
+                        }
+                    }
+                }
+                
+            } else if UI_USER_INTERFACE_IDIOM() == .phone {
+                
+                if let before = street["beforeLink"] {
+                    let url = "http://barrio31.candoit.com.ar" + before
+                    
+                    Alamofire.request(url).responseImage { [weak self] response in
+                        if let image = response.result.value {
+                            self?.imageArray.insert(image, at: 0)
+                        }
+                    }
+                }
+                
+                if let after = street["afterLink"] {
+                    let url = "http://barrio31.candoit.com.ar" + after
+                    
+                    Alamofire.request(url).responseImage { [weak self] response in
+                        if let image = response.result.value {
+                            self?.imageArray.insert(image, at: 1)
+                        }
                     }
                 }
             }
@@ -395,4 +438,21 @@ extension MapDetailViewController: UIScrollViewDelegate {
         self.pageControl.currentPage = Int(currentPage)
     }
     
+}
+
+extension MapDetailViewController {
+    
+    func dateIsBeforeCurrent(dateString: String) -> Bool{
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let someDate = dateFormatter.date(from: dateString)
+        
+        if (someDate?.timeIntervalSinceNow.sign == .minus) {
+            return true
+        } else {
+            return false
+        }
+
+    }
 }
