@@ -16,7 +16,12 @@ import AVFoundation
 class MapDetailViewController: BaseViewController {
   
   var detail : PolygonDetail!
-  var imgView: UIImageView!
+    
+var imageOne : UIImageView!
+var imageTwo : UIImageView!
+var imageThree : UIImageView!
+    
+//  var imgView: UIImageView!
   var bottomView : UIView!
   var pageControl : UIPageControl!
   var ayerLabel : UILabel!
@@ -25,33 +30,24 @@ class MapDetailViewController: BaseViewController {
   var infoButton : UIButton!
   var videoButton : UIButton!
   var infoView : UIView!
+    
+    var scrollView : UIScrollView!
   
   //MARK: Life Cycle
+    
+    
+    override func viewDidLayoutSubviews() {
+        
+        scrollView.contentSize = CGSize(scrollView.frame.width * 4, scrollView.frame.height)
+        imageOne.frame.size.height = scrollView.frame.height
+        imageTwo.frame.size.height = scrollView.frame.height
+        imageThree.frame.size.height = scrollView.frame.height
+    }
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
-    
-    imgView = UIImageView()
-    self.view.addSubview(imgView)
-    imgView.fillSuperview()
-    imgView.backgroundColor = UIColor.white
-    if let street = detail.street {
-      if let before = street["beforeLink"] {
-        let url = "http://barrio31.candoit.com.ar" + before
-        
-        SVProgressHUD.setForegroundColor(detail!.getColor())
-        SVProgressHUD.show()
-        Alamofire.request(url).responseImage { [weak self] response in
-          SVProgressHUD.dismiss()
-            SVProgressHUD.setForegroundColor(UIColor.black)
-          if let image = response.result.value {
-            self?.imgView.image = image
-          }
-        }
-      }
-    }
     
     bottomView = UIView()
     self.view.addSubview(bottomView)
@@ -115,6 +111,8 @@ class MapDetailViewController: BaseViewController {
     mañanaLabel.font = UIFont.chalet(fontSize: 16)
     self.view.addSubview(mañanaLabel)
     mañanaLabel.anchor(pageControl.bottomAnchor, leading: hoyLabel.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/3, 30))
+    
+    setScrollViewAndImages()
   }
   
   @objc func videoPressed() {
@@ -137,17 +135,58 @@ class MapDetailViewController: BaseViewController {
     if infoView == nil {
       createInfoView()
     }else {
-      UIView.animate(withDuration: 0.5) {
+      UIView.animate(withDuration: 0.3) {
         self.infoView.alpha = 1.0
       }
     }
   }
   
   @objc func infoViewPressed() {
-    UIView.animate(withDuration: 0.5) {
+    UIView.animate(withDuration: 0.3) {
       self.infoView.alpha = 0.0
     }
   }
+    
+    
+    func setScrollViewAndImages() {
+        
+        imageOne = UIImageView()
+        imageTwo = UIImageView()
+        imageThree = UIImageView()
+        scrollView = UIScrollView()
+        
+        scrollView.fillSuperview()
+        scrollView.backgroundColor = UIColor.white
+        
+        scrollView.contentSize = CGSize(width:self.scrollView.frame.width * 4, height:self.scrollView.frame.height)
+        scrollView.delegate = self
+        pageControl.currentPage = 0
+        
+        scrollView.frame = CGRect(0, 0, self.view.frame.width,self.view.frame.height)
+        
+        let scrollViewWidth = scrollView.frame.width
+        let scrollViewHeight = scrollView.frame.height
+        
+        if let street = detail.street {
+            if let before = street["beforeLink"] {
+                let url = "http://barrio31.candoit.com.ar" + before
+                
+                SVProgressHUD.setForegroundColor(detail!.getColor())
+                self.imageOne.load(url: URL(string: url)!, placeholder: nil)
+                self.imageTwo.load(url: URL(string: url)!, placeholder: nil)
+                self.imageThree.load(url: URL(string: url)!, placeholder: nil)
+
+            }
+        }
+        
+        imageOne = UIImageView(frame: CGRect(0, 0,scrollViewWidth, scrollViewHeight))
+        imageTwo = UIImageView(frame: CGRect(scrollViewWidth*1, 0,scrollViewWidth, scrollViewHeight))
+        imageThree = UIImageView(frame: CGRect(scrollViewWidth*2, 0,scrollViewWidth, scrollViewHeight))
+        
+        scrollView.addSubview(imageOne)
+        scrollView.addSubview(imageTwo)
+        scrollView.addSubview(imageThree)
+    }
 
   
   func createInfoView() {
@@ -271,7 +310,6 @@ class MapDetailViewController: BaseViewController {
     m2LabelTextLabel.anchor(m2Label.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 0, left: 10, bottom: 0, right: -10) ,size: .init(width: 0, height: 34))
     
     
-    
     infoView.setCellShadow()
     let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapDetailViewController.infoViewPressed))
     infoView.addGestureRecognizer(tap)
@@ -320,4 +358,18 @@ class MapDetailViewController: BaseViewController {
    }
    */
   
+}
+
+extension MapDetailViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // Test the offset and calculate the current page after scrolling ends
+        let pageWidth:CGFloat = scrollView.frame.width
+
+        let currentPage = Int(floor((scrollView.contentOffset.x-pageWidth/2)/pageWidth)+1)
+        
+        // Change the page indicator
+        self.pageControl.currentPage = Int(currentPage)
+    }
+    
 }
