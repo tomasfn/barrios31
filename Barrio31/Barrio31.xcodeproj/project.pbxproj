@@ -35,6 +35,9 @@
 		45D2D6702189F8F100638440 /* DisfrutaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D2D66F2189F8F100638440 /* DisfrutaTableViewCell.swift */; };
 		45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F23A1921359B7500F22C1C /* Main.storyboard */; };
 		45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F23A1D2135D9D400F22C1C /* APIManager.swift */; };
+		8A3253AB21A469E40046CFAC /* CategoryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3253AA21A469E40046CFAC /* CategoryHelper.swift */; };
+		8A6275D021A5A07B0000B4C8 /* StreetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6275CF21A5A07B0000B4C8 /* StreetCollectionViewCell.swift */; };
+		8A6275D221A5B59D0000B4C8 /* DroneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6275D121A5B59D0000B4C8 /* DroneCollectionViewCell.swift */; };
 		8AB35FDF219F08B000E4394D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FDE219F08B000E4394D /* Polygon.swift */; };
 		8AB35FE2219F08F500E4394D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FE1219F08F500E4394D /* Protocols.swift */; };
 		8AB35FE4219F0A5500E4394D /* PolygonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FE3219F0A5500E4394D /* PolygonDetail.swift */; };
@@ -78,6 +81,9 @@
 		45F23A1A21359B7500F22C1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45F23A1D2135D9D400F22C1C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		87925E620ED962C1D59629D4 /* Pods_Barrio31.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Barrio31.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A3253AA21A469E40046CFAC /* CategoryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHelper.swift; sourceTree = "<group>"; };
+		8A6275CF21A5A07B0000B4C8 /* StreetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetCollectionViewCell.swift; sourceTree = "<group>"; };
+		8A6275D121A5B59D0000B4C8 /* DroneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneCollectionViewCell.swift; sourceTree = "<group>"; };
 		8AB35FDE219F08B000E4394D /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 		8AB35FE1219F08F500E4394D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		8AB35FE3219F0A5500E4394D /* PolygonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonDetail.swift; sourceTree = "<group>"; };
@@ -192,6 +198,7 @@
 		45D2D66E2189F8CB00638440 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				8A6275CD21A5A05C0000B4C8 /* CollectionViewCells */,
 				45D2D66F2189F8F100638440 /* DisfrutaTableViewCell.swift */,
 				452CE2EF218C8C8100590678 /* CategoryCell.swift */,
 			);
@@ -206,6 +213,23 @@
 				45CF590F2136E3FE00E2A858 /* Models.swift */,
 			);
 			path = "Manager-Models";
+			sourceTree = "<group>";
+		};
+		8A6275CD21A5A05C0000B4C8 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				8A6275CE21A5A0690000B4C8 /* CustomCell */,
+			);
+			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		8A6275CE21A5A0690000B4C8 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				8A6275CF21A5A07B0000B4C8 /* StreetCollectionViewCell.swift */,
+				8A6275D121A5B59D0000B4C8 /* DroneCollectionViewCell.swift */,
+			);
+			path = CustomCell;
 			sourceTree = "<group>";
 		};
 		8AB35FDD219F08A100E4394D /* Models */ = {
@@ -231,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				8AB35FE8219F0E6F00E4394D /* RealmHelper.swift */,
+				8A3253AA21A469E40046CFAC /* CategoryHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -353,6 +378,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Gemini/Gemini.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -365,6 +391,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gemini.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -409,6 +436,7 @@
 				8AB35FE2219F08F500E4394D /* Protocols.swift in Sources */,
 				45151C3C212DF65100222656 /* ReusableView.swift in Sources */,
 				453CB2662167B85B00DEF65B /* MapDetailViewController.swift in Sources */,
+				8A6275D021A5A07B0000B4C8 /* StreetCollectionViewCell.swift in Sources */,
 				453CB268216BDE9400DEF65B /* MenuViewController.swift in Sources */,
 				8AB35FE6219F0BAC00E4394D /* DisfrutaItem.swift in Sources */,
 				8AB35FEF219F11BB00E4394D /* Street.swift in Sources */,
@@ -420,12 +448,14 @@
 				450081A1217A68810036A086 /* DisfrutaViewController.swift in Sources */,
 				45151C31212DE69300222656 /* AppFonts.swift in Sources */,
 				45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */,
+				8A3253AB21A469E40046CFAC /* CategoryHelper.swift in Sources */,
 				452CE2F7218CF69000590678 /* PopupMapDetailView.swift in Sources */,
 				45151C3B212DF65100222656 /* NibLoadableView.swift in Sources */,
 				45151C2F212DE69300222656 /* AppColors.swift in Sources */,
 				45D2D6702189F8F100638440 /* DisfrutaTableViewCell.swift in Sources */,
 				8AB35FE4219F0A5500E4394D /* PolygonDetail.swift in Sources */,
 				8AB35FF2219F272600E4394D /* PaddingLabel.swift in Sources */,
+				8A6275D221A5B59D0000B4C8 /* DroneCollectionViewCell.swift in Sources */,
 				8AB35FDF219F08B000E4394D /* Polygon.swift in Sources */,
 				4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */,
 				45151C34212DE93900222656 /* Commons.swift in Sources */,

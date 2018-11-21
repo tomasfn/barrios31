@@ -29,8 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     window?.makeKeyAndVisible()
-    
-    
     setUpAppearance()
     
     return true
@@ -60,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func setUpAppearance() {
     let mainColor = UIColor.hexStringToUIColor(hex: "#f9a61d")
+    
     UINavigationBar.appearance().tintColor = UIColor.black
     UINavigationBar.appearance().barTintColor = UIColor.white
     

@@ -13,6 +13,8 @@ pod 'AlamofireImage'
 pod 'Realm', '3.11.0'
 pod 'RealmSwift', '3.11.0'
 pod 'Kingfisher'
+pod 'Gemini'
+
 
 end
 

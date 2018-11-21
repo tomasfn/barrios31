@@ -69,6 +69,7 @@ class APIManager: NSObject {
     Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
       if let value = response.result.value as? [String : AnyObject], response.error == nil {
         let detail = PolygonDetail.init(JSON: value)
+        
         completionBlock(detail, nil)
       }
       else {

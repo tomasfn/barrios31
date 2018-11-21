@@ -33,7 +33,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     setupViews()
     setUpAppearance()
   }
-  
+      
   func setupViews () {
     self.title = "RECORRE"
     mapView = MKMapView()
@@ -276,9 +276,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     map.detail = infoView.detail
     self.navigationController?.pushViewController(map, animated: true)
   }
-  
-  
-  
+    
 }
 
 
