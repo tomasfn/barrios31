@@ -64,6 +64,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
       collectionView.anchor(view.topAnchor, leading: view.leadingAnchor, bottom:mapView.topAnchor, trailing: view.trailingAnchor)
     }
     collectionView.backgroundColor = UIColor.white
+    collectionView.showsHorizontalScrollIndicator = false
     collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "collectionCell")
     loadData()
     centerMapOnLocation(location: villa31)

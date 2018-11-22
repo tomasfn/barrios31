@@ -88,7 +88,7 @@ class PolygonDetail: Object {
         }
 
         if let videoUrlOK = JSON["videoUrl"] as? String {
-            videoUrl = videoUrlOK
+            videoUrl = "http://barrio31.candoit.com.ar/api/" + videoUrlOK + accessToken
         }
 
         if let shortDescriptionOK = JSON["shortDescription"] as? String {
@@ -102,6 +102,8 @@ class PolygonDetail: Object {
         if let neighborsTextOK = JSON["neighborsText"] as? String {
             neighborsText = neighborsTextOK
         }
+        
+        print(JSON)
 
     }
 

@@ -123,7 +123,7 @@ class MapDetailViewController: BaseViewController {
         } else {
             mañanaLabel.text = "HOY"
         }
-        
+        mañanaLabel.alpha = 0.5
         mañanaLabel.textColor = UIColor.white
         mañanaLabel.textAlignment = .center
         mañanaLabel.font = UIFont.chalet(fontSize: 16)
@@ -132,16 +132,62 @@ class MapDetailViewController: BaseViewController {
         
     }
     
+    func playVideUrl(url: String) {
+        
+        guard let url = URL(string: url)  else {
+            return
+        }
+        let player = AVPlayer(url: url)
+        let controller = AVPlayerViewController()
+        controller.player = player
+        
+        present(controller, animated: true) {
+            player.play()
+        }
+    }
+    
+    func downloadVideo(url: String){
+        
+        Alamofire.request(url).downloadProgress(closure : { (progress) in
+            print(progress.fractionCompleted)
+            SVProgressHUD.showProgress(Float(progress.fractionCompleted))
+        }).responseData{ (response) in
+            print(response)
+            print(response.result.value!)
+            print(response.result.description)
+            if let data = response.result.value {
+                
+                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let videoURL = documentsURL.appendingPathComponent("video.mp4")
+                do {
+                    try data.write(to: videoURL)
+                    
+                    print(videoURL)
+                    
+                    let asset = AVAsset(url: videoURL)
+                    let item = AVPlayerItem(asset: asset)
+                    let player = AVPlayer(playerItem: item)
+                    
+                    
+                    let controller = AVPlayerViewController()
+                    controller.player = player
+                    self.addChildViewController(controller)
+                    self.view.addSubview(controller.view)
+                    controller.view.frame = self.view.frame
+                    player.play()
+                    
+                } catch {
+                    print("Something went wrong!")
+                }
+            }
+        }
+    }
+    
     @objc func videoPressed() {
         if let videoURL =  detail.videoUrl {
-            let url = URL(string:videoURL)
-            let player = AVPlayer(url: url!)
-            let playerViewController = AVPlayerViewController()
-            playerViewController.player = player
-            self.present(playerViewController, animated: true) {
-                playerViewController.player!.play()
-                
-            }
+            downloadVideo(url: videoURL)
+//            playVideUrl(url: videoURL)
+
         }
         else {
             SVProgressHUD.showError(withStatus: "No hay video disponible")
@@ -212,7 +258,6 @@ class MapDetailViewController: BaseViewController {
                 downloadImage(from: urlBefore) { (image) in
                     queue.async (group: group) {
                         self.self.streetBeforeImg = image
-                        self.streetImageArray.append(self.self.streetBeforeImg)
                         group.leave()
                     }
                 }
@@ -224,7 +269,6 @@ class MapDetailViewController: BaseViewController {
                 downloadImage(from: urlAfter) { (image) in
                     queue.async (group: group) {
                         self.self.streetAfterImg = image
-                        self.self.streetImageArray.append(self.self.streetAfterImg)
                         group.leave()
                     }
                 }
@@ -241,7 +285,6 @@ class MapDetailViewController: BaseViewController {
                 downloadImage(from: urlBefore) { (image) in
                     queue.async (group: group) {
                         self.self.droneBeforeImg = image
-                        self.self.droneImageArray.append(self.self.droneBeforeImg)
                         group.leave()
                     }
                 }
@@ -253,13 +296,18 @@ class MapDetailViewController: BaseViewController {
                 downloadImage(from: urlAfter) { (image) in
                     queue.async (group: group) {
                         self.self.droneAfterImg = image
-                        self.self.droneImageArray.append(self.self.droneAfterImg)
                         group.leave()
                     }
                 }
             }
             
             group.notify(queue: DispatchQueue.main) {
+                
+                self.streetImageArray.append(self.streetBeforeImg)
+                self.streetImageArray.append(self.streetAfterImg)
+                self.droneImageArray.append(self.droneBeforeImg)
+                self.droneImageArray.append(self.droneAfterImg)
+
                 completion()
             }            
         }
@@ -434,8 +482,12 @@ extension MapDetailViewController: UIScrollViewDelegate {
         if pageCounter > 1 {
         if currentIndex == 0 {
             currentIndex = 1
+            mañanaLabel.alpha = 1
+            ayerLabel.alpha = 0.5
         } else if currentIndex == 1 {
             currentIndex = 0
+            mañanaLabel.alpha = 0.5
+            ayerLabel.alpha = 1
         }
     }
         
