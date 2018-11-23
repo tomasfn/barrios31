@@ -9,6 +9,10 @@
 import UIKit
 import Gemini
 
+protocol DroneCellInteractionDelegate {
+    func scrollWasTap()
+}
+
 class DroneCollectionViewCell: GeminiCell {
     
     let scrollView: UIScrollView = {
@@ -20,6 +24,8 @@ class DroneCollectionViewCell: GeminiCell {
         scroll.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         return scroll
     }()
+    
+    var delegate: DroneCellInteractionDelegate!
     
     fileprivate var currentIndex = 0
 
@@ -66,6 +72,8 @@ class DroneCollectionViewCell: GeminiCell {
         if sender.state == UIGestureRecognizerState.recognized
         {
             print(sender.location(in: sender.view))
+            
+            delegate.scrollWasTap()
             
             if currentIndex == 0 {
                 currentIndex = 1

@@ -87,8 +87,8 @@ class PolygonDetail: Object {
             state = stateOK
         }
 
-        if let videoUrlOK = JSON["videoUrl"] as? String {
-            videoUrl = "http://barrio31.candoit.com.ar/api/" + videoUrlOK + accessToken
+        if let videoUrlOK = JSON["videoDownloadUrl"] as? String {
+            videoUrl = "http://barrio31.candoit.com.ar/api" + videoUrlOK + accessToken
         }
 
         if let shortDescriptionOK = JSON["shortDescription"] as? String {

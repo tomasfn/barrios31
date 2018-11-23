@@ -123,6 +123,7 @@ class MapDetailViewController: BaseViewController {
         } else {
             mañanaLabel.text = "HOY"
         }
+        
         mañanaLabel.alpha = 0.5
         mañanaLabel.textColor = UIColor.white
         mañanaLabel.textAlignment = .center
@@ -137,13 +138,18 @@ class MapDetailViewController: BaseViewController {
         guard let url = URL(string: url)  else {
             return
         }
-        let player = AVPlayer(url: url)
+        
+        let asset = AVAsset(url: url)
+        let item = AVPlayerItem(asset: asset)
+        let player = AVPlayer(playerItem: item)
+        
         let controller = AVPlayerViewController()
         controller.player = player
+        self.addChildViewController(controller)
+        self.view.addSubview(controller.view)
+        controller.view.frame = self.view.frame
         
-        present(controller, animated: true) {
-            player.play()
-        }
+        player.play()
     }
     
     func downloadVideo(url: String){
@@ -167,13 +173,16 @@ class MapDetailViewController: BaseViewController {
                     let asset = AVAsset(url: videoURL)
                     let item = AVPlayerItem(asset: asset)
                     let player = AVPlayer(playerItem: item)
-                    
+                
                     
                     let controller = AVPlayerViewController()
                     controller.player = player
                     self.addChildViewController(controller)
                     self.view.addSubview(controller.view)
                     controller.view.frame = self.view.frame
+                    
+                    SVProgressHUD.dismiss()
+                    
                     player.play()
                     
                 } catch {
@@ -185,8 +194,9 @@ class MapDetailViewController: BaseViewController {
     
     @objc func videoPressed() {
         if let videoURL =  detail.videoUrl {
-            downloadVideo(url: videoURL)
-//            playVideUrl(url: videoURL)
+            let urlString = videoURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+            downloadVideo(url: urlString!)
+//            playVideUrl(url: "http://barrio31.candoit.com.ar/api/multimedia/video-download/1470/4a243ac6-a63d-441f-a609-0dbddc919ea0_this.mp4.mp4?access_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.F0jfyuausMz2uHyzVWaXDExMGQfcgMAZRn-wVv540zCVlknYjSjg3fAatsru9HVOL7xiqpZcUB4eHQjlSIWpUw")
 
         }
         else {
@@ -482,12 +492,8 @@ extension MapDetailViewController: UIScrollViewDelegate {
         if pageCounter > 1 {
         if currentIndex == 0 {
             currentIndex = 1
-            mañanaLabel.alpha = 1
-            ayerLabel.alpha = 0.5
         } else if currentIndex == 1 {
             currentIndex = 0
-            mañanaLabel.alpha = 0.5
-            ayerLabel.alpha = 1
         }
     }
         
@@ -520,6 +526,10 @@ extension MapDetailViewController : UICollectionViewDelegate, UICollectionViewDa
             .shadowEffect(.fadeIn)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -529,6 +539,7 @@ extension MapDetailViewController : UICollectionViewDelegate, UICollectionViewDa
         {
             // Configure For Street Cell
             let cellStreet = collectionView.dequeueReusableCell(withReuseIdentifier: "StreetCollectionViewCell", for: indexPath) as! StreetCollectionViewCell
+            cellStreet.delegate = self
             cellStreet.imageArray = streetImageArray
             cell = cellStreet
         }
@@ -536,6 +547,7 @@ extension MapDetailViewController : UICollectionViewDelegate, UICollectionViewDa
         {
             // Configure For Drone Cell
             let cellDrone = collectionView.dequeueReusableCell(withReuseIdentifier: "DroneCollectionViewCell", for: indexPath) as! DroneCollectionViewCell
+            cellDrone.delegate = self
             cellDrone.imageArray = droneImageArray
             cell = cellDrone
         }
@@ -564,6 +576,27 @@ extension MapDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+}
+
+extension MapDetailViewController: StreetCellInteractionDelegate, DroneCellInteractionDelegate  {
+    func scrollWasTapped() {
+        setLabelAlpha()
+    }
+    
+    func scrollWasTap() {
+        setLabelAlpha()
+    }
+    
+    func setLabelAlpha() {
+        if ayerLabel.alpha == 0.5 {
+            ayerLabel.alpha = 1
+            mañanaLabel.alpha = 0.5
+        } else if ayerLabel.alpha == 1 {
+            ayerLabel.alpha = 0.5
+            mañanaLabel.alpha = 1
+        }
+    }
+    
 }
 
 

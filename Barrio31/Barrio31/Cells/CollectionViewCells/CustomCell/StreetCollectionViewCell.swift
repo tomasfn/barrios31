@@ -9,6 +9,10 @@
 import UIKit
 import Gemini
 
+protocol StreetCellInteractionDelegate {
+    func scrollWasTapped()
+}
+
 class StreetCollectionViewCell: GeminiCell {
     
     let scrollView: UIScrollView = {
@@ -20,6 +24,8 @@ class StreetCollectionViewCell: GeminiCell {
         scroll.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         return scroll
     }()
+    
+    var delegate: StreetCellInteractionDelegate!
     
     var imageArray = [UIImage]() {
         didSet {
@@ -67,8 +73,11 @@ class StreetCollectionViewCell: GeminiCell {
         {
             print(sender.location(in: sender.view))
             
+            delegate?.scrollWasTapped()
+            
             if currentIndex == 0 {
                 currentIndex = 1
+                
             } else if currentIndex == 1 {
                 currentIndex = 0
             }
