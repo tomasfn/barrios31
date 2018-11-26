@@ -87,6 +87,10 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
       let dis = DisfrutaViewController()
       let nav = UINavigationController.init(rootViewController: dis)
       sideMenuController?.contentViewController = nav
+    case 2:
+        let dis = ConoceViewController()
+        let nav = UINavigationController.init(rootViewController: dis)
+        sideMenuController?.contentViewController = nav
     default:
       return
     }

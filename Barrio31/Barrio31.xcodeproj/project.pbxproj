@@ -35,6 +35,9 @@
 		45D2D6702189F8F100638440 /* DisfrutaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D2D66F2189F8F100638440 /* DisfrutaTableViewCell.swift */; };
 		45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F23A1921359B7500F22C1C /* Main.storyboard */; };
 		45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F23A1D2135D9D400F22C1C /* APIManager.swift */; };
+		8A2DE8F721AC548F00D78161 /* ConoceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2DE8F621AC548F00D78161 /* ConoceViewController.swift */; };
+		8A2DE8FB21AC594100D78161 /* ConoceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2DE8FA21AC594100D78161 /* ConoceTableViewCell.swift */; };
+		8A2DE8FD21AC59A100D78161 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2DE8FC21AC59A100D78161 /* BaseTableViewCell.swift */; };
 		8A3253AB21A469E40046CFAC /* CategoryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3253AA21A469E40046CFAC /* CategoryHelper.swift */; };
 		8A6275D021A5A07B0000B4C8 /* StreetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6275CF21A5A07B0000B4C8 /* StreetCollectionViewCell.swift */; };
 		8A6275D221A5B59D0000B4C8 /* DroneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6275D121A5B59D0000B4C8 /* DroneCollectionViewCell.swift */; };
@@ -81,6 +84,9 @@
 		45F23A1A21359B7500F22C1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45F23A1D2135D9D400F22C1C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		87925E620ED962C1D59629D4 /* Pods_Barrio31.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Barrio31.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A2DE8F621AC548F00D78161 /* ConoceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConoceViewController.swift; sourceTree = "<group>"; };
+		8A2DE8FA21AC594100D78161 /* ConoceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConoceTableViewCell.swift; sourceTree = "<group>"; };
+		8A2DE8FC21AC59A100D78161 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		8A3253AA21A469E40046CFAC /* CategoryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHelper.swift; sourceTree = "<group>"; };
 		8A6275CF21A5A07B0000B4C8 /* StreetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A6275D121A5B59D0000B4C8 /* DroneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 				453CB267216BDE9400DEF65B /* MenuViewController.swift */,
 				450081A0217A68810036A086 /* DisfrutaViewController.swift */,
 				452CE2F1218C97A600590678 /* DisfrutaDetailViewController.swift */,
+				8A2DE8F621AC548F00D78161 /* ConoceViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -215,6 +222,23 @@
 			path = "Manager-Models";
 			sourceTree = "<group>";
 		};
+		8A2DE8F821AC592500D78161 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8A2DE8F921AC592A00D78161 /* TableViewCells */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8A2DE8F921AC592A00D78161 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				8A2DE8FA21AC594100D78161 /* ConoceTableViewCell.swift */,
+				8A2DE8FC21AC59A100D78161 /* BaseTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
 		8A6275CD21A5A05C0000B4C8 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +296,7 @@
 		8AB35FF0219F270F00E4394D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8A2DE8F821AC592500D78161 /* Cell */,
 				8AB35FF1219F272600E4394D /* PaddingLabel.swift */,
 			);
 			path = Classes;
@@ -442,6 +467,7 @@
 				8AB35FEF219F11BB00E4394D /* Street.swift in Sources */,
 				452CE2F2218C97A600590678 /* DisfrutaDetailViewController.swift in Sources */,
 				452CE2EE218C8C3D00590678 /* InfoView.swift in Sources */,
+				8A2DE8F721AC548F00D78161 /* ConoceViewController.swift in Sources */,
 				452CE2F0218C8C8100590678 /* CategoryCell.swift in Sources */,
 				45151C32212DE69300222656 /* AppImages.swift in Sources */,
 				45CF59102136E3FE00E2A858 /* Models.swift in Sources */,
@@ -449,6 +475,7 @@
 				45151C31212DE69300222656 /* AppFonts.swift in Sources */,
 				45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */,
 				8A3253AB21A469E40046CFAC /* CategoryHelper.swift in Sources */,
+				8A2DE8FD21AC59A100D78161 /* BaseTableViewCell.swift in Sources */,
 				452CE2F7218CF69000590678 /* PopupMapDetailView.swift in Sources */,
 				45151C3B212DF65100222656 /* NibLoadableView.swift in Sources */,
 				45151C2F212DE69300222656 /* AppColors.swift in Sources */,
@@ -459,6 +486,7 @@
 				8AB35FDF219F08B000E4394D /* Polygon.swift in Sources */,
 				4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */,
 				45151C34212DE93900222656 /* Commons.swift in Sources */,
+				8A2DE8FB21AC594100D78161 /* ConoceTableViewCell.swift in Sources */,
 				45151C36212DEA6F00222656 /* BaseViewController.swift in Sources */,
 				452CE2F4218C9AD800590678 /* DisfrutaInfoView.swift in Sources */,
 				8AB35FED219F11A100E4394D /* Drone.swift in Sources */,
