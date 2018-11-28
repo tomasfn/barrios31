@@ -90,7 +90,7 @@ class MapDetailViewController: BaseViewController {
         videoButton.addTarget(self, action: #selector(MapDetailViewController.videoPressed), for: .touchUpInside)
         videoButton.anchor(bottomView.topAnchor, leading: infoButton.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/2, 60))
         
-        
+        view.isUserInteractionEnabled = true
     }
     
     func addSwipeDownGesture() {
@@ -285,16 +285,27 @@ class MapDetailViewController: BaseViewController {
                     }
                 }
             }
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
             
-            group.notify(queue: DispatchQueue.main) {
-                
-                self.streetImageArray.append(self.streetBeforeImg)
-                self.streetImageArray.append(self.streetAfterImg)
-                self.droneImageArray.append(self.droneBeforeImg)
-                self.droneImageArray.append(self.droneAfterImg)
-
-                completion()
-            }            
+            if let imgSBefore = self.streetBeforeImg {
+                self.streetImageArray.append(imgSBefore)
+            }
+            
+            if let imgSAfter = self.streetAfterImg {
+                self.streetImageArray.append(imgSAfter)
+            }
+            
+            if let imgDBefore = self.droneBeforeImg {
+                self.droneImageArray.append(imgDBefore)
+            }
+            
+            if let imgDBAfter = self.droneAfterImg {
+                self.droneImageArray.append(imgDBAfter)
+            }
+            
+            completion()
         }
         
         automaticallyAdjustsScrollViewInsets = false
@@ -319,6 +330,15 @@ class MapDetailViewController: BaseViewController {
 
         collectionView.fillSuperview()
         view.addSubview(collectionView)
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+        
+        if touch?.view != infoView {
+            infoView.isHidden = true
+        }
         
     }
     
