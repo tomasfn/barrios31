@@ -13,8 +13,8 @@ typealias StreetJSON = [String : AnyObject]
 
 class Street: Object {
     
-    @objc dynamic var beforeLink: String = ""
-    @objc dynamic var afterLink: String = ""
+    @objc dynamic var beforeLink: String?
+    @objc dynamic var afterLink: String?
 
     convenience init(JSON: [String : AnyObject]) {
         self.init()
@@ -24,13 +24,23 @@ class Street: Object {
         
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             
-            afterEndpoint = JSON["ipadAfterLink"] as! String
-            beforeEndpoint = JSON["ipadBeforeLink"] as! String
+            if let endPointAfter = JSON["ipadAfterLink"]  {
+                afterEndpoint = endPointAfter as! String
+            }
+            
+            if let endPointBefore = JSON["ipadBeforeLink"]  {
+                beforeEndpoint = endPointBefore as! String
+            }
             
         } else if UI_USER_INTERFACE_IDIOM() == .phone {
             
-            afterEndpoint = JSON["afterLink"] as! String
-            beforeEndpoint = JSON["beforeLink"] as! String
+            if let endPointAfter = JSON["afterLink"]  {
+                afterEndpoint = endPointAfter as! String
+            }
+            
+            if let endPointBefore = JSON["beforeLink"]  {
+                beforeEndpoint = endPointBefore as! String
+            }
         }
         
         beforeLink = "http://barrio31.candoit.com.ar" + beforeEndpoint

@@ -25,12 +25,15 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Barrios31 necesita ta tu ubicación si quieres aparecer en el mapa</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Chalet NewYorkNineteenEighty.otf</string>
 		<string>Montserrat-Regular.ttf</string>
 		<string>Montserrat-Bold.ttf</string>
 		<string>Montserrat-Light.otf</string>
+		<string>Montserrat-SemiBold.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

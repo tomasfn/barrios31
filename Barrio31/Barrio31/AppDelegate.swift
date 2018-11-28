@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = SideMenuController(contentViewController: nav,
                                                     menuViewController: menuNav)
-
     
     window?.makeKeyAndVisible()
     setUpAppearance()

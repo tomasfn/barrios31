@@ -15,7 +15,9 @@ class ConoceTableViewCell: BaseTableViewCell {
     
     override func awakeFromNib() {
         roundCorners(8)
-
+        clipsToBounds = true
+        
+//        mainImgView.fillSuperview()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,5 +26,7 @@ class ConoceTableViewCell: BaseTableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(10, 10, 50, 10))
+        selectionStyle = .none
     }
 }

@@ -30,16 +30,11 @@ class MapDetailViewController: BaseViewController {
     var droneImageArray = [UIImage]()
     
     var bottomView : UIView!
-    var pageControl : UIPageControl!
-    var ayerLabel : UILabel!
-    var hoyLabel : UILabel!
-    var mañanaLabel : UILabel!
     var infoButton : UIButton!
     var videoButton : UIButton!
     var infoView : UIView!
     
     var pageCounter: Int! = 0
-
     fileprivate var currentIndex = 0
     
     
@@ -95,42 +90,19 @@ class MapDetailViewController: BaseViewController {
         videoButton.addTarget(self, action: #selector(MapDetailViewController.videoPressed), for: .touchUpInside)
         videoButton.anchor(bottomView.topAnchor, leading: infoButton.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/2, 60))
         
-        self.view.addSubview(pageControl)
-        if #available(iOS 11.0, *) {
-            pageControl.anchor(view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor , size : .init(0, 40))
-        } else {
-            // Fallback on earlier versions
-            pageControl.anchor(view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor , size : .init(0, 40))
+        
+    }
+    
+    func addSwipeDownGesture() {
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
+        swipeDown.direction = .down
+        self.view.addGestureRecognizer(swipeDown)
+    }
+    
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+         if gesture.direction == UISwipeGestureRecognizerDirection.down {
+            _ = navigationController?.popViewController(animated: true)
         }
-        
-        pageControl.currentPageIndicatorTintColor = .white
-        pageControl.pageIndicatorTintColor = .lightGray
-        
-        ayerLabel = UILabel()
-        ayerLabel.text = "AYER"
-        ayerLabel.textColor = UIColor.white
-        ayerLabel.textAlignment = .center
-        ayerLabel.font = UIFont.chalet(fontSize: 16)
-        self.view.addSubview(ayerLabel)
-        
-        ayerLabel.anchor(pageControl.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, size : .init(view.width/3, 30))
-        
-        
-        mañanaLabel = UILabel()
-        //Setting the current state of Item
-        if detail.state == "FUTURE" {
-            mañanaLabel.text = "MAÑANA"
-        } else {
-            mañanaLabel.text = "HOY"
-        }
-        
-        mañanaLabel.alpha = 0.5
-        mañanaLabel.textColor = UIColor.white
-        mañanaLabel.textAlignment = .center
-        mañanaLabel.font = UIFont.chalet(fontSize: 16)
-        self.view.addSubview(mañanaLabel)
-        mañanaLabel.anchor(pageControl.bottomAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, size : .init(view.width/3, 30))
-        
     }
     
     func playVideUrl(url: String) {
@@ -173,7 +145,6 @@ class MapDetailViewController: BaseViewController {
                     let asset = AVAsset(url: videoURL)
                     let item = AVPlayerItem(asset: asset)
                     let player = AVPlayer(playerItem: item)
-                
                     
                     let controller = AVPlayerViewController()
                     controller.player = player
@@ -262,10 +233,11 @@ class MapDetailViewController: BaseViewController {
         if detail.street != nil {
             pageCounter += 1
             
-            if let urlBefore = URL(string: detail.street!.beforeLink) {
-                
+            if let urlBefore = detail.street!.beforeLink {
                 group.enter()
-                downloadImage(from: urlBefore) { (image) in
+
+                let url = URL(string: urlBefore)
+                downloadImage(from: url!) { (image) in
                     queue.async (group: group) {
                         self.self.streetBeforeImg = image
                         group.leave()
@@ -273,10 +245,11 @@ class MapDetailViewController: BaseViewController {
                 }
             }
             
-            if let urlAfter = URL(string: detail.street!.afterLink) {
-                
+            if let urlAfter = detail.street!.afterLink {
                 group.enter()
-                downloadImage(from: urlAfter) { (image) in
+                
+                let url = URL(string: urlAfter)
+                downloadImage(from: url!) { (image) in
                     queue.async (group: group) {
                         self.self.streetAfterImg = image
                         group.leave()
@@ -289,10 +262,11 @@ class MapDetailViewController: BaseViewController {
         if detail.drone != nil {
             pageCounter += 1
             
-            if let urlBefore = URL(string: detail.drone!.beforeLink) {
-                
+            if let urlBefore = detail.drone!.beforeLink {
                 group.enter()
-                downloadImage(from: urlBefore) { (image) in
+                
+                let url = URL(string: urlBefore)
+                downloadImage(from: url!) { (image) in
                     queue.async (group: group) {
                         self.self.droneBeforeImg = image
                         group.leave()
@@ -300,10 +274,11 @@ class MapDetailViewController: BaseViewController {
                 }
             }
             
-            if let urlAfter = URL(string: detail.drone!.afterLink) {
-                
+            if let urlAfter = detail.drone!.afterLink {
                 group.enter()
-                downloadImage(from: urlAfter) { (image) in
+                
+                let url = URL(string: urlAfter)
+                downloadImage(from: url!) { (image) in
                     queue.async (group: group) {
                         self.self.droneAfterImg = image
                         group.leave()
@@ -322,9 +297,6 @@ class MapDetailViewController: BaseViewController {
             }            
         }
         
-        pageControl = UIPageControl()
-        pageControl.numberOfPages = pageCounter
-        pageControl.currentPage = 0
         automaticallyAdjustsScrollViewInsets = false
         
         let direction: UICollectionView.ScrollDirection = .horizontal
@@ -338,7 +310,10 @@ class MapDetailViewController: BaseViewController {
         collectionView.dataSource = self
         collectionView.register(StreetCollectionViewCell.self, forCellWithReuseIdentifier: "StreetCollectionViewCell")
         collectionView.register(DroneCollectionViewCell.self, forCellWithReuseIdentifier: "DroneCollectionViewCell")
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor(patternImage: CategoryHelper.setImagePatternForCategory(categorySlug: detail.categorySlug!))
+        collectionView.alwaysBounceHorizontal = false
+        collectionView.alwaysBounceVertical = false
+        collectionView.decelerationRate = UIScrollViewDecelerationRateNormal
 
         configureAnimation()
 
@@ -360,8 +335,8 @@ class MapDetailViewController: BaseViewController {
         infoView.addSubview(imgView)
         
         let tagLabel = UILabel()
-        tagLabel.text = detail.categoryName
-        tagLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        tagLabel.text = detail.categoryName?.uppercased()
+        tagLabel.font = UIFont.chalet(fontSize: 16)
         tagLabel.textColor = UIColor.white
         tagLabel.textAlignment = .left
         //tagLabel.font = UIFont.chalet(fontSize: 16)
@@ -371,7 +346,7 @@ class MapDetailViewController: BaseViewController {
         let nameLabel = UILabel()
         nameLabel.text = detail.name
         nameLabel.textColor = detail.getColor()
-        nameLabel.padding = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        nameLabel.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         nameLabel.backgroundColor = UIColor.white
         nameLabel.textAlignment = .left
         nameLabel.font = UIFont.chalet(fontSize: 18)
@@ -379,14 +354,14 @@ class MapDetailViewController: BaseViewController {
         nameLabel.lineBreakMode = .byWordWrapping
         nameLabel.setContentHuggingPriority(.required, for: .vertical)
         imgView.addSubview(nameLabel)
-        nameLabel.anchor(tagLabel.bottomAnchor, leading: imgView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(0, 20.0))
+        nameLabel.anchor(tagLabel.bottomAnchor, leading: imgView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(0, 30.0))
         nameLabel.sizeToFit()
         
         let descriptionLabel = UILabel()
         descriptionLabel.text = detail.shortDescription
         descriptionLabel.textColor = UIColor.white
         descriptionLabel.textAlignment = .left
-        descriptionLabel.font = UIFont.chalet(fontSize: 16)
+        descriptionLabel.font = UIFont.MontserratSemiBold(fontSize: 16)
         descriptionLabel.numberOfLines = 2
         descriptionLabel.lineBreakMode = .byWordWrapping
         descriptionLabel.setContentHuggingPriority(.required, for: .vertical)
@@ -401,29 +376,58 @@ class MapDetailViewController: BaseViewController {
         dateImgView.image = UIImage.init(named: "ic-fechas")
         dateImgView.contentMode = .scaleAspectFit
         infoView.addSubview(dateImgView)
-        dateImgView.anchor(imgView.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(20, 20.0))
+        dateImgView.anchor(imgView.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(20, 20.0))
         
         let dateLabel = UILabel()
-        dateLabel.text = "Inicio: \(detail.started!) | Finalizado: \(detail.ended!)"
+        
+        let startAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+        
+        let finishAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+        
+        let startAttributed = NSMutableAttributedString(string:"Inicio: ", attributes:startAttr)
+        
+        let finishAttributed = NSMutableAttributedString(string:"Finalizado: ", attributes:finishAttr)
+        
+        let startDataAttr = [NSAttributedStringKey.font : UIFont.MontserratRegular(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+        
+        let finishDataAttr = [NSAttributedStringKey.font : UIFont.MontserratRegular(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+        
+        let startData = NSMutableAttributedString(string: "\(detail.started!) | ", attributes: startDataAttr)
+        let endedData = NSMutableAttributedString(string: "\(detail.ended!)", attributes: finishDataAttr)
+        
+        startAttributed.append(startData)
+        finishAttributed.append(endedData)
+        
+        startAttributed.append(finishAttributed)
+        dateLabel.attributedText = startAttributed
+ 
         dateLabel.textColor = UIColor.lightGray
         dateLabel.textAlignment = .left
-        dateLabel.font = UIFont.chalet(fontSize: 14)
         infoView.addSubview(dateLabel)
-        dateLabel.anchor(imgView.bottomAnchor, leading: dateImgView.trailingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 10, left: 10, bottom: 0, right: 0) ,size: .init(0, 20.0))
+        dateLabel.anchor(imgView.bottomAnchor, leading: dateImgView.trailingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 20, left: 10, bottom: 0, right: 0) ,size: .init(0, 20.0))
         
         let montoImgView = UIImageView()
         montoImgView.image = UIImage.init(named: "ic-montos")
         montoImgView.contentMode = .scaleAspectFit
         infoView.addSubview(montoImgView)
-        montoImgView.anchor(dateLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(20, 20.0))
+        montoImgView.anchor(dateLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 5.0, left: 20.0, bottom: 0.0, right: 0.0), size: .init(20, 20.0))
         
         let montoLabel = UILabel()
-        montoLabel.text = "Monto: $\(detail.amountStr!)"
-        montoLabel.textColor = UIColor.lightGray
+        
+        let montaAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+        
+        let amountAttr = [NSAttributedStringKey.font : UIFont.MontserratRegular(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+        
+        let montAttributed = NSMutableAttributedString(string:"Monto: ", attributes:montaAttr)
+        
+        let amountAttributed = NSMutableAttributedString(string:"$\(detail.amountStr!)", attributes:amountAttr)
+        
+        montAttributed.append(amountAttributed)
+        montoLabel.attributedText = montAttributed
+        
         montoLabel.textAlignment = .left
-        montoLabel.font = UIFont.chalet(fontSize: 14)
         infoView.addSubview(montoLabel)
-        montoLabel.anchor(dateImgView.bottomAnchor, leading: montoImgView.trailingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 10, left: 10, bottom: 0, right: 0) ,size: .init(0, 20.0))
+        montoLabel.anchor(dateImgView.bottomAnchor, leading: montoImgView.trailingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 5.0, left: 10, bottom: 0, right: 0) ,size: .init(0, 20.0))
         
         let line = UIView()
         line.backgroundColor = UIColor.lightGray
@@ -443,13 +447,13 @@ class MapDetailViewController: BaseViewController {
         neighborsTextLabel.text = detail.neighborsText
         neighborsTextLabel.textColor = UIColor.black
         neighborsTextLabel.textAlignment = .left
-        neighborsTextLabel.font = UIFont.chalet(fontSize: 16)
+        neighborsTextLabel.font = UIFont.MontserratRegular(fontSize: 16)
         neighborsTextLabel.numberOfLines = 0
         neighborsTextLabel.adjustsFontSizeToFitWidth = true
         neighborsTextLabel.minimumScaleFactor = 0.5
         
         infoView.addSubview(neighborsTextLabel)
-        neighborsTextLabel.anchor(neighborsLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 0, left: 10, bottom: 0, right: -10) ,size: .init(width: 0, height: 34))
+        neighborsTextLabel.anchor(neighborsLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: -5, left: 10, bottom: 0, right: -10) ,size: .init(width: 0, height: 34))
         
         let m2Label = UILabel()
         m2Label.text = detail.m2
@@ -463,15 +467,17 @@ class MapDetailViewController: BaseViewController {
         m2LabelTextLabel.text = detail.m2Text
         m2LabelTextLabel.textColor = UIColor.black
         m2LabelTextLabel.textAlignment = .left
-        m2LabelTextLabel.font = UIFont.chalet(fontSize: 16)
+        m2LabelTextLabel.font = UIFont.MontserratRegular(fontSize: 16)
         m2LabelTextLabel.numberOfLines = 2
         infoView.addSubview(m2LabelTextLabel)
-        m2LabelTextLabel.anchor(m2Label.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 0, left: 10, bottom: 0, right: -10) ,size: .init(width: 0, height: 34))
+        m2LabelTextLabel.anchor(m2Label.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: -5, left: 10, bottom: 0, right: -10) ,size: .init(width: 0, height: 34))
         
         
         infoView.setCellShadow()
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapDetailViewController.infoViewPressed))
         infoView.addGestureRecognizer(tap)
+        
+        addSwipeDownGesture()
     }
     
     override func didReceiveMemoryWarning() {
@@ -496,8 +502,7 @@ extension MapDetailViewController: UIScrollViewDelegate {
             currentIndex = 0
         }
     }
-        
-        self.pageControl.currentPage = currentIndex
+    
     }
     
 }
@@ -521,6 +526,7 @@ extension MapDetailViewController : UICollectionViewDelegate, UICollectionViewDa
     
     // Configure animation and properties
     func configureAnimation() {
+        
         collectionView.gemini
             .cubeAnimation()
             .shadowEffect(.fadeIn)
@@ -539,16 +545,18 @@ extension MapDetailViewController : UICollectionViewDelegate, UICollectionViewDa
         {
             // Configure For Street Cell
             let cellStreet = collectionView.dequeueReusableCell(withReuseIdentifier: "StreetCollectionViewCell", for: indexPath) as! StreetCollectionViewCell
-            cellStreet.delegate = self
+            cellStreet.state = detail.state
             cellStreet.imageArray = streetImageArray
+            
             cell = cellStreet
         }
         else
         {
             // Configure For Drone Cell
             let cellDrone = collectionView.dequeueReusableCell(withReuseIdentifier: "DroneCollectionViewCell", for: indexPath) as! DroneCollectionViewCell
-            cellDrone.delegate = self
+            cellDrone.state = detail.state
             cellDrone.imageArray = droneImageArray
+            
             cell = cellDrone
         }
         
@@ -578,25 +586,5 @@ extension MapDetailViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension MapDetailViewController: StreetCellInteractionDelegate, DroneCellInteractionDelegate  {
-    func scrollWasTapped() {
-        setLabelAlpha()
-    }
-    
-    func scrollWasTap() {
-        setLabelAlpha()
-    }
-    
-    func setLabelAlpha() {
-        if ayerLabel.alpha == 0.5 {
-            ayerLabel.alpha = 1
-            mañanaLabel.alpha = 0.5
-        } else if ayerLabel.alpha == 1 {
-            ayerLabel.alpha = 0.5
-            mañanaLabel.alpha = 1
-        }
-    }
-    
-}
 
 

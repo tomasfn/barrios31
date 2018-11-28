@@ -20,6 +20,18 @@ extension UIFont {
     }*/
     return UIFont.init(name: "Chalet-NewYorkNineteenEighty", size: CGFloat(fontSize))!
   }
+    
+    class func MontserratSemiBold(fontSize: Float!) -> UIFont {
+        return UIFont.init(name: "Montserrat-SemiBold", size: CGFloat(fontSize))!
+    }
+    
+    class func MontserratBold(fontSize: Float!) -> UIFont {
+        return UIFont.init(name: "Montserrat-Bold", size: CGFloat(fontSize))!
+    }
+    
+    class func MontserratRegular(fontSize: Float!) -> UIFont {
+        return UIFont.init(name: "Montserrat-Regular", size: CGFloat(fontSize))!
+    }
   
   class func LibreBaskervilleBold(fontSize: Float!) -> UIFont {
     return UIFont.init(name: "LibreBaskerville-Bold", size: CGFloat(fontSize))!

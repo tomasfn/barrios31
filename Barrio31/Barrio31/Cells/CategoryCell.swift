@@ -22,10 +22,10 @@ class CategoryCell: UICollectionViewCell {
       }
       else {
         container.backgroundColor = UIColor.white
-        label.textColor = UIColor.gray
+        label.textColor = UIColor.lightGray
         imgView.image = item!.getImageOff()
       }
-      label.text = item!.name
+      label.text = item!.name?.uppercased()
     }
   }
   
@@ -48,8 +48,8 @@ class CategoryCell: UICollectionViewCell {
   
   let label: UILabel = {
     let label = UILabel()
-    label.textColor = UIColor.darkGray
-    label.font = UIFont.systemFont(ofSize: 12)
+    label.textColor = UIColor.lightGray
+    label.font = UIFont.chalet(fontSize: 12)
     label.textAlignment = .center
     label.numberOfLines = 0
     return label

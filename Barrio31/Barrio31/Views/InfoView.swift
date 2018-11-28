@@ -47,10 +47,10 @@ class InfoView: UIView {
     label.backgroundColor = UIColor.darkGray
     label.font = UIFont.chalet(fontSize: 20)
     label.textAlignment = .center
-    label.adjustsFontSizeToFitWidth = true
-    label.minimumScaleFactor = 0.5
+    label.numberOfLines = 0
     label.padding = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     label.text = ""
+    label.sizeToFit()
     return label
   }()
   
@@ -59,8 +59,6 @@ class InfoView: UIView {
     label.textColor = UIColor.darkGray
     label.font = UIFont.chalet(fontSize: 15)
     label.textAlignment = .center
-    label.adjustsFontSizeToFitWidth = true
-    label.minimumScaleFactor = 0.5
     label.text = ""
     return label
   }()
@@ -68,8 +66,9 @@ class InfoView: UIView {
     let label = UILabel()
     label.textColor = UIColor.black
     label.numberOfLines = 0
-    label.font = UIFont.chalet(fontSize: 15)
+    label.font = UIFont.MontserratSemiBold(fontSize: 15)
     label.text = ""
+    
     return label
   }()
   

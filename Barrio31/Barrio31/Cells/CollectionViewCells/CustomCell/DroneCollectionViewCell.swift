@@ -9,11 +9,17 @@
 import UIKit
 import Gemini
 
-protocol DroneCellInteractionDelegate {
-    func scrollWasTap()
-}
 
 class DroneCollectionViewCell: GeminiCell {
+    
+    var pageControl : UIPageControl!
+    var ayerLabel : UILabel!
+    var hoyLabel : UILabel!
+    var mañanaLabel : UILabel!
+    var state: String?
+    
+    var pageCounter: Int! = 2
+    var currentIndex = 0
     
     let scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -25,19 +31,60 @@ class DroneCollectionViewCell: GeminiCell {
         return scroll
     }()
     
-    var delegate: DroneCellInteractionDelegate!
     
-    fileprivate var currentIndex = 0
-
     var imageArray = [UIImage]() {
         didSet {
             if imageArray.count > 1 {
                 setupImages(imageArray)
+                setIndicatorLbls()
             }
         }
     }
     
     override func awakeFromNib() {
+    }
+    
+    func setIndicatorLbls() {
+        
+        pageControl = UIPageControl()
+        pageControl.numberOfPages = pageCounter
+        pageControl.currentPage = 0
+        
+        addSubview(pageControl)
+        if #available(iOS 11.0, *) {
+            pageControl.anchor(safeAreaLayoutGuide.topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor , size : .init(0, 40))
+        } else {
+            // Fallback on earlier versions
+            pageControl.anchor(topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor , size : .init(0, 40))
+        }
+        
+        pageControl.currentPageIndicatorTintColor = .white
+        pageControl.pageIndicatorTintColor = .lightGray
+        
+        ayerLabel = UILabel()
+        ayerLabel.text = "AYER"
+        ayerLabel.textColor = UIColor.white
+        ayerLabel.textAlignment = .center
+        ayerLabel.font = UIFont.chalet(fontSize: 16)
+        addSubview(ayerLabel)
+        
+        ayerLabel.anchor(pageControl.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, size : .init(width/3, 30))
+        
+        
+        mañanaLabel = UILabel()
+        //Setting the current state of Item
+        if state == "FUTURE" {
+            mañanaLabel.text = "MAÑANA"
+        } else {
+            mañanaLabel.text = "HOY"
+        }
+        
+        mañanaLabel.alpha = 0.5
+        mañanaLabel.textColor = UIColor.white
+        mañanaLabel.textAlignment = .center
+        mañanaLabel.font = UIFont.chalet(fontSize: 16)
+        addSubview(mañanaLabel)
+        mañanaLabel.anchor(pageControl.bottomAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, size : .init(width/3, 30))
     }
     
     func setupImages(_ images: [UIImage]){
@@ -62,6 +109,7 @@ class DroneCollectionViewCell: GeminiCell {
         scrollView.fillSuperview()
         scrollView.backgroundColor = UIColor.white
         scrollView.contentMode = .scaleAspectFill
+        scrollView.decelerationRate = UIScrollViewDecelerationRateFast
         scrollView.delegate = self
         scrollView.resizeScrollViewContentSize()
         addSubview(scrollView)
@@ -72,14 +120,15 @@ class DroneCollectionViewCell: GeminiCell {
         if sender.state == UIGestureRecognizerState.recognized
         {
             print(sender.location(in: sender.view))
-            
-            delegate.scrollWasTap()
-            
+
             if currentIndex == 0 {
                 currentIndex = 1
             } else if currentIndex == 1 {
                 currentIndex = 0
             }
+            
+            setLabelAlpha()
+            pageControl.currentPage = currentIndex
             
             scrollToPage(page: currentIndex, animated: true)
         }
@@ -91,11 +140,33 @@ class DroneCollectionViewCell: GeminiCell {
         frame.origin.y = 0
         self.scrollView.scrollRectToVisible(frame, animated: animated)
     }
+    
+    func setLabelAlpha() {
+        if ayerLabel.alpha == 0.5 {
+            ayerLabel.alpha = 1
+            mañanaLabel.alpha = 0.5
+        } else if ayerLabel.alpha == 1 {
+            ayerLabel.alpha = 0.5
+            mañanaLabel.alpha = 1
+        }
+    }
 }
 
 extension DroneCollectionViewCell: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // Change the page indicator
+        
+//        if pageCounter > 1 {
+//            if currentIndex == 0 {
+//                currentIndex = 1
+//            } else if currentIndex == 1 {
+//                currentIndex = 0
+//            }
+//        }
         
     }
 }

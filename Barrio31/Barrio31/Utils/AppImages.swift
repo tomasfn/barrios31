@@ -11,6 +11,27 @@ import UIKit
 //MARK: App Images
 extension UIImage {
     
+    //MARK: MapView
+    
+    class func layersMap() -> UIImage! {
+        return UIImage(named: "layer")
+    }
+    
+    class func centerOnLocation() -> UIImage! {
+        return UIImage(named: "centerLocation")
+    }
+    
+    class func hybridMap() -> UIImage! {
+        return UIImage(named: "hybridMap")
+    }
+    
+    class func standardMap() -> UIImage! {
+        return UIImage(named: "standardMap")
+    }
+    
+    class func satellitalMap() -> UIImage! {
+        return UIImage(named: "satellitalMap")
+    }
     
     //MARK: Category Image Patterns
     class func patternHighPark() -> UIImage! {

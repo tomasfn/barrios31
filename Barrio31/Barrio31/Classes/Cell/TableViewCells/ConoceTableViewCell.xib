@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConoceTableViewCell" rowHeight="220" id="pYg-Pc-yYr" customClass="ConoceTableViewCell" customModule="Barrio31" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pYg-Pc-yYr" id="A0h-Wc-Upf">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="219.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AWG-n3-qGe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="219.5"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3q-eT-4Eg">
+                        <rect key="frame" x="16" y="11" width="190" height="21"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="190" id="UNv-pk-5CP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.58648916500000003" green="0.43504917170000001" blue="0.81246107820000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="AWG-n3-qGe" secondAttribute="trailing" id="74q-Sh-PNR"/>
+                    <constraint firstItem="n3q-eT-4Eg" firstAttribute="leading" secondItem="A0h-Wc-Upf" secondAttribute="leadingMargin" id="ZkU-sw-HzS"/>
+                    <constraint firstItem="n3q-eT-4Eg" firstAttribute="top" secondItem="A0h-Wc-Upf" secondAttribute="topMargin" id="ZuP-tC-rCx"/>
+                    <constraint firstAttribute="bottom" secondItem="AWG-n3-qGe" secondAttribute="bottom" id="fRG-bv-fLc"/>
+                    <constraint firstItem="AWG-n3-qGe" firstAttribute="leading" secondItem="A0h-Wc-Upf" secondAttribute="leading" id="qsk-e5-GMu"/>
+                    <constraint firstItem="AWG-n3-qGe" firstAttribute="top" secondItem="A0h-Wc-Upf" secondAttribute="top" id="z40-Yo-rEG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="mainImgView" destination="AWG-n3-qGe" id="QbP-GM-4Ld"/>
+                <outlet property="titleLbl" destination="n3q-eT-4Eg" id="tW0-c4-tG3"/>
+            </connections>
+            <point key="canvasLocation" x="61.600000000000001" y="122.33883058470765"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class MenuViewController: BaseViewController {
   
@@ -26,6 +27,7 @@ class MenuViewController: BaseViewController {
     tableView.rowHeight = 100.0
     tableView.separatorStyle = .none
     
+    
     let barButton = UIBarButtonItem.init(title: "BA Integración", style: .plain, target: self, action: #selector(MenuViewController.menuPressed))
     let titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.black,
                                NSAttributedStringKey.font : UIFont.chalet(fontSize: 17)]
@@ -33,7 +35,48 @@ class MenuViewController: BaseViewController {
     barButton.setTitlePositionAdjustment(UIOffset.init(horizontal: -145, vertical: 0), for: .default)
     self.navigationItem.rightBarButtonItem = barButton
     // Do any additional setup after loading the view.
+    
+    addFooterViewTableView()
   }
+    
+    func addFooterViewTableView() {
+        
+        //Adding switcher to locally download app data
+        
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        customView.backgroundColor = UIColor.white
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        label.font = UIFont.chalet(fontSize: 14)
+        label.textColor = UIColor(red:0.96, green:0.59, blue:0.17, alpha:1.0)
+        label.text = "Descarga a local"
+        label.center.x = customView.center.x
+        label.center.y = customView.center.y
+
+        label.sizeToFit()
+   
+        let switcher = UISwitch(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        switcher.backgroundColor = .white
+        switcher.onTintColor = UIColor(red:0.96, green:0.59, blue:0.17, alpha:1.0)
+        switcher.thumbTintColor = UIColor(red:0.96, green:0.59, blue:0.17, alpha:1.0)
+        switcher.center.y = customView.center.y
+        switcher.center.x = customView.center.x
+
+        switcher.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
+        customView.addSubview(switcher)
+        customView.addSubview(label)
+        tableView.tableFooterView = customView
+    }
+    
+    @objc func switchChanged(_ sender : UISwitch!){
+        SVProgressHUD.show()
+        
+        //DOWNLOAD LOCAL DATA HERE if its ON
+        print("table row switch Changed \(sender.tag)")
+        print("The switch is \(sender.isOn ? "ON" : "OFF")")
+        
+        SVProgressHUD.dismiss()
+    }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()

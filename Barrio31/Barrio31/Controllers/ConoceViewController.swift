@@ -21,51 +21,42 @@ class ConoceViewController: BaseViewController {
         tableView.fillSuperview()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+
+
         addMenuButton()
         self.title = "CONOCÉ"
         setUpAppearance()
         
+        let cellNib = UINib.init(nibName: "ConoceTableViewCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "ConoceTableViewCell")
     }
     
     func setUpAppearance() {
-        let mainColor = UIColor.hexStringToUIColor(hex: "#de316a")
+        let mainColor = UIColor.hexStringToUIColor(hex: "#006fb6")
         UINavigationBar.appearance().tintColor = UIColor.black
         UINavigationBar.appearance().barTintColor = UIColor.white
         
         let titleTextAttributes = [NSAttributedStringKey.foregroundColor : mainColor,
                                    NSAttributedStringKey.font : UIFont.chalet(fontSize: 17)]
         UINavigationBar.appearance().titleTextAttributes  = titleTextAttributes
+
     }
 
 }
 
 extension ConoceViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    private func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView()
-        header.backgroundColor = UIColor.clear
-        return header
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-    let cell = tableView.dequeueReusableCell(withIdentifier: "ConoceTableViewCell") as? ConoceTableViewCell
-        cell?.mainImgView.image = UIImage.patternHealth()
-        cell?.titleLbl.text = "titulo"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConoceTableViewCell", for: indexPath) as! ConoceTableViewCell
+        cell.mainImgView.image = UIImage.patternHealth()
         
-        return cell!
-    }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        return cell
     }
     
 }
