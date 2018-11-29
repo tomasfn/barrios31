@@ -109,6 +109,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         infoView.addGestureRecognizer(tap)
         
         addCenterOnLocationBtn()
+        addFloatyMapView()
     }
     
     @objc func centerMapOnLocation(location: CLLocation) {
@@ -149,12 +150,11 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         centerLocationBtn.roundView()
    
         mapView.addSubview(centerLocationBtn)
-        addFloatyMapView()
     }
     
     func addFloatyMapView() {
         
-        floaty = Floaty(frame: CGRect(x: centerLocationBtn.frame.origin.x, y: view.center.y - 100, width: 60, height: 60))
+        floaty = Floaty(frame: CGRect(x: centerLocationBtn.frame.origin.x, y: 0, width: 60, height: 60))
         floaty.addItem("Standard", icon: UIImage.standardMap().maskWithColor(color: .darkGray), titlePosition: .right, handler: { item in
             self.setMapState(optionId: 0)
             self.floaty.close()
