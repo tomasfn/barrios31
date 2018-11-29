@@ -9,10 +9,14 @@
 import UIKit
 import MapKit
 import SVProgressHUD
+import SimpleImageViewer
+import Kingfisher
 
 class ConoceViewController: BaseViewController {
     
     var tableView: UITableView!
+    
+    private var conoceItems = [ConoceItem] ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +26,31 @@ class ConoceViewController: BaseViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 300
 
-
-        addMenuButton()
         self.title = "CONOCÉ"
+        
+        addMenuButton()
         setUpAppearance()
+        getConoceItems()
         
         let cellNib = UINib.init(nibName: "ConoceTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "ConoceTableViewCell")
+    }
+    
+    func getConoceItems() {
+        SVProgressHUD.show()
+        
+        APIManager.getAllConoceItems { (cItems, error) in
+            if error == nil {
+                
+                self.conoceItems = cItems!
+                SVProgressHUD.dismiss()
+                self.tableView.reloadData()
+            }
+        }
     }
     
     func setUpAppearance() {
@@ -48,15 +69,36 @@ class ConoceViewController: BaseViewController {
 extension ConoceViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return conoceItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConoceTableViewCell", for: indexPath) as! ConoceTableViewCell
-        cell.mainImgView.image = UIImage.patternHealth()
+        
+        let cItem = conoceItems[(indexPath as NSIndexPath).row]
+        
+        let url = URL(string: cItem.imgLink!)
+        cell.mainImgView.kf.setImage(with: url)
+        cell.titleLbl.text = cItem.name
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath) as? ConoceTableViewCell
+        
+        let configuration = ImageViewerConfiguration { config in
+            config.imageView = cell?.mainImgView
+        }
+        
+        let imageViewerController = ImageViewerController(configuration: configuration)
+        present(imageViewerController, animated: true)
     }
     
 }

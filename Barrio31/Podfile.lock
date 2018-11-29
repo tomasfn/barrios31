@@ -11,6 +11,7 @@ PODS:
   - RealmSwift (3.11.0):
     - Realm (= 3.11.0)
   - SideMenuSwift (0.4.0)
+  - SimpleImageViewer (1.1.1)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - Realm (= 3.11.0)
   - RealmSwift (= 3.11.0)
   - SideMenuSwift (= 0.4.0)
+  - SimpleImageViewer (~> 1.1.1)
   - SVProgressHUD
 
 SPEC REPOS:
@@ -34,6 +36,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SideMenuSwift
+    - SimpleImageViewer
     - SVProgressHUD
 
 SPEC CHECKSUMS:
@@ -45,8 +48,9 @@ SPEC CHECKSUMS:
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
   SideMenuSwift: 620bebef86c04680ada5f15f9dee928fd740adf4
+  SimpleImageViewer: 34c3a2cde2d9ac022146772cefc27fca14b0c8b1
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 24fced302faa86b0c31963ba20ab22b8e41ae18a
+PODFILE CHECKSUM: bf8d3494a3e5f3b3539de48abe344bf0a064cdc9
 
 COCOAPODS: 1.5.3

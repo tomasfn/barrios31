@@ -11,13 +11,19 @@ import UIKit
 class ConoceTableViewCell: BaseTableViewCell {
     
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var mainImgView: UIImageView!
+    @IBOutlet weak var mainImgView: GSSimpleImageView!
     
     override func awakeFromNib() {
         roundCorners(8)
-        clipsToBounds = true
+        mainImgView.roundCorners(8)
         
-//        mainImgView.fillSuperview()
+        titleLbl.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        titleLbl.textColor = .black
+        titleLbl.backgroundColor = .white
+        titleLbl.font = UIFont.chalet(fontSize: 18)
+        
+        mainImgView.contentMode = .scaleAspectFill
+        mainImgView.clipsToBounds = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,5 +34,7 @@ class ConoceTableViewCell: BaseTableViewCell {
         super.layoutSubviews()
         contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(10, 10, 50, 10))
         selectionStyle = .none
+        titleLbl.sizeToFit()
+        titleLbl.frame.size = titleLbl.intrinsicContentSize
     }
 }

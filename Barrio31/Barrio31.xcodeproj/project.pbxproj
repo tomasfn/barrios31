@@ -36,6 +36,8 @@
 		45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F23A1921359B7500F22C1C /* Main.storyboard */; };
 		45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F23A1D2135D9D400F22C1C /* APIManager.swift */; };
 		8A2C728621AF4E86000FF24C /* NavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C728521AF4E86000FF24C /* NavigationHelper.swift */; };
+		8A2C728921B02931000FF24C /* GSSimpleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C728821B02931000FF24C /* GSSimpleImageView.swift */; };
+		8A2C728B21B03089000FF24C /* ConoceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C728A21B03089000FF24C /* ConoceItem.swift */; };
 		8A2DE8F721AC548F00D78161 /* ConoceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2DE8F621AC548F00D78161 /* ConoceViewController.swift */; };
 		8A2DE8FB21AC594100D78161 /* ConoceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2DE8FA21AC594100D78161 /* ConoceTableViewCell.swift */; };
 		8A2DE8FD21AC59A100D78161 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2DE8FC21AC59A100D78161 /* BaseTableViewCell.swift */; };
@@ -87,6 +89,8 @@
 		45F23A1D2135D9D400F22C1C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		87925E620ED962C1D59629D4 /* Pods_Barrio31.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Barrio31.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A2C728521AF4E86000FF24C /* NavigationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHelper.swift; sourceTree = "<group>"; };
+		8A2C728821B02931000FF24C /* GSSimpleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSimpleImageView.swift; sourceTree = "<group>"; };
+		8A2C728A21B03089000FF24C /* ConoceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConoceItem.swift; sourceTree = "<group>"; };
 		8A2DE8F621AC548F00D78161 /* ConoceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConoceViewController.swift; sourceTree = "<group>"; };
 		8A2DE8FA21AC594100D78161 /* ConoceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConoceTableViewCell.swift; sourceTree = "<group>"; };
 		8A2DE8FC21AC59A100D78161 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
@@ -226,6 +230,14 @@
 			path = "Manager-Models";
 			sourceTree = "<group>";
 		};
+		8A2C728721B02919000FF24C /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				8A2C728821B02931000FF24C /* GSSimpleImageView.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 		8A2DE8F821AC592500D78161 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +280,7 @@
 				8AB35FDE219F08B000E4394D /* Polygon.swift */,
 				8AB35FE3219F0A5500E4394D /* PolygonDetail.swift */,
 				8AB35FE5219F0BAC00E4394D /* DisfrutaItem.swift */,
+				8A2C728A21B03089000FF24C /* ConoceItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -302,6 +315,7 @@
 		8AB35FF0219F270F00E4394D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8A2C728721B02919000FF24C /* Image */,
 				8A2DE8F821AC592500D78161 /* Cell */,
 				8AB35FF1219F272600E4394D /* PaddingLabel.swift */,
 			);
@@ -417,6 +431,7 @@
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenuSwift/SideMenuSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -431,6 +446,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -469,6 +485,7 @@
 				45151C3A212DF65100222656 /* EVExtensions.swift in Sources */,
 				8AB35FE2219F08F500E4394D /* Protocols.swift in Sources */,
 				45151C3C212DF65100222656 /* ReusableView.swift in Sources */,
+				8A2C728B21B03089000FF24C /* ConoceItem.swift in Sources */,
 				453CB2662167B85B00DEF65B /* MapDetailViewController.swift in Sources */,
 				8A6275D021A5A07B0000B4C8 /* StreetCollectionViewCell.swift in Sources */,
 				453CB268216BDE9400DEF65B /* MenuViewController.swift in Sources */,
@@ -497,6 +514,7 @@
 				4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */,
 				45151C34212DE93900222656 /* Commons.swift in Sources */,
 				8A2DE8FB21AC594100D78161 /* ConoceTableViewCell.swift in Sources */,
+				8A2C728921B02931000FF24C /* GSSimpleImageView.swift in Sources */,
 				45151C36212DEA6F00222656 /* BaseViewController.swift in Sources */,
 				452CE2F4218C9AD800590678 /* DisfrutaInfoView.swift in Sources */,
 				8AB35FED219F11A100E4394D /* Drone.swift in Sources */,

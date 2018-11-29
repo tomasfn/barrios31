@@ -15,7 +15,7 @@ pod 'RealmSwift', '3.11.0'
 pod 'Kingfisher'
 pod 'Gemini'
 pod 'Floaty'
-
+pod 'SimpleImageViewer', '~> 1.1.1'
 
 end
 

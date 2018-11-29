@@ -47,6 +47,7 @@ class DroneCollectionViewCell: GeminiCell {
     func setIndicatorLbls() {
         
         pageControl = UIPageControl()
+        pageControl.isUserInteractionEnabled = false
         pageControl.numberOfPages = pageCounter
         pageControl.currentPage = 0
         
