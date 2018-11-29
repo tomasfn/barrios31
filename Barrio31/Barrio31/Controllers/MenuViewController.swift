@@ -116,16 +116,16 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
+
     return sections.count
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
     switch indexPath.row {
+        
     case 0:
-      let map = MapViewController()
-      let nav = UINavigationController.init(rootViewController: map)
-      sideMenuController?.contentViewController = nav
+        sideMenuController?.setContentViewController(with: "mapViewController")
     case 1:
       let dis = DisfrutaViewController()
       let nav = UINavigationController.init(rootViewController: dis)

@@ -43,6 +43,24 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         setupViews()
         setUpAppearance()
         setLocationConfig()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = "RECORRE"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        addCenterOnLocationBtn()
+        addFloatyMapView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.title = ""
+        
+        sideMenuController?.cache(viewController: navigationController!, with: "mapViewController")
     }
     
     func setLocationConfig() {
@@ -107,9 +125,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapViewController.infoViewPressed))
         infoView.addGestureRecognizer(tap)
-        
-        addCenterOnLocationBtn()
-        addFloatyMapView()
+  
     }
     
     @objc func centerMapOnLocation(location: CLLocation) {
@@ -134,9 +150,11 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     }
     
     func addCenterOnLocationBtn() {
+        
+        if centerLocationBtn == nil {
 
         centerLocationBtn = UIButton()
-        centerLocationBtn.frame = CGRect(x: 20, y: 20, width: 60, height: 60)
+        centerLocationBtn.frame = CGRect(x: mapView.bounds.maxX - 80, y: 20, width: 60, height: 60)
         centerLocationBtn.addTarget(self, action: #selector(centerOnUserLocation), for: .valueChanged)
         centerLocationBtn.setImage(UIImage.centerOnLocation(), for: .normal)
         centerLocationBtn.contentMode = .scaleAspectFit
@@ -148,13 +166,16 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         centerLocationBtn.layer.shadowRadius = 0.0
         centerLocationBtn.isUserInteractionEnabled = true
         centerLocationBtn.roundView()
-   
         mapView.addSubview(centerLocationBtn)
+            
+        }
     }
     
     func addFloatyMapView() {
         
-        floaty = Floaty(frame: CGRect(x: centerLocationBtn.frame.origin.x, y: 0, width: 60, height: 60))
+        if floaty == nil {
+        
+        floaty = Floaty(frame: CGRect(x: mapView.origin.x + 20, y: mapView.origin.y + 20, width: 60, height: 60))
         floaty.addItem("Standard", icon: UIImage.standardMap().maskWithColor(color: .darkGray), titlePosition: .right, handler: { item in
             self.setMapState(optionId: 0)
             self.floaty.close()
@@ -175,6 +196,8 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         floaty.verticalDirection = .down
         
         view.addSubview(floaty)
+            
+        }
     }
     
     @objc func centerOnUserLocation() {
@@ -228,16 +251,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
             }
         }
         )
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.title = "RECORRE"
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.title = ""
     }
     
     func setUpAppearance() {
