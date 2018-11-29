@@ -163,7 +163,8 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         centerLocationBtn.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
         centerLocationBtn.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         centerLocationBtn.layer.shadowOpacity = 1.0
-        centerLocationBtn.layer.shadowRadius = 0.0
+        centerLocationBtn.layer.shadowRadius = 10.0
+        centerLocationBtn.layer.masksToBounds = false
         centerLocationBtn.isUserInteractionEnabled = true
         centerLocationBtn.roundView()
         mapView.addSubview(centerLocationBtn)
@@ -174,8 +175,9 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     func addFloatyMapView() {
         
         if floaty == nil {
-        
+                    
         floaty = Floaty(frame: CGRect(x: mapView.origin.x + 20, y: mapView.origin.y + 20, width: 60, height: 60))
+                        
         floaty.addItem("Standard", icon: UIImage.standardMap().maskWithColor(color: .darkGray), titlePosition: .right, handler: { item in
             self.setMapState(optionId: 0)
             self.floaty.close()
@@ -196,7 +198,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         floaty.verticalDirection = .down
         
         view.addSubview(floaty)
-            
+
         }
     }
     

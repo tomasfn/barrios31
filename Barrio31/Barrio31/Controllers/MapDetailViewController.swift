@@ -322,8 +322,6 @@ class MapDetailViewController: BaseViewController {
         collectionView.register(StreetCollectionViewCell.self, forCellWithReuseIdentifier: "StreetCollectionViewCell")
         collectionView.register(DroneCollectionViewCell.self, forCellWithReuseIdentifier: "DroneCollectionViewCell")
         collectionView.backgroundColor = UIColor(patternImage: CategoryHelper.setImagePatternForCategory(categorySlug: detail.categorySlug!))
-        collectionView.alwaysBounceHorizontal = false
-        collectionView.alwaysBounceVertical = false
         collectionView.decelerationRate = UIScrollViewDecelerationRateNormal
 
         configureAnimation()
@@ -550,7 +548,10 @@ extension MapDetailViewController : UICollectionViewDelegate, UICollectionViewDa
         collectionView.gemini
             .cubeAnimation()
             .shadowEffect(.fadeIn)
+        
+        collectionView.bounces = false
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
