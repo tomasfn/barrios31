@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import SVProgressHUD
 import CoreLocation
-import Floaty
+import DTZFloatingActionButton
 
 class MapViewController: BaseViewController , UICollectionViewDataSource , UICollectionViewDelegate, MKMapViewDelegate {
     
@@ -25,15 +25,16 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     var categorys = [Category]()
     var polygons = [Polygon]()
     var polygonsDetails = [PolygonDetail]()
-    var floaty: Floaty!
     
-    var centerLocationBtn: UIButton!
     var segmentedControl: UISegmentedControl!
     
     var lastInfoViewId: Int!
     var selectedIndexs = [Int]()
     let villa31 = CLLocation(latitude: -34.582800, longitude: -58.379679)
     let regionRadius: CLLocationDistance = 1000
+    
+    
+    var mapState: Int = 0
     
     //MARK: Life Cycle
     
@@ -42,7 +43,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         // Do any additional setup after loading the view, typically from a nib.
         setupViews()
         setUpAppearance()
-        setLocationConfig()
         
     }
     
@@ -54,6 +54,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     override func viewDidAppear(_ animated: Bool) {
         addCenterOnLocationBtn()
         addFloatyMapView()
+        setLocationConfig()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -151,58 +152,49 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     
     func addCenterOnLocationBtn() {
         
-        if centerLocationBtn == nil {
-
-        centerLocationBtn = UIButton()
-        centerLocationBtn.frame = CGRect(x: mapView.bounds.maxX - 80, y: 20, width: 60, height: 60)
-        centerLocationBtn.addTarget(self, action: #selector(centerOnUserLocation), for: .valueChanged)
-        centerLocationBtn.setImage(UIImage.centerOnLocation(), for: .normal)
-        centerLocationBtn.contentMode = .scaleAspectFit
-        centerLocationBtn.backgroundColor = .white
+        let centerOnLocationBtn = DTZFloatingActionButton(frame:CGRect(x: mapView.bounds.maxX - 80, y: collectionView.bounds.height + 90, width: 55, height: 55))
         
-        centerLocationBtn.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        centerLocationBtn.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        centerLocationBtn.layer.shadowOpacity = 1.0
-        centerLocationBtn.layer.shadowRadius = 10.0
-        centerLocationBtn.layer.masksToBounds = false
-        centerLocationBtn.isUserInteractionEnabled = true
-        centerLocationBtn.roundView()
-        mapView.addSubview(centerLocationBtn)
-            
+        centerOnLocationBtn.handler = {
+            button in
+            self.centerOnUserLocation()
         }
+        
+        centerOnLocationBtn.buttonImage = UIImage.centerOnLocation()
+        centerOnLocationBtn.buttonColor = .white
+        centerOnLocationBtn.contentMode = .scaleAspectFit
+        
+        view.addSubview(centerOnLocationBtn)
     }
     
     func addFloatyMapView() {
         
-        if floaty == nil {
-                    
-        floaty = Floaty(frame: CGRect(x: mapView.origin.x + 20, y: mapView.origin.y + 20, width: 60, height: 60))
-                        
-        floaty.addItem("Standard", icon: UIImage.standardMap().maskWithColor(color: .darkGray), titlePosition: .right, handler: { item in
-            self.setMapState(optionId: 0)
-            self.floaty.close()
-        })
+        let layerBtn = DTZFloatingActionButton(frame:CGRect(x: 20,
+                                                                y: collectionView.bounds.height + 90,
+                                                                width: 55,
+                                                                height: 55
+        ))
         
-        floaty.addItem("Satelital", icon: UIImage.satellitalMap().maskWithColor(color: .darkGray), titlePosition: .right, handler: { item in
-            self.setMapState(optionId: 1)
-            self.floaty.close()
-        })
-
-//        floaty.addItem("Hybrido", icon: UIImage.hybridMap().maskWithColor(color: .darkGray), handler: { item in
-//            self.setMapState(optionId: 2)
-//            floaty.close()
-//        })
-
-        floaty.buttonImage = UIImage.layersMap()
-        floaty.buttonColor = .white
-        floaty.verticalDirection = .down
-        
-        view.addSubview(floaty)
-
+        layerBtn.handler = {
+            button in
+            
+            if self.mapState == 0 {
+                self.mapState = 1
+            } else if self.mapState == 1 {
+                self.mapState = 0
+            }
+            
+            self.setMapState(optionId: self.mapState)
         }
+        
+        layerBtn.buttonImage = UIImage.layersMap()
+        layerBtn.buttonColor = .white
+        layerBtn.contentMode = .scaleAspectFit
+        
+        view.addSubview(layerBtn)
     }
     
-    @objc func centerOnUserLocation() {
+    func centerOnUserLocation() {
+        
         if currentLocation != nil {
             centerMapOnLocation(location: currentLocation!)
         }
