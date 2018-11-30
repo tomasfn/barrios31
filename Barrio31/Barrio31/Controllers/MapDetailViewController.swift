@@ -37,6 +37,7 @@ class MapDetailViewController: BaseViewController {
     var pageCounter: Int! = 0
     fileprivate var currentIndex = 0
     
+    let imageCache = NSCache<NSString, UIImage>()
     
     //MARK: Life Cycle
     
@@ -211,12 +212,18 @@ class MapDetailViewController: BaseViewController {
     func downloadImage(from url: URL, completion: @escaping (UIImage) -> Void) {
         print("Download Started")
         var image = UIImage()
+        
+        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+            completion(cachedImage)
+        }
+
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
             DispatchQueue.main.async() {
                 image = UIImage(data: data)!
+                self.imageCache.setObject(image, forKey: url.absoluteString as NSString)
                 completion(image)
             }
         }

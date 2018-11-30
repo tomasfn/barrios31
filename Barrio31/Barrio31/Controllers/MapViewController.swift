@@ -34,6 +34,8 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     let regionRadius: CLLocationDistance = 1000
     
     
+    private var mapLayerBtn: UIButton!
+    private var mapLocationBtn: UIButton!
     var mapState: Int = 0
     
     //MARK: Life Cycle
@@ -52,9 +54,12 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        addCenterOnLocationBtn()
-        addFloatyMapView()
         setLocationConfig()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addLocationAndLayerBtns()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -150,50 +155,50 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         }
     }
     
-    func addCenterOnLocationBtn() {
+    func addLocationAndLayerBtns() {
         
-        let centerOnLocationBtn = DTZFloatingActionButton(frame:CGRect(x: mapView.bounds.maxX - 80, y: collectionView.bounds.height + 90, width: 55, height: 55))
-        
-        centerOnLocationBtn.handler = {
-            button in
-            self.centerOnUserLocation()
-        }
-        
-        centerOnLocationBtn.buttonImage = UIImage.centerOnLocation()
-        centerOnLocationBtn.buttonColor = .white
-        centerOnLocationBtn.contentMode = .scaleAspectFit
-        
-        view.addSubview(centerOnLocationBtn)
-    }
-    
-    func addFloatyMapView() {
-        
-        let layerBtn = DTZFloatingActionButton(frame:CGRect(x: 20,
-                                                                y: collectionView.bounds.height + 90,
-                                                                width: 55,
-                                                                height: 55
+        mapLayerBtn = UIButton(frame:CGRect(x: 20,
+                                                       y: 20,
+                                                       width: 55,
+                                                       height: 55
         ))
+        mapLayerBtn.showsTouchWhenHighlighted = true
+        mapLayerBtn.setImage(UIImage.layersMap(), for: .normal)
+        mapLayerBtn.setImage(UIImage.layersMap()?.maskWithColor(color: .lightGray), for: .highlighted)
+        let tapA = UITapGestureRecognizer.init(target: self, action: #selector(MapViewController.setMap))
+        mapLayerBtn.addGestureRecognizer(tapA)
+        mapLayerBtn.roundView()
+        mapLayerBtn.contentMode = .scaleAspectFit
+        mapLayerBtn.backgroundColor = .white
         
-        layerBtn.handler = {
-            button in
-            
-            if self.mapState == 0 {
-                self.mapState = 1
-            } else if self.mapState == 1 {
-                self.mapState = 0
-            }
-            
-            self.setMapState(optionId: self.mapState)
-        }
+        mapView.addSubview(mapLayerBtn)
         
-        layerBtn.buttonImage = UIImage.layersMap()
-        layerBtn.buttonColor = .white
-        layerBtn.contentMode = .scaleAspectFit
+        mapLocationBtn = UIButton(frame:CGRect(x: mapView.bounds.maxX - 80, y: collectionView.bounds.height - 60, width: 55, height: 55))
         
-        view.addSubview(layerBtn)
+        mapLocationBtn.showsTouchWhenHighlighted = true
+        mapLocationBtn.setImage(UIImage.centerOnLocation(), for: .normal)
+        mapLocationBtn.setImage(UIImage.centerOnLocation()?.maskWithColor(color: .lightGray), for: .highlighted)
+        let tapB = UITapGestureRecognizer.init(target: self, action: #selector(MapViewController.centerOnUserLocation))
+        mapLocationBtn.addGestureRecognizer(tapB)
+        mapLocationBtn.roundView()
+        mapLocationBtn.contentMode = .scaleAspectFit
+        mapLocationBtn.backgroundColor = .white
+
+        mapView.addSubview(mapLocationBtn)
     }
     
-    func centerOnUserLocation() {
+    @objc func setMap() {
+       
+        if self.mapState == 0 {
+            self.mapState = 1
+        } else if self.mapState == 1 {
+            self.mapState = 0
+        }
+        
+        self.setMapState(optionId: self.mapState)
+    }
+    
+    @objc func centerOnUserLocation() {
         
         if currentLocation != nil {
             centerMapOnLocation(location: currentLocation!)
