@@ -33,6 +33,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     let villa31 = CLLocation(latitude: -34.582800, longitude: -58.379679)
     let regionRadius: CLLocationDistance = 1000
     
+    private var selectedPol: B31Polyline!
     
     private var mapLayerBtn: UIButton!
     private var mapLocationBtn: UIButton!
@@ -225,6 +226,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
                     self.loadPolygonsDetails("\(pol.id)")
                     //print(" id a descrgar \(pol.id!)")
                 }
+                
                 SVProgressHUD.dismiss()
             }
             else {
@@ -276,7 +278,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
             for pol in polygons {
                 if pol.category == item.slug {
                     let polygon = B31Polyline(coordinates: pol.coordinates, count: pol.coordinates.count)
-                    polygon.color = item.getColor()
+                    polygon.color = item.getColor().withAlphaComponent(0.5)
                     polygon.category = item
                     polygon.polygon = pol
                     self.mapView.add(polygon)
@@ -295,10 +297,16 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         
         for polygon in mapView.overlays as! [B31Polyline] {
             
-            
             if polygon.intersects(mapRect) {//Touch in polygon
                 
                 infoView.category = polygon.category
+
+                    selectedPol = B31Polyline(coordinates: (polygon.polygon?.coordinates)!, count: polygon.polygon!.coordinates.count)
+                    selectedPol.color = polygon.category?.getColor()
+                    selectedPol.category = polygon.category
+                    selectedPol.polygon = polygon.polygon
+                
+                    self.mapView.add(selectedPol)
                 
                 if let det = polygonsDetails.first(where: {$0.id == polygon.polygon?.id}) {
                     infoView.detail = det
@@ -318,6 +326,10 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
                 return
             }
             else {
+                
+                if selectedPol != nil {
+                    self.mapView.remove(selectedPol)
+                }
                 
                 UIView.animate(withDuration: 0.3) {
                     self.infoView.alpha = 0.0
