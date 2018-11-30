@@ -15,7 +15,7 @@ class ConoceTableViewCell: BaseTableViewCell {
     
     override func awakeFromNib() {
         roundCorners(8)
-        mainImgView.roundCorners(8)
+//        mainImgView.roundCorners(8)
         
         titleLbl.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         titleLbl.textColor = .black
@@ -24,6 +24,7 @@ class ConoceTableViewCell: BaseTableViewCell {
         
         mainImgView.contentMode = .scaleAspectFill
         mainImgView.clipsToBounds = true
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
