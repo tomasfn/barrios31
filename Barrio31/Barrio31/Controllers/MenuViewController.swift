@@ -23,8 +23,8 @@ class MenuViewController: BaseViewController {
     view.addSubview(tableView)
     tableView.anchor(self.view.topAnchor, leading: nil, bottom: self.view.bottomAnchor, trailing: self.view.trailingAnchor , size: .init(300, 0))
     tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
-    tableView.estimatedRowHeight = 100.0
-    tableView.rowHeight = 100.0
+    tableView.estimatedRowHeight = 70.0
+    tableView.rowHeight = 70.0
     tableView.separatorStyle = .none
     
     
@@ -50,22 +50,24 @@ class MenuViewController: BaseViewController {
         label.font = UIFont.chalet(fontSize: 14)
         label.textColor = UIColor(red:0.96, green:0.59, blue:0.17, alpha:1.0)
         label.text = "Descarga a local"
-        label.center.x = customView.center.x
-        label.center.y = customView.center.y
-
+        label.frame.origin.x = customView.bounds.minX + 20
+        label.frame.origin.y = customView.bounds.maxY
         label.sizeToFit()
    
-        let switcher = UISwitch(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        let switcher = UISwitch(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         switcher.backgroundColor = .white
         switcher.onTintColor = UIColor(red:0.96, green:0.59, blue:0.17, alpha:1.0)
         switcher.thumbTintColor = UIColor(red:0.96, green:0.59, blue:0.17, alpha:1.0)
-        switcher.center.y = customView.center.y
-        switcher.center.x = customView.center.x
+        
+        switcher.center.x = customView.bounds.maxY
+        switcher.center.y = label.center.y
 
         switcher.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
         customView.addSubview(switcher)
         customView.addSubview(label)
+        
         tableView.tableFooterView = customView
+        
     }
     
     @objc func switchChanged(_ sender : UISwitch!){
@@ -104,7 +106,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     let cell = tableView.dequeueReusableCell(withIdentifier:"cell")
     cell?.textLabel?.text = sections[indexPath.row]
     cell?.textLabel?.textColor = colors[indexPath.row]
-    cell?.textLabel?.font = UIFont.chalet(fontSize: 38)
+    cell?.textLabel?.font = UIFont.chalet(fontSize: 30)
     
     return cell!
   }
