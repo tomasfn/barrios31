@@ -744,6 +744,14 @@ extension UIScrollView {
     }
 }
 
+extension UILabel {
+    func resizeToText() {
+        self.numberOfLines = 0
+        self.sizeToFit()
+    }
+    
+}
+
 
 
 

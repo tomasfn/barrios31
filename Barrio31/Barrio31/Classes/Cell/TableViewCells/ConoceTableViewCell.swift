@@ -15,12 +15,12 @@ class ConoceTableViewCell: BaseTableViewCell {
     
     override func awakeFromNib() {
         roundCorners(8)
-//        mainImgView.roundCorners(8)
+        mainImgView.roundCorners(8)
         
-        titleLbl.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         titleLbl.textColor = .black
         titleLbl.backgroundColor = .white
         titleLbl.font = UIFont.chalet(fontSize: 18)
+        titleLbl.lineBreakMode = .byClipping
         
         mainImgView.contentMode = .scaleAspectFill
         mainImgView.clipsToBounds = true
@@ -35,7 +35,5 @@ class ConoceTableViewCell: BaseTableViewCell {
         super.layoutSubviews()
         contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(10, 10, 50, 10))
         selectionStyle = .none
-        titleLbl.sizeToFit()
-        titleLbl.frame.size = titleLbl.intrinsicContentSize
     }
 }

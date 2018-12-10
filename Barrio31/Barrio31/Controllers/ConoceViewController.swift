@@ -18,11 +18,7 @@ class ConoceViewController: BaseViewController {
     var floatingLbl: UILabel!
     
     private var conoceItems = [ConoceItem] ()
-    
-    override func viewDidAppear(_ animated: Bool) {
-        floatingLbl.isHidden = true
-    }
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView = UITableView()
@@ -35,7 +31,7 @@ class ConoceViewController: BaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
         
-        floatingLbl = UILabel(frame: CGRect(x: 50, y: 70, width: 200, height: 50))
+        floatingLbl = UILabel(frame: CGRect(x: 30, y: 70, width: 260, height: 40))
         floatingLbl.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         floatingLbl.textColor = .black
         floatingLbl.backgroundColor = .white
@@ -96,7 +92,7 @@ extension ConoceViewController: UITableViewDelegate, UITableViewDataSource {
         let url = URL(string: cItem.imgLink!)
         cell.mainImgView.kf.setImage(with: url)
         cell.titleLbl.text = cItem.name
-        
+
         return cell
     }
     
@@ -106,18 +102,21 @@ extension ConoceViewController: UITableViewDelegate, UITableViewDataSource {
         
         let configuration = ImageViewerConfiguration { config in
             config.imageView = cell?.mainImgView
+            config.imageView?.roundCorners(radius: 8)
         }
         
         let imageViewerController = ImageViewerController(configuration: configuration)
-        present(imageViewerController, animated: true)
+        
         
         let cItem = conoceItems[(indexPath as NSIndexPath).row]
         floatingLbl.text = cItem.name
         floatingLbl.isHidden = false
+        floatingLbl.fitTextToBounds()
+
+        imageViewerController.view.addSubview(floatingLbl)
         
-        let window = UIApplication.shared.keyWindow!
-        window.addSubview(floatingLbl)
-        
+        present(imageViewerController, animated: true)
+
     }
     
 }

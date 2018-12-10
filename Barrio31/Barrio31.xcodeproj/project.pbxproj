@@ -43,6 +43,7 @@
 		8A2DE8FD21AC59A100D78161 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2DE8FC21AC59A100D78161 /* BaseTableViewCell.swift */; };
 		8A2DE8FF21AC645B00D78161 /* ConoceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A2DE8FE21AC645B00D78161 /* ConoceTableViewCell.xib */; };
 		8A3253AB21A469E40046CFAC /* CategoryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3253AA21A469E40046CFAC /* CategoryHelper.swift */; };
+		8A456A2421BB3D2400FAC043 /* UILabel+BestFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A456A2321BB3D2400FAC043 /* UILabel+BestFit.swift */; };
 		8A6275D021A5A07B0000B4C8 /* StreetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6275CF21A5A07B0000B4C8 /* StreetCollectionViewCell.swift */; };
 		8A6275D221A5B59D0000B4C8 /* DroneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6275D121A5B59D0000B4C8 /* DroneCollectionViewCell.swift */; };
 		8AB35FDF219F08B000E4394D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FDE219F08B000E4394D /* Polygon.swift */; };
@@ -96,6 +97,7 @@
 		8A2DE8FC21AC59A100D78161 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		8A2DE8FE21AC645B00D78161 /* ConoceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConoceTableViewCell.xib; sourceTree = "<group>"; };
 		8A3253AA21A469E40046CFAC /* CategoryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHelper.swift; sourceTree = "<group>"; };
+		8A456A2321BB3D2400FAC043 /* UILabel+BestFit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+BestFit.swift"; sourceTree = "<group>"; };
 		8A6275CF21A5A07B0000B4C8 /* StreetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A6275D121A5B59D0000B4C8 /* DroneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneCollectionViewCell.swift; sourceTree = "<group>"; };
 		8AB35FDE219F08B000E4394D /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				8A2C728721B02919000FF24C /* Image */,
 				8A2DE8F821AC592500D78161 /* Cell */,
 				8AB35FF1219F272600E4394D /* PaddingLabel.swift */,
+				8A456A2321BB3D2400FAC043 /* UILabel+BestFit.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				453CB2662167B85B00DEF65B /* MapDetailViewController.swift in Sources */,
 				8A6275D021A5A07B0000B4C8 /* StreetCollectionViewCell.swift in Sources */,
 				453CB268216BDE9400DEF65B /* MenuViewController.swift in Sources */,
+				8A456A2421BB3D2400FAC043 /* UILabel+BestFit.swift in Sources */,
 				8AB35FE6219F0BAC00E4394D /* DisfrutaItem.swift in Sources */,
 				8AB35FEF219F11BB00E4394D /* Street.swift in Sources */,
 				8A2C728621AF4E86000FF24C /* NavigationHelper.swift in Sources */,
