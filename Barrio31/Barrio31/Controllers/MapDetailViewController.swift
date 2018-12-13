@@ -34,6 +34,8 @@ class MapDetailViewController: BaseViewController {
     var videoButton : UIButton!
     var infoView : UIView!
     
+    var pageControl : UIPageControl!
+    
     var pageCounter: Int! = 0
     fileprivate var currentIndex = 0
     
@@ -63,6 +65,7 @@ class MapDetailViewController: BaseViewController {
         setImagesView {
             self.collectionView.reloadData()
             SVProgressHUD.dismiss()
+            self.setPageControl()
         }
         
         bottomView = UIView()
@@ -91,18 +94,44 @@ class MapDetailViewController: BaseViewController {
         videoButton.addTarget(self, action: #selector(MapDetailViewController.videoPressed), for: .touchUpInside)
         videoButton.anchor(bottomView.topAnchor, leading: infoButton.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/2, 60))
         
+        
         view.isUserInteractionEnabled = true
+    }
+    
+    func setPageControl() {
+        
+        //Set Page Control
+        pageControl = UIPageControl()
+        pageControl.isUserInteractionEnabled = false
+        pageControl.numberOfPages = pageCounter
+        pageControl.currentPage = 0
+        pageControl.currentPageIndicatorTintColor = .white
+        pageControl.pageIndicatorTintColor = .lightGray
+        
+        view.addSubview(pageControl)
+        
+        if #available(iOS 11.0, *) {
+            pageControl.anchor(view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor , size : .init(0, 40))
+        } else {
+            // Fallback on earlier versions
+            pageControl.anchor(view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor , size : .init(0, 40))
+        }
+        
+        
     }
     
     func addSwipeDownGesture() {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
         swipeDown.direction = .down
-        self.view.addGestureRecognizer(swipeDown)
+        self.infoView.addGestureRecognizer(swipeDown)
     }
     
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
          if gesture.direction == UISwipeGestureRecognizerDirection.down {
-            _ = navigationController?.popViewController(animated: true)
+            
+            UIView.animate(withDuration: 0.3) {
+                self.infoView.alpha = 0.0
+            }
         }
     }
     
@@ -216,7 +245,7 @@ class MapDetailViewController: BaseViewController {
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
             completion(cachedImage)
         }
-
+       
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
@@ -363,6 +392,7 @@ class MapDetailViewController: BaseViewController {
         tagLabel.text = detail.categoryName?.uppercased()
         tagLabel.font = UIFont.chalet(fontSize: 16)
         tagLabel.textColor = UIColor.white
+        tagLabel.numberOfLines = 0
         tagLabel.textAlignment = .left
         //tagLabel.font = UIFont.chalet(fontSize: 16)
         imgView.addSubview(tagLabel)
@@ -387,11 +417,11 @@ class MapDetailViewController: BaseViewController {
         descriptionLabel.textColor = UIColor.white
         descriptionLabel.textAlignment = .left
         descriptionLabel.font = UIFont.MontserratSemiBold(fontSize: 16)
-        descriptionLabel.numberOfLines = 2
+        descriptionLabel.numberOfLines = 0
         descriptionLabel.lineBreakMode = .byWordWrapping
         descriptionLabel.setContentHuggingPriority(.required, for: .vertical)
         imgView.addSubview(descriptionLabel)
-        descriptionLabel.anchor(nameLabel.bottomAnchor, leading: imgView.leadingAnchor, bottom: nil, trailing: imgView.trailingAnchor, padding: .init(top: 10.0, left: 20.0, bottom: 0, right: -20.0))
+        descriptionLabel.anchor(nameLabel.bottomAnchor, leading: imgView.leadingAnchor, bottom: nil, trailing: imgView.trailingAnchor, padding: .init(top: 10.0, left: 20.0, bottom: 0, right: -20.0), size: .init(0, 60.0))
         descriptionLabel.sizeToFit()
         
         imgView.clipsToBounds = true
@@ -464,7 +494,7 @@ class MapDetailViewController: BaseViewController {
         neighborsLabel.text = detail.neighbors
         neighborsLabel.textColor = detail.getColor()
         neighborsLabel.textAlignment = .left
-        neighborsLabel.font = UIFont.chalet(fontSize: 28)
+        neighborsLabel.font = UIFont.chalet(fontSize: 30)
         infoView.addSubview(neighborsLabel)
         neighborsLabel.anchor(line.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 30, left: 10, bottom: 0, right: 10) ,size: .init(width: 0, height: 30))
         
@@ -472,7 +502,7 @@ class MapDetailViewController: BaseViewController {
         neighborsTextLabel.text = detail.neighborsText
         neighborsTextLabel.textColor = UIColor.black
         neighborsTextLabel.textAlignment = .left
-        neighborsTextLabel.font = UIFont.MontserratRegular(fontSize: 16)
+        neighborsTextLabel.font = UIFont.MontserratSemiBold(fontSize: 16)
         neighborsTextLabel.numberOfLines = 0
         neighborsTextLabel.adjustsFontSizeToFitWidth = true
         neighborsTextLabel.minimumScaleFactor = 0.5
@@ -484,18 +514,18 @@ class MapDetailViewController: BaseViewController {
         m2Label.text = detail.m2
         m2Label.textColor = detail.getColor()
         m2Label.textAlignment = .left
-        m2Label.font = UIFont.chalet(fontSize: 28)
+        m2Label.font = UIFont.chalet(fontSize: 30)
         infoView.addSubview(m2Label)
-        m2Label.anchor(neighborsTextLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 30, left: 10, bottom: 0, right: 10) ,size: .init(width: 0, height: 30))
+        m2Label.anchor(neighborsTextLabel.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: 20, left: 10, bottom: 0, right: 10) ,size: .init(width: 0, height: 30))
         
         let m2LabelTextLabel = UILabel()
         m2LabelTextLabel.text = detail.m2Text
         m2LabelTextLabel.textColor = UIColor.black
         m2LabelTextLabel.textAlignment = .left
-        m2LabelTextLabel.font = UIFont.MontserratRegular(fontSize: 16)
+        m2LabelTextLabel.font = UIFont.MontserratSemiBold(fontSize: 16)
         m2LabelTextLabel.numberOfLines = 2
         infoView.addSubview(m2LabelTextLabel)
-        m2LabelTextLabel.anchor(m2Label.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: -5, left: 10, bottom: 0, right: -10) ,size: .init(width: 0, height: 34))
+        m2LabelTextLabel.anchor(m2Label.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: -5, left: 10, bottom: 20, right: -10) ,size: .init(width: 0, height: 34))
         
         
         infoView.setCellShadow()
@@ -527,6 +557,9 @@ extension MapDetailViewController: UIScrollViewDelegate {
             currentIndex = 0
         }
     }
+        
+        // pageControlposition
+        pageControl.currentPage = currentIndex
     
     }
     

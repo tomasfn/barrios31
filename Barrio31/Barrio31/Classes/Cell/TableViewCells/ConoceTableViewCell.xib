@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="419.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AWG-n3-qGe">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="AWG-n3-qGe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="420.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="420" id="Yh1-Ua-21Z"/>
@@ -36,7 +36,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.58648916500000003" green="0.43504917170000001" blue="0.81246107820000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="AWG-n3-qGe" secondAttribute="trailing" id="74q-Sh-PNR"/>
                     <constraint firstItem="AWG-n3-qGe" firstAttribute="centerX" secondItem="A0h-Wc-Upf" secondAttribute="centerX" id="L69-nY-ocg"/>
@@ -55,4 +55,7 @@
             <point key="canvasLocation" x="61.600000000000001" y="212.29385307346328"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="splash" width="1080" height="1920"/>
+    </resources>
 </document>

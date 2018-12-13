@@ -31,8 +31,7 @@ class ConoceViewController: BaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
         
-        floatingLbl = UILabel(frame: CGRect(x: 30, y: 70, width: 260, height: 40))
-        floatingLbl.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        floatingLbl = UILabel(frame: CGRect(x: 30, y: 70, width: 240, height: 40))
         floatingLbl.textColor = .black
         floatingLbl.backgroundColor = .white
         floatingLbl.font = UIFont.chalet(fontSize: 18)
@@ -111,8 +110,9 @@ extension ConoceViewController: UITableViewDelegate, UITableViewDataSource {
         let cItem = conoceItems[(indexPath as NSIndexPath).row]
         floatingLbl.text = cItem.name
         floatingLbl.isHidden = false
-        floatingLbl.fitTextToBounds()
-
+        floatingLbl.minimumScaleFactor = 0.5
+        floatingLbl.adjustsFontSizeToFitWidth = true
+        
         imageViewerController.view.addSubview(floatingLbl)
         
         present(imageViewerController, animated: true)

@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 import SVProgressHUD
 import CoreLocation
-import DTZFloatingActionButton
 
 class MapViewController: BaseViewController , UICollectionViewDataSource , UICollectionViewDelegate, MKMapViewDelegate {
     

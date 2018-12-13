@@ -147,6 +147,12 @@ extension UIImage {
     class func iconInfo() -> UIImage! {
         return UIImage(named: "ic-info")
     }
+    
+    //MARK: SPLASH
+    
+    class func splashImage() -> UIImage! {
+        return UIImage(named: "splash")
+    }
 }
 
 

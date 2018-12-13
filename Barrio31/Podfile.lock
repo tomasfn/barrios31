@@ -2,9 +2,13 @@ PODS:
   - Alamofire (4.8.0)
   - AlamofireImage (3.5.0):
     - Alamofire (~> 4.8)
-  - DTZFloatingActionButton (0.4.0)
   - Gemini (1.3.1)
-  - Kingfisher (4.10.1)
+  - GoogleMaps (2.7.0):
+    - GoogleMaps/Maps (= 2.7.0)
+  - GoogleMaps/Base (2.7.0)
+  - GoogleMaps/Maps (2.7.0):
+    - GoogleMaps/Base
+  - Kingfisher (5.0.0)
   - Realm (3.11.0):
     - Realm/Headers (= 3.11.0)
   - Realm/Headers (3.11.0)
@@ -17,8 +21,8 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
-  - DTZFloatingActionButton
   - Gemini
+  - GoogleMaps
   - Kingfisher
   - Realm (= 3.11.0)
   - RealmSwift (= 3.11.0)
@@ -30,8 +34,8 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
-    - DTZFloatingActionButton
     - Gemini
+    - GoogleMaps
     - Kingfisher
     - Realm
     - RealmSwift
@@ -42,15 +46,15 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
-  DTZFloatingActionButton: 746febb29e47f9023089cb7bab15da2b1cbbf888
   Gemini: 25fd4ae5dcde4cbd136dac899faf38a1dddea1a8
-  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
+  Kingfisher: 2b0dd651e4fe5a07305b8242fde56f8e2d410f58
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
   SideMenuSwift: 620bebef86c04680ada5f15f9dee928fd740adf4
   SimpleImageViewer: 34c3a2cde2d9ac022146772cefc27fca14b0c8b1
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 74eaf4b490339ac169959eb949648fa92093c13b
+PODFILE CHECKSUM: 87ba00e6364fd3173710b795af42c55be0883249
 
 COCOAPODS: 1.5.3

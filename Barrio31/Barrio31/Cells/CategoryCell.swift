@@ -26,6 +26,11 @@ class CategoryCell: UICollectionViewCell {
         imgView.image = item!.getImageOff()
       }
       label.text = item!.name?.uppercased()
+        
+        //Ugly resolution as client requested
+        if item?.name == "Infraestructura" {
+            label.text = "INFRAESTRU..."
+        }
     }
   }
   
@@ -51,6 +56,7 @@ class CategoryCell: UICollectionViewCell {
     label.textColor = UIColor.lightGray
     label.font = UIFont.chalet(fontSize: 12)
     label.textAlignment = .center
+    label.lineBreakMode = .byWordWrapping
     label.numberOfLines = 0
     return label
   }()

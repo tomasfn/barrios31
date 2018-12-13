@@ -54,6 +54,7 @@
 		8AB35FED219F11A100E4394D /* Drone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FEC219F11A100E4394D /* Drone.swift */; };
 		8AB35FEF219F11BB00E4394D /* Street.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FEE219F11BB00E4394D /* Street.swift */; };
 		8AB35FF2219F272600E4394D /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FF1219F272600E4394D /* PaddingLabel.swift */; };
+		8AD5466421C2CF42003D2C70 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5466321C2CF42003D2C70 /* UIImageView+Extensions.swift */; };
 		B9631DB48E780CD0E206A39A /* Pods_Barrio31.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87925E620ED962C1D59629D4 /* Pods_Barrio31.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,7 @@
 		8AB35FEC219F11A100E4394D /* Drone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drone.swift; sourceTree = "<group>"; };
 		8AB35FEE219F11BB00E4394D /* Street.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
 		8AB35FF1219F272600E4394D /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		8AD5466321C2CF42003D2C70 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		A5F59669DBE4A55B921151E8 /* Pods-Barrio31.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.release.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.release.xcconfig"; sourceTree = "<group>"; };
 		FAD8B302D123058E3BA65FD7 /* Pods-Barrio31.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +137,7 @@
 				45151C2B212DE69300222656 /* AppColors.swift */,
 				45151C2D212DE69300222656 /* AppFonts.swift */,
 				45151C2E212DE69300222656 /* AppImages.swift */,
+				8AD5466321C2CF42003D2C70 /* UIImageView+Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				4542CCDF212C4FDE00EE5D3F /* Frameworks */,
 				4542CCE0212C4FDE00EE5D3F /* Resources */,
 				50919938E4C6C27D63E98689 /* [CP] Embed Pods Frameworks */,
+				5363022596E0169D26DF3656 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -427,7 +431,6 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/DTZFloatingActionButton/DTZFloatingActionButton.framework",
 				"${BUILT_PRODUCTS_DIR}/Gemini/Gemini.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -442,7 +445,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTZFloatingActionButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gemini.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
@@ -454,6 +456,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5363022596E0169D26DF3656 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		91DEA52C0C7048B1E8C47DDD /* [CP] Check Pods Manifest.lock */ = {
@@ -515,6 +539,7 @@
 				8AB35FF2219F272600E4394D /* PaddingLabel.swift in Sources */,
 				8A6275D221A5B59D0000B4C8 /* DroneCollectionViewCell.swift in Sources */,
 				8AB35FDF219F08B000E4394D /* Polygon.swift in Sources */,
+				8AD5466421C2CF42003D2C70 /* UIImageView+Extensions.swift in Sources */,
 				4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */,
 				45151C34212DE93900222656 /* Commons.swift in Sources */,
 				8A2DE8FB21AC594100D78161 /* ConoceTableViewCell.swift in Sources */,

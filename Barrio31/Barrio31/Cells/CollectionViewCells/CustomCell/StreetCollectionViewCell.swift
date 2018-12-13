@@ -60,6 +60,7 @@ class StreetCollectionViewCell: GeminiCell {
         
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.isHidden = true
         
         ayerLabel = UILabel()
         ayerLabel.text = "AYER"
@@ -129,9 +130,11 @@ class StreetCollectionViewCell: GeminiCell {
             }
             
             setLabelAlpha()
-            pageControl.currentPage = currentIndex
+            
+            // harcoding pageControlposition
+            pageControl.currentPage = 0
 
-            scrollToPage(page: currentIndex, animated: true)
+            scrollToPage(page: currentIndex, animated: false)
         }
     }
     
@@ -139,7 +142,11 @@ class StreetCollectionViewCell: GeminiCell {
         var frame: CGRect = self.scrollView.frame
         frame.origin.x = frame.size.width * CGFloat(page)
         frame.origin.y = 0
-        self.scrollView.scrollRectToVisible(frame, animated: animated)
+        
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
+            self.scrollView.scrollRectToVisible(frame, animated: animated)
+        })
+
     }
     
     func setLabelAlpha() {

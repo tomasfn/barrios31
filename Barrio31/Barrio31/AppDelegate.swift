@@ -9,6 +9,8 @@
 import UIKit
 import SideMenuSwift
 import SVProgressHUD
+import GoogleMaps
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window?.makeKeyAndVisible()
     setUpAppearance()
+    
+    //2
+    let googleApiKey = "AIzaSyCIm0cPMUpAFEViRfvly52mq80zYFP8TAs"
+    GMSServices.provideAPIKey(googleApiKey)
     
     return true
   }

@@ -14,8 +14,8 @@ pod 'Realm', '3.11.0'
 pod 'RealmSwift', '3.11.0'
 pod 'Kingfisher'
 pod 'Gemini'
-pod 'DTZFloatingActionButton'
 pod 'SimpleImageViewer', '~> 1.1.1'
+pod 'GoogleMaps'
 
 end
 

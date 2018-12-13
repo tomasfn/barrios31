@@ -61,6 +61,7 @@ class DroneCollectionViewCell: GeminiCell {
         
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.isHidden = true
         
         ayerLabel = UILabel()
         ayerLabel.text = "AYER"
@@ -127,11 +128,13 @@ class DroneCollectionViewCell: GeminiCell {
             } else if currentIndex == 1 {
                 currentIndex = 0
             }
-            
+
             setLabelAlpha()
-            pageControl.currentPage = currentIndex
             
-            scrollToPage(page: currentIndex, animated: true)
+            // harcoding pageControlposition
+            pageControl.currentPage = 1
+            
+            scrollToPage(page: currentIndex, animated: false)
         }
     }
     
@@ -139,7 +142,11 @@ class DroneCollectionViewCell: GeminiCell {
         var frame: CGRect = self.scrollView.frame
         frame.origin.x = frame.size.width * CGFloat(page)
         frame.origin.y = 0
-        self.scrollView.scrollRectToVisible(frame, animated: animated)
+        
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
+            self.scrollView.scrollRectToVisible(frame, animated: animated)
+        })
+        
     }
     
     func setLabelAlpha() {
