@@ -21,6 +21,7 @@ class ConoceTableViewCell: BaseTableViewCell {
         titleLbl.backgroundColor = .white
         titleLbl.font = UIFont.chalet(fontSize: 18)
         titleLbl.lineBreakMode = .byClipping
+
         
         mainImgView.contentMode = .scaleAspectFill
         mainImgView.clipsToBounds = true

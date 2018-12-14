@@ -31,10 +31,12 @@ class ConoceViewController: BaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
         
-        floatingLbl = UILabel(frame: CGRect(x: 30, y: 70, width: 240, height: 40))
+        floatingLbl = UILabel(frame: CGRect(x: 30, y: 100, width: 240, height: 40))
         floatingLbl.textColor = .black
         floatingLbl.backgroundColor = .white
         floatingLbl.font = UIFont.chalet(fontSize: 18)
+        floatingLbl.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+
 
         self.title = "CONOCÉ"
         
