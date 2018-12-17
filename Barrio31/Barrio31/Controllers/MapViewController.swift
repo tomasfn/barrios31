@@ -156,6 +156,8 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     
     func addLocationAndLayerBtns() {
         
+        if mapLayerBtn == nil {
+        
         mapLayerBtn = UIButton(frame:CGRect(x: 20,
                                                        y: 20,
                                                        width: 55,
@@ -171,6 +173,10 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         mapLayerBtn.backgroundColor = .white
         
         mapView.addSubview(mapLayerBtn)
+        }
+        
+        
+        if mapLocationBtn == nil {
         
         mapLocationBtn = UIButton(frame:CGRect(x: mapView.bounds.maxX - 80, y: collectionView.bounds.height - 60, width: 55, height: 55))
         
@@ -184,6 +190,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         mapLocationBtn.backgroundColor = .white
 
         mapView.addSubview(mapLocationBtn)
+        }
     }
     
     @objc func setMap() {

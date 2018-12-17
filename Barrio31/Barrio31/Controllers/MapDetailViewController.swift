@@ -36,6 +36,9 @@ class MapDetailViewController: BaseViewController {
     
     var pageControl : UIPageControl!
     
+    var controller: AVPlayerViewController!
+    var player: AVPlayer!
+    
     var pageCounter: Int! = 0
     fileprivate var currentIndex = 0
     
@@ -143,7 +146,7 @@ class MapDetailViewController: BaseViewController {
         
         let asset = AVAsset(url: url)
         let item = AVPlayerItem(asset: asset)
-        let player = AVPlayer(playerItem: item)
+        player = AVPlayer(playerItem: item)
         
         let controller = AVPlayerViewController()
         controller.player = player
@@ -174,17 +177,17 @@ class MapDetailViewController: BaseViewController {
                     
                     let asset = AVAsset(url: videoURL)
                     let item = AVPlayerItem(asset: asset)
-                    let player = AVPlayer(playerItem: item)
+                    self.player = AVPlayer(playerItem: item)
                     
-                    let controller = AVPlayerViewController()
-                    controller.player = player
-                    self.addChildViewController(controller)
-                    self.view.addSubview(controller.view)
-                    controller.view.frame = self.view.frame
+                    self.controller = AVPlayerViewController()
+                    self.controller.player = self.player
+                    self.addChildViewController(self.controller)
+                    self.view.addSubview(self.controller.view)
+                    self.controller.view.frame = self.view.frame
                     
                     SVProgressHUD.dismiss()
                     
-                    player.play()
+                    self.player.play()
                     
                 } catch {
                     print("Something went wrong!")
@@ -370,10 +373,11 @@ class MapDetailViewController: BaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
         
-        if touch?.view != infoView {
-            infoView.isHidden = true
+        if controller == nil {
+            if touch?.view != infoView {
+                infoView.isHidden = true
+            }
         }
-        
     }
     
     
