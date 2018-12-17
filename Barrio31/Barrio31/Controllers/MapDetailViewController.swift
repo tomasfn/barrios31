@@ -164,7 +164,7 @@ class MapDetailViewController: BaseViewController {
         let playerItem = CachingPlayerItem(url: url)
         player = AVPlayer(playerItem: playerItem)
         
-        let controller = AVPlayerViewController()
+        controller = AVPlayerViewController()
         controller.player = player
         self.addChildViewController(controller)
         self.view.addSubview(controller.view)

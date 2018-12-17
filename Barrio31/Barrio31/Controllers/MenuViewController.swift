@@ -62,6 +62,8 @@ class MenuViewController: BaseViewController {
         
         switcher.center.x = customView.bounds.maxY
         switcher.center.y = label.center.y
+        
+        switcher.setOn(true, animated: false)
 
         switcher.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
         customView.addSubview(switcher)
