@@ -124,18 +124,32 @@ class MapDetailViewController: BaseViewController {
         
     }
     
-    func addSwipeDownGesture() {
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
-        swipeDown.direction = .down
-        self.infoView.addGestureRecognizer(swipeDown)
+    func addDraggableGesture() {
+        
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.wasDragged(gestureRecognizer:)))
+        infoView.addGestureRecognizer(gesture)
+        infoView.isUserInteractionEnabled = true
+        gesture.delegate = self
+        
     }
     
-    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
-         if gesture.direction == UISwipeGestureRecognizerDirection.down {
+    @objc func wasDragged(gestureRecognizer: UIPanGestureRecognizer) {
+        if gestureRecognizer.state == UIGestureRecognizerState.began || gestureRecognizer.state == UIGestureRecognizerState.changed {
             
-            UIView.animate(withDuration: 0.3) {
-                self.infoView.alpha = 0.0
+            if case .Down = gestureRecognizer.verticalDirection(target: view) {
+                print("Swiping down")
+                
+                let translation = gestureRecognizer.translation(in: self.view)
+                print(gestureRecognizer.view!.center.y)
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.infoView.alpha = 0.0
+                }
+                
+            } else {
+                print("Swiping up")
             }
+  
         }
     }
     
@@ -214,6 +228,7 @@ class MapDetailViewController: BaseViewController {
         if infoView == nil {
             createInfoView()
         }else {
+            
             UIView.animate(withDuration: 0.3) {
                 self.infoView.alpha = 1.0
             }
@@ -545,7 +560,7 @@ class MapDetailViewController: BaseViewController {
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapDetailViewController.infoViewPressed))
         infoView.addGestureRecognizer(tap)
         
-        addSwipeDownGesture()
+        addDraggableGesture()
     }
     
     override func didReceiveMemoryWarning() {
@@ -658,6 +673,10 @@ extension MapDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+}
+
+extension MapDetailViewController: UIGestureRecognizerDelegate {
+    
 }
 
 
