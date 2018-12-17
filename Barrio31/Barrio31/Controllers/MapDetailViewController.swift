@@ -14,6 +14,7 @@ import AVKit
 import AVFoundation
 import Kingfisher
 import Gemini
+import SDWebImage
 
 class MapDetailViewController: BaseViewController {
     
@@ -242,23 +243,30 @@ class MapDetailViewController: BaseViewController {
     }
     
     func downloadImage(from url: URL, completion: @escaping (UIImage) -> Void) {
-        print("Download Started")
-        var image = UIImage()
         
-        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
-            completion(cachedImage)
-        }
-       
-        getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
-            DispatchQueue.main.async() {
-                image = UIImage(data: data)!
-                self.imageCache.setObject(image, forKey: url.absoluteString as NSString)
-                completion(image)
+//        let cacheKey = SDWebImageManager.shared().cacheKey(for: url)
+        var finalImage = UIImage()
+        
+        print("Download Started")
+        SDWebImageManager.shared().imageCache?.queryCacheOperation(forKey: url.absoluteString, done: { (image, data, cacheType) in
+            if (image != nil) {
+                completion(image!)
+            } else {
+                
+                self.getData(from: url) { data, response, error in
+                    guard let data = data, error == nil else { return }
+                    print(response?.suggestedFilename ?? url.lastPathComponent)
+                    print("Download Finished")
+                    DispatchQueue.main.async() {
+                        finalImage = UIImage(data: data)!
+                        SDImageCache.shared().store(finalImage, forKey: url.absoluteString)
+                        completion(finalImage)
+                    }
+                }
+                
+                
             }
-        }
+        })
     }
 
     func setImagesView(completion: @escaping () -> ())  {
