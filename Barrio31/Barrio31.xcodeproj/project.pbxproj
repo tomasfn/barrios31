@@ -55,6 +55,7 @@
 		8AB35FEF219F11BB00E4394D /* Street.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FEE219F11BB00E4394D /* Street.swift */; };
 		8AB35FF2219F272600E4394D /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FF1219F272600E4394D /* PaddingLabel.swift */; };
 		8AD5466421C2CF42003D2C70 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5466321C2CF42003D2C70 /* UIImageView+Extensions.swift */; };
+		8AE8337D21C815BB00D9BA71 /* CachingPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8337C21C815BB00D9BA71 /* CachingPlayerItem.swift */; };
 		B9631DB48E780CD0E206A39A /* Pods_Barrio31.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87925E620ED962C1D59629D4 /* Pods_Barrio31.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		8AB35FEE219F11BB00E4394D /* Street.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
 		8AB35FF1219F272600E4394D /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		8AD5466321C2CF42003D2C70 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		8AE8337C21C815BB00D9BA71 /* CachingPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingPlayerItem.swift; sourceTree = "<group>"; };
 		A5F59669DBE4A55B921151E8 /* Pods-Barrio31.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.release.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.release.xcconfig"; sourceTree = "<group>"; };
 		FAD8B302D123058E3BA65FD7 /* Pods-Barrio31.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +131,7 @@
 		45151C2A212DE0EE00222656 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8AE8337B21C815A600D9BA71 /* CachingItemPlayer */,
 				45151C37212DF65000222656 /* EVExtensions.swift */,
 				45151C38212DF65000222656 /* NibLoadableView.swift */,
 				45151C39212DF65000222656 /* ReusableView.swift */,
@@ -328,6 +331,14 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		8AE8337B21C815A600D9BA71 /* CachingItemPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				8AE8337C21C815BB00D9BA71 /* CachingPlayerItem.swift */,
+			);
+			path = CachingItemPlayer;
+			sourceTree = "<group>";
+		};
 		D99365C1C434852C7CE705F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +522,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AE8337D21C815BB00D9BA71 /* CachingPlayerItem.swift in Sources */,
 				45151C3A212DF65100222656 /* EVExtensions.swift in Sources */,
 				8AB35FE2219F08F500E4394D /* Protocols.swift in Sources */,
 				45151C3C212DF65100222656 /* ReusableView.swift in Sources */,

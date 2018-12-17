@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import SDWebImage
 
 class MenuViewController: BaseViewController {
   
@@ -71,13 +72,14 @@ class MenuViewController: BaseViewController {
     }
     
     @objc func switchChanged(_ sender : UISwitch!){
-        SVProgressHUD.show()
         
-        //DOWNLOAD LOCAL DATA HERE if its ON
-        print("table row switch Changed \(sender.tag)")
-        print("The switch is \(sender.isOn ? "ON" : "OFF")")
-        
-        SVProgressHUD.dismiss()
+        if sender.isOn {
+            SDImageCache.shared().config.shouldCacheImagesInMemory = true
+        } else {
+            SDImageCache.shared().clearMemory()
+            SDImageCache.shared().clearDisk()
+            SDImageCache.shared().config.shouldCacheImagesInMemory = false
+        }        
     }
   
   override func didReceiveMemoryWarning() {

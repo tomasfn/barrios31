@@ -145,9 +145,10 @@ class MapDetailViewController: BaseViewController {
             return
         }
         
-        let asset = AVAsset(url: url)
-        let item = AVPlayerItem(asset: asset)
-        player = AVPlayer(playerItem: item)
+//        let asset = AVAsset(url: url)
+        
+        let playerItem = CachingPlayerItem(url: url)
+        player = AVPlayer(playerItem: playerItem)
         
         let controller = AVPlayerViewController()
         controller.player = player
@@ -200,9 +201,9 @@ class MapDetailViewController: BaseViewController {
     @objc func videoPressed() {
         if let videoURL =  detail.videoUrl {
             let urlString = videoURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-            downloadVideo(url: urlString!)
-//            playVideUrl(url: "http://barrio31.candoit.com.ar/api/multimedia/video-download/1470/4a243ac6-a63d-441f-a609-0dbddc919ea0_this.mp4.mp4?access_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.F0jfyuausMz2uHyzVWaXDExMGQfcgMAZRn-wVv540zCVlknYjSjg3fAatsru9HVOL7xiqpZcUB4eHQjlSIWpUw")
+//            downloadVideo(url: urlString!)
 
+            playVideUrl(url: urlString!)
         }
         else {
             SVProgressHUD.showError(withStatus: "No hay video disponible")
