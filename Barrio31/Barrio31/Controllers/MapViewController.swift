@@ -45,7 +45,9 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         // Do any additional setup after loading the view, typically from a nib.
         setupViews()
         setUpAppearance()
+        
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -96,22 +98,29 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
             mapView.anchor(view.topAnchor, leading: view.leadingAnchor, bottom:view.bottomAnchor, trailing: view.trailingAnchor , padding: .init(top: 80, left: 0, bottom: 0, right: 0))
         }
         addMenuButton()
+        
         let flowLayout = UICollectionViewFlowLayout()
         collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         flowLayout.scrollDirection = .horizontal
         flowLayout.estimatedItemSize = .init(100, 80)
         flowLayout.minimumInteritemSpacing = 0
+        
+        
+        // minimumLineSpacing para los items debajo
         flowLayout.minimumLineSpacing = 0
         flowLayout.sectionInset = UIEdgeInsetsMake(0.0, 0.0,00,0);
         self.view.addSubview(collectionView)
+        
         if #available(iOS 11.0, *) {
             collectionView.anchor(view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom:mapView.topAnchor, trailing: view.trailingAnchor)
         } else {
             // Fallback on earlier versions
             collectionView.anchor(view.topAnchor, leading: view.leadingAnchor, bottom:mapView.topAnchor, trailing: view.trailingAnchor)
         }
+       
         collectionView.backgroundColor = UIColor.white
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "collectionCell")
@@ -126,6 +135,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         infoView.backgroundColor = UIColor.white
         self.view.addSubview(infoView)
         infoView.anchor(nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 10, bottom: -20 , right: 10), size: .init(350, 95))
+        
         infoView.alpha = 0.0
         
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapViewController.infoViewPressed))

@@ -34,9 +34,10 @@ class MapDetailViewController: BaseViewController {
     var infoButton : UIButton!
     var videoButton : UIButton!
     var infoView : UIView!
-    
+   
     var pageControl : UIPageControl!
-    
+   
+    var videoView : UIView!
     var controller: AVPlayerViewController!
     var player: AVPlayer!
     
@@ -94,6 +95,7 @@ class MapDetailViewController: BaseViewController {
         videoButton.titleLabel?.font =  UIFont.chalet(fontSize: 16)
         videoButton.setImage(#imageLiteral(resourceName: "ic-video"), for: .normal)
         videoButton.imageEdgeInsets = .init(top: 0, left: -40, bottom: 0, right: 0)
+       
         bottomView.addSubview(videoButton)
         videoButton.addTarget(self, action: #selector(MapDetailViewController.videoPressed), for: .touchUpInside)
         videoButton.anchor(bottomView.topAnchor, leading: infoButton.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/2, 60))
@@ -125,53 +127,130 @@ class MapDetailViewController: BaseViewController {
     }
     
     func addDraggableGesture() {
-        
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.wasDragged(gestureRecognizer:)))
         infoView.addGestureRecognizer(gesture)
         infoView.isUserInteractionEnabled = true
         gesture.delegate = self
-        
     }
+    
+    func addVideoDraggableGesture(){
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector (self.videoWasDragged(gestureRecognizer:)))
+        self.videoView.addGestureRecognizer(gesture)
+        videoView.isUserInteractionEnabled = true
+        dismissViewController()
+        gesture.delegate = self
+    }
+    
     
     @objc func wasDragged(gestureRecognizer: UIPanGestureRecognizer) {
         if gestureRecognizer.state == UIGestureRecognizerState.began || gestureRecognizer.state == UIGestureRecognizerState.changed {
-            
-            if case .Down = gestureRecognizer.verticalDirection(target: view) {
-                print("Swiping down")
-                
+            if case .Down = gestureRecognizer.verticalDirection(target: self.view) {
+                print("Swiping info down")
                 let translation = gestureRecognizer.translation(in: self.view)
                 print(gestureRecognizer.view!.center.y)
-                
-                UIView.animate(withDuration: 0.3) {
+                dismiss(animated: true, completion: nil)
+                UIView.animate(withDuration: 0.3){
                     self.infoView.alpha = 0.0
+                    print("info dismiss")
                 }
-                
-            } else {
-                print("Swiping up")
             }
-  
         }
     }
     
-    func playVideUrl(url: String) {
-        
-        guard let url = URL(string: url)  else {
+    @objc func videoWasDragged(gestureRecognizer: UIPanGestureRecognizer){
+        if gestureRecognizer.state == UIGestureRecognizerState.began || gestureRecognizer.state == UIGestureRecognizerState.changed {
+            if case .Down = gestureRecognizer.verticalDirection(target: self.view) {
+                print("Swiping Video down")
+                let translation = gestureRecognizer.translation(in: self.view)
+                print(gestureRecognizer.view!.center.y)
+                dismiss(animated: true, completion: nil)
+                UIView.animate(withDuration: 0.3) {
+                    self.player.pause()
+                    self.videoView.alpha = 0.0
+                    print("video dismiss")
+                }
+            }
+        }
+    }
+    
+    
+    enum UIUserInterfaceIdiom : Int{
+        case unespecified
+        case phone
+        case pad
+    }
+    
+    @IBAction func dismissButtonAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func createVideoView(url: String){
+        guard let url = URL(string: url) else{
             return
         }
         
-//        let asset = AVAsset(url: url)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            
+            videoView = UIView()
+            self.view.addSubview(videoView)
+            videoView.backgroundColor = UIColor.init(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
+            videoView.layer.cornerRadius = 8.0
+            videoView.clipsToBounds = true
+            
+            
+            //******** VIDEO SIZE NUEVO *********
+            videoView.anchor(view.topAnchor, leading: view.centerXAnchor , bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 15, left: -40, bottom: -20, right: -15))
+            
+            let playerItem = CachingPlayerItem(url: url)
+            player = AVPlayer(playerItem: playerItem)
+            let controller = AVPlayerViewController()
+            controller.player = player
+            self.addChildViewController(controller)
+            videoView.addSubview(controller.view)
+//            self.view.addSubview(controller.view)
+            //        controller.view.frame = self.view.frame
+            
+            controller.player = player
+            controller.didMove(toParentViewController: self)
+            
+            //**************** FrameSize ***********************
+            controller.view.anchor(videoView.topAnchor, leading: videoView.leadingAnchor, bottom: videoView.bottomAnchor, trailing: videoView.trailingAnchor, padding: .init(top: 10, left:10, bottom: -15, right: -10))
+            player.play()
+            
+            addVideoDraggableGesture()
+        }
         
-        let playerItem = CachingPlayerItem(url: url)
-        player = AVPlayer(playerItem: playerItem)
-        
-        controller = AVPlayerViewController()
-        controller.player = player
-        self.addChildViewController(controller)
-        self.view.addSubview(controller.view)
-        controller.view.frame = self.view.frame
-        
-        player.play()
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            videoView = UIView()
+            self.view.addSubview(videoView)
+            videoView.backgroundColor = UIColor.init(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
+            videoView.layer.cornerRadius = 8.0
+            videoView.clipsToBounds = true
+
+            //******** VIDEO SIZE NUEVO *********
+            videoView.anchor(view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 15, left: 15, bottom: -20, right: -15), size: .init(0,0))
+         
+            let playerItem = CachingPlayerItem(url: url)
+            player = AVPlayer(playerItem: playerItem)
+            
+            let controller = AVPlayerViewController()
+            controller.player = player
+
+            self.addChildViewController(controller)
+            videoView.addSubview(controller.view)
+            
+
+            controller.player = player
+            controller.didMove(toParentViewController: self)
+            
+            //**************** FrameSize ***********************
+            controller.view.anchor(videoView.topAnchor, leading: videoView.leadingAnchor, bottom: videoView.bottomAnchor, trailing: videoView.trailingAnchor, padding: .init(top: 10, left: 10, bottom: -15, right: -10))
+            player.play()
+            addVideoDraggableGesture()
+        }
+        addVideoDraggableGesture()
     }
+
     
     func downloadVideo(url: String){
         
@@ -212,21 +291,45 @@ class MapDetailViewController: BaseViewController {
         }
     }
     
+    // OBJECT ORIGINAL!!
+    
+//    @objc func videoPressed() {
+//        if let videoURL =  detail.videoUrl {
+//            let urlString = videoURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+////            downloadVideo(url: urlString!)
+//
+//            playVideUrl(url: urlString!)
+//        }
+//        else {
+//            SVProgressHUD.showError(withStatus: "No hay video disponible")
+//        }
+//    }
+    
+    // Video View
     @objc func videoPressed() {
-        if let videoURL =  detail.videoUrl {
-            let urlString = videoURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-//            downloadVideo(url: urlString!)
-
-            playVideUrl(url: urlString!)
-        }
-        else {
-            SVProgressHUD.showError(withStatus: "No hay video disponible")
+        if videoView == nil{
+            if let videoURL =  detail.videoUrl {
+                let urlString = videoURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+                //            downloadVideo(url: urlString!)
+            
+                createVideoView(url: urlString!)
+//                playVideUrl(url: urlString!)
+            }
+            else {
+                SVProgressHUD.showError(withStatus: "No hay video disponible")
+            }
+        }else{
+            UIView.animate(withDuration: 0.3) {
+                self.videoView.alpha = 1.0
+            }
         }
     }
     
+    // Info View
     @objc func infoPressed() {
         if infoView == nil {
             createInfoView()
+            SVProgressHUD.showError(withStatus: "No hay info disponible")
         }else {
             
             UIView.animate(withDuration: 0.3) {
@@ -279,8 +382,6 @@ class MapDetailViewController: BaseViewController {
                         completion(finalImage)
                     }
                 }
-                
-                
             }
         })
     }
@@ -394,22 +495,36 @@ class MapDetailViewController: BaseViewController {
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch? = touches.first
-        
-        if controller == nil {
-            if touch?.view != infoView {
-                infoView.isHidden = true
-            }
-        }
-    }
-    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        let touch: UITouch? = touches.first
+//
+//        if controller != nil {
+//            if touch?.view != infoView {
+//                infoView.isHidden = true
+//            }
+//
+//            if touch?.view != controller {
+//                if #available(iOS 11.0, *) {
+//                    controller.exitsFullScreenWhenPlaybackEnds = true
+//                } else {
+//                    // Fallback on earlier versions
+//                    print("you have an older version")
+//                }
+//            }
+//        }
+//    }
+//
     
     func createInfoView() {
         infoView = UIView()
         self.view.addSubview(infoView)
         infoView.backgroundColor = UIColor.white
-        infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: -80, left: 10.0, bottom: -10.0, right: -10.0))
+        
+        // ******************* INFOSIZE *********************
+        infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: nil, padding: .init(top: -150, left: 10, bottom: -15, right: -10), size: .init(350, 0))
+
+        //****************** old infosize *******************
+        //infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: -80, left: 10.0, bottom: -10.0, right: -10.0))
         
         let imgView = UIImageView()
         imgView.image = CategoryHelper.setImagePatternForCategory(categorySlug: detail.categorySlug!)
@@ -453,6 +568,7 @@ class MapDetailViewController: BaseViewController {
         descriptionLabel.sizeToFit()
         
         imgView.clipsToBounds = true
+        
         imgView.anchor(infoView.topAnchor, leading: infoView.leadingAnchor, bottom: descriptionLabel.bottomAnchor, trailing: infoView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 10.0, right: 0))
         
         let dateImgView = UIImageView()
@@ -551,9 +667,9 @@ class MapDetailViewController: BaseViewController {
         m2LabelTextLabel.textColor = UIColor.black
         m2LabelTextLabel.textAlignment = .left
         m2LabelTextLabel.font = UIFont.MontserratSemiBold(fontSize: 16)
-        m2LabelTextLabel.numberOfLines = 2
+        m2LabelTextLabel.numberOfLines = 0
         infoView.addSubview(m2LabelTextLabel)
-        m2LabelTextLabel.anchor(m2Label.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: -5, left: 10, bottom: 20, right: -10) ,size: .init(width: 0, height: 34))
+        m2LabelTextLabel.anchor(m2Label.bottomAnchor, leading: infoView.leadingAnchor, bottom: nil, trailing: infoView.trailingAnchor, padding: .init(top: -5, left: 10, bottom: 20, right: -10) ,size: .init(width: 0, height: 60))
         
         
         infoView.setCellShadow()

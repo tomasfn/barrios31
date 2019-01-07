@@ -33,6 +33,7 @@
 		45CB1079214ADF2900E856E2 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CB1075214ADF2900E856E2 /* Montserrat-SemiBold.ttf */; };
 		45CF59102136E3FE00E2A858 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF590F2136E3FE00E2A858 /* Models.swift */; };
 		45D2D6702189F8F100638440 /* DisfrutaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D2D66F2189F8F100638440 /* DisfrutaTableViewCell.swift */; };
+		45E3EAF521DCF4DF00AF2F49 /* video.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E3EAF421DCF4DE00AF2F49 /* video.xib */; };
 		45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F23A1921359B7500F22C1C /* Main.storyboard */; };
 		45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F23A1D2135D9D400F22C1C /* APIManager.swift */; };
 		8A2C728621AF4E86000FF24C /* NavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C728521AF4E86000FF24C /* NavigationHelper.swift */; };
@@ -88,6 +89,7 @@
 		45CB1075214ADF2900E856E2 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		45CF590F2136E3FE00E2A858 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		45D2D66F2189F8F100638440 /* DisfrutaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisfrutaTableViewCell.swift; sourceTree = "<group>"; };
+		45E3EAF421DCF4DE00AF2F49 /* video.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = video.xib; sourceTree = "<group>"; };
 		45F23A1A21359B7500F22C1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45F23A1D2135D9D400F22C1C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		87925E620ED962C1D59629D4 /* Pods_Barrio31.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Barrio31.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +203,7 @@
 				45CB1071214ADDB000E856E2 /* Resources */,
 				4542CCEC212C4FE400EE5D3F /* Assets.xcassets */,
 				4542CCEE212C4FE400EE5D3F /* LaunchScreen.storyboard */,
+				45E3EAF421DCF4DE00AF2F49 /* video.xib */,
 				45F23A1921359B7500F22C1C /* Main.storyboard */,
 				4542CCF1212C4FE400EE5D3F /* Info.plist */,
 			);
@@ -421,6 +424,7 @@
 				45CB1077214ADF2900E856E2 /* Chalet NewYorkNineteenEighty.otf in Resources */,
 				8A2DE8FF21AC645B00D78161 /* ConoceTableViewCell.xib in Resources */,
 				45CB1076214ADF2900E856E2 /* Montserrat-Bold.ttf in Resources */,
+				45E3EAF521DCF4DF00AF2F49 /* video.xib in Resources */,
 				45CB1079214ADF2900E856E2 /* Montserrat-SemiBold.ttf in Resources */,
 				45F23A1B21359B7500F22C1C /* Main.storyboard in Resources */,
 				4542CCF0212C4FE400EE5D3F /* LaunchScreen.storyboard in Resources */,

@@ -16,6 +16,7 @@ class BaseViewController: UIViewController {
     get { return super.title }
     set { super.title = newValue }
   }
+    
   
   override func viewDidLoad() {
     super.viewDidLoad()
