@@ -329,7 +329,6 @@ class MapDetailViewController: BaseViewController {
     @objc func infoPressed() {
         if infoView == nil {
             createInfoView()
-            SVProgressHUD.showError(withStatus: "No hay info disponible")
         }else {
             
             UIView.animate(withDuration: 0.3) {
