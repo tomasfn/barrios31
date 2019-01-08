@@ -19,7 +19,7 @@ typealias AlamofireCompletionBlock = (AnyObject?, NSError?) -> Void
 
 
 public let accessToken = "?access_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.F0jfyuausMz2uHyzVWaXDExMGQfcgMAZRn-wVv540zCVlknYjSjg3fAatsru9HVOL7xiqpZcUB4eHQjlSIWpUw"//"http://64.251.25.64:8083/api" //
-public let apiServer = "http://barrio31-test.candoit.com.ar/api/"//"http://64.251.25.64:8083/api" //
+public let apiServer = "http://barrio31.candoit.com.ar/api/"//"http://64.251.25.64:8083/api" //
 private var mainHeader = ["Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.F0jfyuausMz2uHyzVWaXDExMGQfcgMAZRn-wVv540zCVlknYjSjg3fAatsru9HVOL7xiqpZcUB4eHQjlSIWpUw"]
 private let acceptedContentTypes = ["audio/mp3", "audio/mpeg", "image/png", "image/jpeg", "application/json", "text/html"]
 
@@ -28,7 +28,7 @@ class APIManager: NSObject {
   
   // MARK: REcorre services
   
-  class func getCategorys(completionBlock: @escaping CategorysCompletionBlock) {
+  class func getRecorreCategorys(completionBlock: @escaping CategorysCompletionBlock) {
     let url = apiServer + "recorre/categorias"
     Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
       if let data = response.data, response.error == nil {
@@ -44,6 +44,23 @@ class APIManager: NSObject {
       }
     }
   }
+    
+    class func getDisfrutaCategorys(completionBlock: @escaping CategorysCompletionBlock) {
+        let url = apiServer + "disfruta/categorias"
+        Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+            if let data = response.data, response.error == nil {
+                do {
+                    let response = try JSONDecoder().decode([Category].self, from: data)
+                    completionBlock(response, nil)
+                } catch {
+                    completionBlock(nil, ErrorManager.serverError())
+                }
+            }
+            else {
+                completionBlock(nil, ErrorManager.serverError())
+            }
+        }
+    }
   
   class func getPolygons(completionBlock: @escaping PolygonsCompletionBlock) {
     let url = apiServer + "recorre"
