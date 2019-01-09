@@ -23,7 +23,8 @@ class DisfrutaViewController: BaseViewController {
   var details = [DisfrutaDetail]()
   var currentDetail : DisfrutaDetail?
 
-  
+var lastInfoViewId: Int!
+
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView = UITableView()
@@ -75,12 +76,86 @@ class DisfrutaViewController: BaseViewController {
     let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapViewController.infoViewPressed))
     infoView.addGestureRecognizer(tap)
     
+    //add gesture to infoview to closes itself
+    
+    let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.wasDragged(gestureRecognizer:)))
+    infoView.addGestureRecognizer(gesture)
+    infoView.isUserInteractionEnabled = true
+    gesture.delegate = self
+    
     tableView.register(DisfrutaTableViewCell.self, forCellReuseIdentifier: "cell")
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 140
     tableView.separatorStyle = .none
     
+//    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.tapOnMap(sender:)))
+//    tapGesture.numberOfTapsRequired = 1
+//    tapGesture.numberOfTouchesRequired = 1
+//    self.mapView.addGestureRecognizer(tapGesture)
+    
   }
+    
+    @objc func wasDragged(gestureRecognizer: UIPanGestureRecognizer) {
+        if gestureRecognizer.state == UIGestureRecognizerState.began || gestureRecognizer.state == UIGestureRecognizerState.changed {
+            if case .Down = gestureRecognizer.verticalDirection(target: self.view) {
+                print("Swiping info down")
+                let translation = gestureRecognizer.translation(in: self.view)
+                print(gestureRecognizer.view!.center.y)
+                dismiss(animated: true, completion: nil)
+                UIView.animate(withDuration: 0.3){
+                    self.infoView.alpha = 0.0
+                    print("info dismiss")
+                }
+            }
+        }
+    }
+    
+    @objc func tapOnMap(sender: UITapGestureRecognizer) {
+        //if sender.state != UIGestureRecognizerState.Began { return }
+        let touchLocation = sender.location(in: mapView)
+        let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
+        
+        let point = MKMapPointForCoordinate(locationCoordinate)
+        let mapRect = MKMapRectMake(point.x, point.y, 0, 0);
+        
+//        for item in items as! [B31Polyline] {
+//
+//            if polygon.intersects(mapRect) {//Touch in polygon
+//
+//                infoView.category = polygon.category
+//
+//                selectedPol = B31Polyline(coordinates: (polygon.polygon?.coordinates)!, count: polygon.polygon!.coordinates.count)
+//                selectedPol.color = polygon.category?.getColor()
+//                selectedPol.category = polygon.category
+//                selectedPol.polygon = polygon.polygon
+//
+//                self.mapView.add(selectedPol)
+//
+//                if let det = polygonsDetails.first(where: {$0.id == polygon.polygon?.id}) {
+//                    infoView.detail = det
+//                }
+//
+//                UIView.animate(withDuration: 0.3) {
+//                    self.infoView.alpha = 1
+//
+//                    if self.infoView.disfrutaDetail.id != self.lastInfoViewId {
+//                        self.infoView.center.y -= self.infoView.frame.height
+//                    }
+//
+//                }
+//
+//                lastInfoViewId = polygon.polygon?.id
+//
+//                return
+//            }
+//            else {
+//
+//                UIView.animate(withDuration: 0.3) {
+//                    self.infoView.alpha = 0.0
+//                }
+//            }
+//        }
+    }
   
   func setUpAppearance() {
     let mainColor = UIColor.hexStringToUIColor(hex: "#de316a")
@@ -91,6 +166,7 @@ class DisfrutaViewController: BaseViewController {
                                NSAttributedStringKey.font : UIFont.chalet(fontSize: 17)]
     UINavigationBar.appearance().titleTextAttributes  = titleTextAttributes
   }
+    
   
   @objc func mapButtonpressed () {
     if mapButton.isSelected == false {
@@ -210,9 +286,29 @@ extension DisfrutaViewController : MKMapViewDelegate {
     if let ann = view as? CustomPointAnnotationView {
       print("Seleccionó \(String(describing: ann.item?.name))")
       infoView.disfrutaDetail = ann.item
-      infoView.alpha = 1.0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.infoView.alpha = 1
+            
+            if self.infoView.disfrutaDetail.id != self.lastInfoViewId {
+                self.infoView.center.y -= self.infoView.frame.height
+            }
+        }
+        
+        lastInfoViewId = infoView.disfrutaDetail.id
     }
   }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        if let ann = view as? CustomPointAnnotationView {
+            print("Deseleccionó \(String(describing: ann.item?.name))")
+            
+            UIView.animate(withDuration: 0.3) {
+                self.infoView.alpha = 0
+            }
+
+        }
+    }
 }
 
 class CustomPointAnnotationView:  MKAnnotationView {
@@ -243,6 +339,10 @@ class DisfrutaAnnotation: NSObject, MKAnnotation {
   }
 }
 
+
+extension DisfrutaViewController: UIGestureRecognizerDelegate {
+    
+}
 
 
 

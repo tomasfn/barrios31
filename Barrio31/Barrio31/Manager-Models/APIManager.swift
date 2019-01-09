@@ -28,7 +28,7 @@ class APIManager: NSObject {
   
   // MARK: REcorre services
   
-  class func getCategorys(completionBlock: @escaping CategorysCompletionBlock) {
+  class func getRecorreCategorys(completionBlock: @escaping CategorysCompletionBlock) {
     let url = apiServer + "recorre/categorias"
     Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
       if let data = response.data, response.error == nil {
@@ -44,6 +44,23 @@ class APIManager: NSObject {
       }
     }
   }
+    
+    class func getDisfrutaCategorys(completionBlock: @escaping CategorysCompletionBlock) {
+        let url = apiServer + "disfruta/categorias"
+        Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+            if let data = response.data, response.error == nil {
+                do {
+                    let response = try JSONDecoder().decode([Category].self, from: data)
+                    completionBlock(response, nil)
+                } catch {
+                    completionBlock(nil, ErrorManager.serverError())
+                }
+            }
+            else {
+                completionBlock(nil, ErrorManager.serverError())
+            }
+        }
+    }
   
   class func getPolygons(completionBlock: @escaping PolygonsCompletionBlock) {
     let url = apiServer + "recorre"

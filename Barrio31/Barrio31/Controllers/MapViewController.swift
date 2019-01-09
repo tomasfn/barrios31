@@ -157,7 +157,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     
     func loadData() {
         SVProgressHUD.show()
-        APIManager.getCategorys { (cats, error) in
+        APIManager.getRecorreCategorys { (cats, error) in
             if let _ = cats {
                 self.categorys = cats!
                 self.collectionView.reloadData()
