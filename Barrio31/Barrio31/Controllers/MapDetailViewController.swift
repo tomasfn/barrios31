@@ -188,66 +188,46 @@ class MapDetailViewController: BaseViewController {
         guard let url = URL(string: url) else{
             return
         }
+        videoView = UIView()
+        self.view.addSubview(videoView)
+        videoView.backgroundColor = UIColor.init(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
+        videoView.layer.cornerRadius = 8.0
+        videoView.clipsToBounds = true
+        
+        let playerItem = CachingPlayerItem(url: url)
+        player = AVPlayer(playerItem: playerItem)
+        let controller = AVPlayerViewController()
+        controller.player = player
+        self.addChildViewController(controller)
+        videoView.addSubview(controller.view)
+        //            self.view.addSubview(controller.view)
+        //        controller.view.frame = self.view.frame
+        
+        controller.player = player
+        controller.didMove(toParentViewController: self)
+        
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             
-            videoView = UIView()
-            self.view.addSubview(videoView)
-            videoView.backgroundColor = UIColor.init(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
-            videoView.layer.cornerRadius = 8.0
-            videoView.clipsToBounds = true
-            
-            
             //******** VIDEO SIZE NUEVO *********
             videoView.anchor(view.topAnchor, leading: view.centerXAnchor , bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 15, left: -40, bottom: -20, right: -15))
-            
-            let playerItem = CachingPlayerItem(url: url)
-            player = AVPlayer(playerItem: playerItem)
-            let controller = AVPlayerViewController()
-            controller.player = player
-            self.addChildViewController(controller)
-            videoView.addSubview(controller.view)
-//            self.view.addSubview(controller.view)
-            //        controller.view.frame = self.view.frame
-            
-            controller.player = player
-            controller.didMove(toParentViewController: self)
             
             //**************** FrameSize ***********************
             controller.view.anchor(videoView.topAnchor, leading: videoView.leadingAnchor, bottom: videoView.bottomAnchor, trailing: videoView.trailingAnchor, padding: .init(top: 10, left:10, bottom: -15, right: -10))
             player.play()
             
-            addVideoDraggableGesture()
         }
         
         if UIDevice.current.userInterfaceIdiom == .phone {
-            videoView = UIView()
-            self.view.addSubview(videoView)
-            videoView.backgroundColor = UIColor.init(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
-            videoView.layer.cornerRadius = 8.0
-            videoView.clipsToBounds = true
 
             //******** VIDEO SIZE NUEVO *********
             videoView.anchor(view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 15, left: 15, bottom: -20, right: -15), size: .init(0,0))
          
-            let playerItem = CachingPlayerItem(url: url)
-            player = AVPlayer(playerItem: playerItem)
-            
-            let controller = AVPlayerViewController()
-            controller.player = player
-
-            self.addChildViewController(controller)
-            videoView.addSubview(controller.view)
-            
-
-            controller.player = player
-            controller.didMove(toParentViewController: self)
-            
             //**************** FrameSize ***********************
             controller.view.anchor(videoView.topAnchor, leading: videoView.leadingAnchor, bottom: videoView.bottomAnchor, trailing: videoView.trailingAnchor, padding: .init(top: 10, left: 10, bottom: -15, right: -10))
             player.play()
-            addVideoDraggableGesture()
         }
+
         addVideoDraggableGesture()
     }
 
@@ -515,15 +495,11 @@ class MapDetailViewController: BaseViewController {
 //
     
     func createInfoView() {
+        
         infoView = UIView()
         self.view.addSubview(infoView)
         infoView.backgroundColor = UIColor.white
         
-        // ******************* INFOSIZE *********************
-        infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: nil, padding: .init(top: -150, left: 10, bottom: -15, right: -10), size: .init(350, 0))
-
-        //****************** old infosize *******************
-        //infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: -80, left: 10.0, bottom: -10.0, right: -10.0))
         
         let imgView = UIImageView()
         imgView.image = CategoryHelper.setImagePatternForCategory(categorySlug: detail.categorySlug!)
@@ -598,7 +574,7 @@ class MapDetailViewController: BaseViewController {
         
         startAttributed.append(finishAttributed)
         dateLabel.attributedText = startAttributed
- 
+        
         dateLabel.textColor = UIColor.lightGray
         dateLabel.textAlignment = .left
         infoView.addSubview(dateLabel)
@@ -675,7 +651,21 @@ class MapDetailViewController: BaseViewController {
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapDetailViewController.infoViewPressed))
         infoView.addGestureRecognizer(tap)
         
+        
+        
+        if UIDevice.current.userInterfaceIdiom == .pad{
+            
+            // ******************* INFOSIZE *********************
+            infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: nil, padding: .init(top: -150, left: 10, bottom: -15, right: -10), size: .init(400, 0))
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .phone{
+            // ******************* INFOSIZE *********************
+            infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: -150, left: 15, bottom: -20, right: -15))
+        }
+        
         addDraggableGesture()
+        
     }
     
     override func didReceiveMemoryWarning() {

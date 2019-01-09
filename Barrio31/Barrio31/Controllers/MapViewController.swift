@@ -46,6 +46,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         setupViews()
         setUpAppearance()
         
+        
     }
     
     
@@ -134,8 +135,14 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         infoView = InfoView()
         infoView.backgroundColor = UIColor.white
         self.view.addSubview(infoView)
-        infoView.anchor(nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 10, bottom: -20 , right: 10), size: .init(350, 95))
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            infoView.anchor(nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 10, bottom: -20 , right: 10), size: .init(350, 95))
+        }
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            infoView.anchor(nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 15, bottom: -20 , right: -15), size: .init(0, 95))
+        }
+    
         infoView.alpha = 0.0
         
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(MapViewController.infoViewPressed))
