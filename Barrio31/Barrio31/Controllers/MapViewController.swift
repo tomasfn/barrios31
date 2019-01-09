@@ -45,10 +45,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         // Do any additional setup after loading the view, typically from a nib.
         setupViews()
         setUpAppearance()
-        
-        
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -108,7 +105,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         flowLayout.scrollDirection = .horizontal
         flowLayout.estimatedItemSize = .init(100, 80)
         flowLayout.minimumInteritemSpacing = 0
-        
         
         // minimumLineSpacing para los items debajo
         flowLayout.minimumLineSpacing = 0

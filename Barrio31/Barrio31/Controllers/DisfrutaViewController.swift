@@ -18,12 +18,16 @@ class DisfrutaViewController: BaseViewController {
   var listButton: UIButton!
   var infoView: DisfrutaInfoView!
 
+    var collectionView: UICollectionView!
 
   var items = [DisfrutaItem]()
   var details = [DisfrutaDetail]()
   var currentDetail : DisfrutaDetail?
 
 var lastInfoViewId: Int!
+    
+    var selectedIndexs = [Int]()
+    var categorys = [Category]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,11 +41,12 @@ var lastInfoViewId: Int!
     
     self.loadData()
     
-    mapView = MKMapView()
-    self.view.addSubview(mapView)
-    mapView.delegate = self
-    mapView.fillSuperview()
-    mapView.alpha = 1.0
+//    mapView = MKMapView()
+//    self.view.addSubview(mapView)
+//
+//    mapView.delegate = self
+//    mapView.fillSuperview()
+//    mapView.alpha = 1.0
     tableView.alpha = 0.0
     
     // Do any additional setup after loading the view.
@@ -88,12 +93,72 @@ var lastInfoViewId: Int!
     tableView.estimatedRowHeight = 140
     tableView.separatorStyle = .none
     
+    getCategories()
+    setupViews()
+    
 //    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.tapOnMap(sender:)))
 //    tapGesture.numberOfTapsRequired = 1
 //    tapGesture.numberOfTouchesRequired = 1
 //    self.mapView.addGestureRecognizer(tapGesture)
     
   }
+    
+    func setupViews () {
+        self.title = "DISFRUTA"
+        mapView = MKMapView()
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+        
+        self.view.addSubview(mapView)
+        if #available(iOS 11.0, *) {
+            mapView.anchor(view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom:view.bottomAnchor, trailing: view.trailingAnchor , padding: .init(top: 80, left: 0, bottom: 0, right: 0))
+        } else {
+            // Fallback on earlier versions
+            mapView.anchor(view.topAnchor, leading: view.leadingAnchor, bottom:view.bottomAnchor, trailing: view.trailingAnchor , padding: .init(top: 80, left: 0, bottom: 0, right: 0))
+        }
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.estimatedItemSize = .init(100, 80)
+        flowLayout.minimumInteritemSpacing = 0
+        
+        // minimumLineSpacing para los items debajo
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.sectionInset = UIEdgeInsetsMake(0.0, 0.0,00,0);
+        self.view.addSubview(collectionView)
+        
+        if #available(iOS 11.0, *) {
+            collectionView.anchor(view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom:mapView.topAnchor, trailing: view.trailingAnchor)
+        } else {
+            // Fallback on earlier versions
+            collectionView.anchor(view.topAnchor, leading: view.leadingAnchor, bottom:mapView.topAnchor, trailing: view.trailingAnchor)
+        }
+        
+        collectionView.backgroundColor = UIColor.white
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "collectionCell")
+        
+        self.view.bringSubview(toFront: infoView)
+    }
+    
+    func getCategories() {
+        SVProgressHUD.show()
+        APIManager.getDisfrutaCategorys { (cats, error) in
+            if let _ = cats {
+                self.categorys = cats!
+                self.collectionView.reloadData()
+            }
+            else {
+                //Show Error
+                SVProgressHUD.dismiss()
+                SVProgressHUD.showError(withStatus: "Error al descargar datos")
+            }
+        }
+    }
     
     @objc func wasDragged(gestureRecognizer: UIPanGestureRecognizer) {
         if gestureRecognizer.state == UIGestureRecognizerState.began || gestureRecognizer.state == UIGestureRecognizerState.changed {
@@ -174,7 +239,7 @@ var lastInfoViewId: Int!
       listButton.isSelected = false
       mapView.alpha = 1.0
       tableView.alpha = 0.0
-
+        collectionView.alpha = 1.0
     }
   }
   
@@ -185,6 +250,7 @@ var lastInfoViewId: Int!
       mapView.alpha = 0.0
       tableView.alpha = 1.0
       infoView.alpha = 0.0
+        collectionView.alpha = 0.0
     }
   }
   
@@ -346,4 +412,32 @@ extension DisfrutaViewController: UIGestureRecognizerDelegate {
 
 
 
+extension DisfrutaViewController: UICollectionViewDataSource , UICollectionViewDelegate {
+    
+    //MARK: CollectionView Methods
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        return self.categorys.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath ) as! CategoryCell
+        let item = categorys[indexPath.item]
+        cell.isPressed = selectedIndexs.contains(indexPath.item)
+        cell.item = item
+        
+        return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if selectedIndexs.contains(indexPath.item) {
+            selectedIndexs.removeObject(indexPath.item)
+        }else {
+            selectedIndexs.append(indexPath.item)
+        }
+
+        collectionView.reloadData()
+    }    
+}
 
