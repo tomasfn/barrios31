@@ -16,6 +16,8 @@ class DisfrutaItem: Object {
     
     @objc dynamic var id: Int = -1
     @objc dynamic var color : String?
+    @objc dynamic var name : String?
+    @objc dynamic var address : String?
     @objc dynamic var category : String?
     var coordinate :CLLocationCoordinate2D?
     
@@ -25,6 +27,12 @@ class DisfrutaItem: Object {
         if let properties = JSON["properties"] as? Dictionary<String, AnyObject> {
             if let idOK = properties["id"] as? Int {
                 id = idOK
+            }
+            if let nameOk = properties["name"] as? String {
+                name = nameOk
+            }
+            if let addressOk = properties["address"] as? String {
+                address = addressOk
             }
             if let categoryNameOK = properties["category"] as? String {
                 category = categoryNameOK
@@ -64,6 +72,7 @@ extension DisfrutaItem: StandaloneCopiable {
         let standaloneDisfrutaItem = DisfrutaItem()
         standaloneDisfrutaItem.id = id
         standaloneDisfrutaItem.category = category
+        standaloneDisfrutaItem.name = name
         standaloneDisfrutaItem.color = color
         standaloneDisfrutaItem.coordinate = coordinate
         

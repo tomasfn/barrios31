@@ -18,6 +18,13 @@ class ConoceViewController: BaseViewController {
     var floatingLbl: UILabel!
     
     private var conoceItems = [ConoceItem] ()
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.title = ""
+        
+        sideMenuController?.cache(viewController: navigationController!, with: "conoceViewController")
+    }
  
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -19,7 +19,7 @@ typealias AlamofireCompletionBlock = (AnyObject?, NSError?) -> Void
 
 
 public let accessToken = "?access_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.F0jfyuausMz2uHyzVWaXDExMGQfcgMAZRn-wVv540zCVlknYjSjg3fAatsru9HVOL7xiqpZcUB4eHQjlSIWpUw"//"http://64.251.25.64:8083/api" //
-public let apiServer = "http://barrio31.candoit.com.ar/api/"//"http://64.251.25.64:8083/api" //
+public let apiServer = "http://barrio31-test.candoit.com.ar/api/"//"http://64.251.25.64:8083/api" //
 private var mainHeader = ["Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.F0jfyuausMz2uHyzVWaXDExMGQfcgMAZRn-wVv540zCVlknYjSjg3fAatsru9HVOL7xiqpZcUB4eHQjlSIWpUw"]
 private let acceptedContentTypes = ["audio/mp3", "audio/mpeg", "image/png", "image/jpeg", "application/json", "text/html"]
 

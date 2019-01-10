@@ -27,8 +27,7 @@ class MenuViewController: BaseViewController {
     tableView.estimatedRowHeight = 70.0
     tableView.rowHeight = 70.0
     tableView.separatorStyle = .none
-    
-    
+
     let barButton = UIBarButtonItem.init(title: "BA Integración", style: .plain, target: self, action: #selector(MenuViewController.menuPressed))
     let titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.black,
                                NSAttributedStringKey.font : UIFont.chalet(fontSize: 17)]
@@ -70,7 +69,6 @@ class MenuViewController: BaseViewController {
         customView.addSubview(label)
         
         tableView.tableFooterView = customView
-        
     }
     
     @objc func switchChanged(_ sender : UISwitch!){

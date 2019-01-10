@@ -103,6 +103,13 @@ var lastInfoViewId: Int!
     
   }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.title = ""
+        
+        sideMenuController?.cache(viewController: navigationController!, with: "disfrutaViewController")
+    }
+    
     func setupViews () {
         self.title = "DISFRUTA"
         mapView = MKMapView()
@@ -281,7 +288,7 @@ var lastInfoViewId: Int!
           if self.details.count == self.items.count , counter == 0 {
             SVProgressHUD.dismiss()
             self.tableView.reloadData()
-            self.addPins()
+            //self.addPins()
           }
           else {
             if counter != 0 {
@@ -311,6 +318,30 @@ var lastInfoViewId: Int!
     mapView.showAnnotations(mapView.annotations, animated: true)
     
   }
+    
+    func addFilteredPins() {
+        removeMapAnnotations()
+        for index in selectedIndexs {
+            let category = categorys [index]
+            for item in items {
+                if item.category == category.slug {
+                    if let coord = item.coordinate {
+                        if let det = details.first(where: { ($0.id == item.id)}) {
+                            let ann = DisfrutaAnnotation.init(coordinate: coord, title: item.category!, subtitle: "", item: det)
+                            mapView.addAnnotation(ann)
+                        }
+                    }
+                }
+            }
+            
+           // mapView.showAnnotations(mapView.annotations, animated: true)
+        }
+    }
+    
+    func removeMapAnnotations() {
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+    }
   
   @objc func infoViewPressed () {
     //print("infoViewPressed")
@@ -429,14 +460,20 @@ extension DisfrutaViewController: UICollectionViewDataSource , UICollectionViewD
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("deselection")
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         if selectedIndexs.contains(indexPath.item) {
             selectedIndexs.removeObject(indexPath.item)
         }else {
             selectedIndexs.append(indexPath.item)
         }
-
+        
+        addFilteredPins()
+        
         collectionView.reloadData()
     }    
 }
