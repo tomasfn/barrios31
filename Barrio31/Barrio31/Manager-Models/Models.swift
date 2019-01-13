@@ -272,17 +272,17 @@ struct Category : Decodable {
 //  }
 //}
 
-struct DisfrutaDetail : Decodable {
-  var name : String?
-  var id : Int?
-  var shortDescription : String?
-  var longDescription : String?
-  var started : String?
-  var ended : String?
-  var price : String?
-  var scheduled : String?
-  var imageLink : String?
-  var imageIpadLink : String?
-  var imageSmartphoneLink : String?
-  var imagesCarousel : [String]?
-}
+//struct DisfrutaDetail : Decodable {
+//  var name : String?
+//  var id : Int?
+//  var shortDescription : String?
+//  var longDescription : String?
+//  var started : String?
+//  var ended : String?
+//  var price : String?
+//  var scheduled : String?
+//  var imageLink : String?
+//  var imageIpadLink : String?
+//  var imageSmartphoneLink : String?
+//  var imagesCarousel : [String]?
+//}

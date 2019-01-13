@@ -96,11 +96,6 @@ var lastInfoViewId: Int!
     getCategories()
     setupViews()
     
-//    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.tapOnMap(sender:)))
-//    tapGesture.numberOfTapsRequired = 1
-//    tapGesture.numberOfTouchesRequired = 1
-//    self.mapView.addGestureRecognizer(tapGesture)
-    
   }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -181,53 +176,6 @@ var lastInfoViewId: Int!
             }
         }
     }
-    
-    @objc func tapOnMap(sender: UITapGestureRecognizer) {
-        //if sender.state != UIGestureRecognizerState.Began { return }
-        let touchLocation = sender.location(in: mapView)
-        let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
-        
-        let point = MKMapPointForCoordinate(locationCoordinate)
-        let mapRect = MKMapRectMake(point.x, point.y, 0, 0);
-        
-//        for item in items as! [B31Polyline] {
-//
-//            if polygon.intersects(mapRect) {//Touch in polygon
-//
-//                infoView.category = polygon.category
-//
-//                selectedPol = B31Polyline(coordinates: (polygon.polygon?.coordinates)!, count: polygon.polygon!.coordinates.count)
-//                selectedPol.color = polygon.category?.getColor()
-//                selectedPol.category = polygon.category
-//                selectedPol.polygon = polygon.polygon
-//
-//                self.mapView.add(selectedPol)
-//
-//                if let det = polygonsDetails.first(where: {$0.id == polygon.polygon?.id}) {
-//                    infoView.detail = det
-//                }
-//
-//                UIView.animate(withDuration: 0.3) {
-//                    self.infoView.alpha = 1
-//
-//                    if self.infoView.disfrutaDetail.id != self.lastInfoViewId {
-//                        self.infoView.center.y -= self.infoView.frame.height
-//                    }
-//
-//                }
-//
-//                lastInfoViewId = polygon.polygon?.id
-//
-//                return
-//            }
-//            else {
-//
-//                UIView.animate(withDuration: 0.3) {
-//                    self.infoView.alpha = 0.0
-//                }
-//            }
-//        }
-    }
   
   func setUpAppearance() {
     let mainColor = UIColor.hexStringToUIColor(hex: "#de316a")
@@ -288,7 +236,7 @@ var lastInfoViewId: Int!
           if self.details.count == self.items.count , counter == 0 {
             SVProgressHUD.dismiss()
             self.tableView.reloadData()
-            //self.addPins()
+            self.addPins()
           }
           else {
             if counter != 0 {

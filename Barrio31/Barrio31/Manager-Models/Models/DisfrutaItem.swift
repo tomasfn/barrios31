@@ -12,6 +12,7 @@ import CoreLocation
 
 typealias DisfrutaItemsJSON = [String : AnyObject]
 
+
 class DisfrutaItem: Object {
     
     @objc dynamic var id: Int = -1
@@ -20,6 +21,7 @@ class DisfrutaItem: Object {
     @objc dynamic var address : String?
     @objc dynamic var category : String?
     var coordinate :CLLocationCoordinate2D?
+    var details :[DisfrutaDetail]?
     
     convenience init(JSON: [String : AnyObject]) {
         self.init()
@@ -39,6 +41,11 @@ class DisfrutaItem: Object {
             }
             if let colorOK = properties["color"] as? String {
                 color = colorOK
+            }
+            
+            if let events = properties["events"] as? [String : AnyObject] {
+                let detail = DisfrutaDetail(JSON: events)
+                details?.append(detail)
             }
         }
         
