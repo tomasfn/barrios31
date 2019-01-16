@@ -18,10 +18,10 @@ class DisfrutaItem: Object {
     @objc dynamic var id: Int = -1
     @objc dynamic var color : String?
     @objc dynamic var name : String?
+    @objc dynamic var type : String?
     @objc dynamic var address : String?
-    @objc dynamic var category : String?
     var coordinate :CLLocationCoordinate2D?
-    var details :[DisfrutaDetail]?
+    var details = [DisfrutaDetail]()
     
     convenience init(JSON: [String : AnyObject]) {
         self.init()
@@ -36,16 +36,19 @@ class DisfrutaItem: Object {
             if let addressOk = properties["address"] as? String {
                 address = addressOk
             }
-            if let categoryNameOK = properties["category"] as? String {
-                category = categoryNameOK
+            if let typeOk = properties["type"] as? String {
+                type = typeOk
             }
+            
             if let colorOK = properties["color"] as? String {
                 color = colorOK
             }
             
-            if let events = properties["events"] as? [String : AnyObject] {
-                let detail = DisfrutaDetail(JSON: events)
-                details?.append(detail)
+            if let eventsArray = properties["events"] as? Array<AnyObject>  {
+                for event in eventsArray {
+                    let detail = DisfrutaDetail(JSON: event as! [String : AnyObject])
+                    details.append(detail)
+                }
             }
         }
         
@@ -78,7 +81,7 @@ extension DisfrutaItem: StandaloneCopiable {
         
         let standaloneDisfrutaItem = DisfrutaItem()
         standaloneDisfrutaItem.id = id
-        standaloneDisfrutaItem.category = category
+        standaloneDisfrutaItem.type = type
         standaloneDisfrutaItem.name = name
         standaloneDisfrutaItem.color = color
         standaloneDisfrutaItem.coordinate = coordinate

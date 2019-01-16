@@ -153,6 +153,17 @@ extension UIImage {
     class func splashImage() -> UIImage! {
         return UIImage(named: "splash")
     }
+    
+    
+    //MARK: Disfruta Detail ViewController
+    
+    class func shareImage() -> UIImage! {
+        return UIImage(named: "ic-share")
+    }
+    
+    class func cerrarImage() -> UIImage! {
+        return UIImage(named: "ic-cerrar")
+    }
 }
 
 

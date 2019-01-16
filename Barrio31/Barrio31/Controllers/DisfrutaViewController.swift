@@ -28,6 +28,9 @@ var lastInfoViewId: Int!
     
     var selectedIndexs = [Int]()
     var categorys = [Category]()
+    
+    private var locationManager: CLLocationManager!
+    private var currentLocation: CLLocation?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,6 +38,7 @@ var lastInfoViewId: Int!
     self.view.addSubview(tableView)
     tableView.fillSuperview()
     tableView.dataSource = self
+    tableView.delegate = self
     addMenuButton()
     self.title = "DISFRUTÁ"
     setUpAppearance() 
@@ -98,11 +102,29 @@ var lastInfoViewId: Int!
     
   }
     
+    override func viewDidAppear(_ animated: Bool) {
+        setLocationConfig()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.title = ""
         
         sideMenuController?.cache(viewController: navigationController!, with: "disfrutaViewController")
+    }
+    
+    func setLocationConfig() {
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        // Check for Location Services
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        }
     }
     
     func setupViews () {
@@ -256,7 +278,7 @@ var lastInfoViewId: Int!
     for item in items {
       if let coord = item.coordinate {
         if let det = details.first(where: { ($0.id == item.id)}) {
-          let ann = DisfrutaAnnotation.init(coordinate: coord, title: item.category!, subtitle: "", item: det)
+          let ann = DisfrutaAnnotation.init(coordinate: coord, title: item.name!, subtitle: "", item: det)
           mapView.addAnnotation(ann)
         }
        
@@ -272,11 +294,13 @@ var lastInfoViewId: Int!
         for index in selectedIndexs {
             let category = categorys [index]
             for item in items {
-                if item.category == category.slug {
-                    if let coord = item.coordinate {
-                        if let det = details.first(where: { ($0.id == item.id)}) {
-                            let ann = DisfrutaAnnotation.init(coordinate: coord, title: item.category!, subtitle: "", item: det)
-                            mapView.addAnnotation(ann)
+                for detail in item.details {
+                    if detail.categorySlug == category.slug {
+                        if let coord = item.coordinate {
+                            if let det = details.first(where: { ($0.id == item.id)}) {
+                                let ann = DisfrutaAnnotation.init(coordinate: coord, title: item.name!, subtitle: "", item: det)
+                                mapView.addAnnotation(ann)
+                            }
                         }
                     }
                 }
@@ -293,14 +317,26 @@ var lastInfoViewId: Int!
   
   @objc func infoViewPressed () {
     //print("infoViewPressed")
-    let det = DisfrutaDetailViewController()
+//    let det = DisfrutaDetailViewController()
+//    //map.detail = infoView.detail
+//
+//    det.item = infoView.disfrutaDetail
+//    self.navigationController?.pushViewController(det, animated: true)
+    
+    let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+    let controller = storyboard.instantiateViewController(withIdentifier: "DisfrutaDetailViewController") as! DisfrutaDetailViewController
+    controller.item = infoView.disfrutaDetail
+    
+    //let det = DisfrutaDetailViewController()
     //map.detail = infoView.detail
-    self.navigationController?.pushViewController(det, animated: true)
+    //det.item = details[indexPath.row]
+    self.navigationController?.pushViewController(controller, animated: true)
+    
   }
   
 }
 
-extension DisfrutaViewController : UITableViewDataSource {
+extension DisfrutaViewController : UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! DisfrutaTableViewCell
@@ -313,12 +349,28 @@ extension DisfrutaViewController : UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return items.count
   }
-  
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "DisfrutaDetailViewController") as! DisfrutaDetailViewController
+        controller.item = details[indexPath.row]
+
+        //let det = DisfrutaDetailViewController()
+        //map.detail = infoView.detail
+        //det.item = details[indexPath.row]
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
 }
 
 extension DisfrutaViewController : MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    
+    if annotation.isKind(of: MKUserLocation.self) {
+        return MKAnnotationView()
+    }
+    
     let annotationView = CustomPointAnnotationView(annotation: annotation, reuseIdentifier: "Attraction")
     annotationView.canShowCallout = false
     if let ann = annotation as? DisfrutaAnnotation {
@@ -385,11 +437,17 @@ class DisfrutaAnnotation: NSObject, MKAnnotation {
 }
 
 
-extension DisfrutaViewController: UIGestureRecognizerDelegate {
+// MARK - CLLocationManagerDelegate
+
+extension DisfrutaViewController: CLLocationManagerDelegate {
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        defer { currentLocation = locations.last }
+        mapView.showsUserLocation = true
+    }
 }
 
-
+extension DisfrutaViewController: UIGestureRecognizerDelegate {}
 
 extension DisfrutaViewController: UICollectionViewDataSource , UICollectionViewDelegate {
     
