@@ -14,7 +14,11 @@ class DisfrutaTableViewCell: UITableViewCell {
   
   var item : DisfrutaDetail? {
     didSet {
-      dateLabel.text = (item?.started)! + " - " + (item?.ended)!
+
+        if let started = item?.started {
+            dateLabel.text = started + " - " + (item?.ended)!
+        }
+        
       nameLabel.text = item?.name
       dateLabel.sizeToFit()
       descriptionLabel.text = item?.shortDescription

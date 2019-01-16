@@ -12,11 +12,11 @@ import UIKit
 
 class DisfrutaInfoView: UIView {
   
-  var disfrutaDetail : DisfrutaDetail! {
+  var disfrutaItem : DisfrutaItem! {
     didSet {
-      labelName.text = disfrutaDetail.name
-      labelDescription.text = disfrutaDetail.shortDescription
-      labelDate.text = disfrutaDetail.started! + " - " + disfrutaDetail.ended!
+      labelName.text = disfrutaItem.name
+      labelDescription.text = disfrutaItem.address
+      //labelDate.text = disfrutaDetail.started! + " - " + disfrutaDetail.ended!
       //labelName.sizeToFit()
       
     }

@@ -113,31 +113,45 @@
                                                     <constraint firstItem="QeZ-3F-HF2" firstAttribute="leading" secondItem="VBF-ps-8c8" secondAttribute="trailing" constant="8" id="ou0-BR-YVI"/>
                                                 </constraints>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vdc-Gu-g1g">
-                                                <rect key="frame" x="8" y="436.5" width="359" height="214"/>
+                                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="tUI-MY-DKT" customClass="ImageCarouselView" customModule="Barrio31" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="443" width="359" height="207"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZW6-s0-aNT" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                                                        <rect key="frame" x="0.0" y="0.0" width="359" height="207"/>
+                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="214" id="ZpF-uc-MMU"/>
+                                                    <constraint firstItem="ZW6-s0-aNT" firstAttribute="leading" secondItem="tUI-MY-DKT" secondAttribute="leading" id="6bU-p1-cGa"/>
+                                                    <constraint firstItem="ZW6-s0-aNT" firstAttribute="top" secondItem="tUI-MY-DKT" secondAttribute="top" id="GfB-U2-r9H"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ZW6-s0-aNT" secondAttribute="bottom" id="Oze-EP-Qrn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ZW6-s0-aNT" secondAttribute="trailing" id="RMs-yx-t5B"/>
+                                                    <constraint firstAttribute="height" constant="207" id="lOy-2M-iHa"/>
                                                 </constraints>
-                                            </imageView>
+                                                <connections>
+                                                    <outlet property="imageSlideShow" destination="ZW6-s0-aNT" id="kkO-hv-XhB"/>
+                                                </connections>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="3ty-OP-wVE" firstAttribute="top" secondItem="9vO-xX-FQt" secondAttribute="bottom" constant="7" id="1Hb-Du-8IT"/>
                                             <constraint firstItem="Msc-tO-SMM" firstAttribute="top" secondItem="3ty-OP-wVE" secondAttribute="bottom" constant="15" id="3Nf-ZY-hUn"/>
-                                            <constraint firstItem="vdc-Gu-g1g" firstAttribute="leading" secondItem="tWX-y4-hNc" secondAttribute="leading" constant="8" id="8FQ-8s-ORb"/>
+                                            <constraint firstItem="tUI-MY-DKT" firstAttribute="centerX" secondItem="tWX-y4-hNc" secondAttribute="centerX" id="5Kf-Ro-GGc"/>
                                             <constraint firstItem="9vO-xX-FQt" firstAttribute="top" secondItem="tWX-y4-hNc" secondAttribute="top" constant="5" id="GCD-om-v2h"/>
                                             <constraint firstItem="3ty-OP-wVE" firstAttribute="leading" secondItem="tWX-y4-hNc" secondAttribute="leading" constant="8" id="NKS-0b-5Vi"/>
                                             <constraint firstAttribute="trailing" secondItem="9vO-xX-FQt" secondAttribute="trailing" constant="8" id="RnX-z8-1s0"/>
                                             <constraint firstAttribute="trailing" secondItem="3ty-OP-wVE" secondAttribute="trailing" constant="8" id="Tqc-7r-33N"/>
-                                            <constraint firstItem="vdc-Gu-g1g" firstAttribute="top" secondItem="jf1-FV-uN6" secondAttribute="bottom" constant="15" id="UKi-D3-fW3"/>
-                                            <constraint firstItem="vdc-Gu-g1g" firstAttribute="centerX" secondItem="tWX-y4-hNc" secondAttribute="centerX" id="X0b-TK-AVw"/>
+                                            <constraint firstItem="tUI-MY-DKT" firstAttribute="top" secondItem="jf1-FV-uN6" secondAttribute="bottom" constant="21.5" id="VBX-go-fRB"/>
                                             <constraint firstItem="Msc-tO-SMM" firstAttribute="leading" secondItem="tWX-y4-hNc" secondAttribute="leading" constant="8" id="Xo4-e0-l2c"/>
                                             <constraint firstItem="9vO-xX-FQt" firstAttribute="centerX" secondItem="tWX-y4-hNc" secondAttribute="centerX" id="ZYE-Fl-fe0"/>
                                             <constraint firstItem="9vO-xX-FQt" firstAttribute="leading" secondItem="tWX-y4-hNc" secondAttribute="leading" constant="8" id="eut-tp-z9O"/>
                                             <constraint firstAttribute="height" constant="598" id="m4y-GI-G23"/>
                                             <constraint firstAttribute="trailing" secondItem="jf1-FV-uN6" secondAttribute="trailing" constant="8" id="myI-Qc-KTo"/>
                                             <constraint firstItem="Msc-tO-SMM" firstAttribute="centerX" secondItem="tWX-y4-hNc" secondAttribute="centerX" id="nsm-FM-r5J"/>
-                                            <constraint firstAttribute="trailing" secondItem="vdc-Gu-g1g" secondAttribute="trailing" constant="8" id="pPS-mb-Z3p"/>
+                                            <constraint firstItem="tUI-MY-DKT" firstAttribute="leading" secondItem="tWX-y4-hNc" secondAttribute="leading" constant="8" id="qnQ-pK-fQP"/>
+                                            <constraint firstAttribute="trailing" secondItem="tUI-MY-DKT" secondAttribute="trailing" constant="8" id="uws-dR-pds"/>
                                             <constraint firstAttribute="trailing" secondItem="Msc-tO-SMM" secondAttribute="trailing" constant="8" id="vJr-r1-au7"/>
                                             <constraint firstItem="jf1-FV-uN6" firstAttribute="leading" secondItem="tWX-y4-hNc" secondAttribute="leading" constant="8" id="wt0-Dd-fwl"/>
                                             <constraint firstItem="jf1-FV-uN6" firstAttribute="top" secondItem="Msc-tO-SMM" secondAttribute="bottom" constant="15" id="zHU-HJ-HO2"/>
@@ -195,11 +209,11 @@
                     <navigationItem key="navigationItem" id="pBO-DW-KJv"/>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
+                        <outlet property="carouselImageView" destination="tUI-MY-DKT" id="EjJ-Od-tt6"/>
                         <outlet property="containerView" destination="tWX-y4-hNc" id="rlo-cR-MOk"/>
                         <outlet property="datesLbl" destination="38s-lB-dvg" id="eIX-cf-Gh8"/>
                         <outlet property="descriptionTxtView" destination="9vO-xX-FQt" id="tvP-3d-ec2"/>
                         <outlet property="entryTypeLbl" destination="QeZ-3F-HF2" id="QUX-VY-2Vf"/>
-                        <outlet property="footerImgView" destination="vdc-Gu-g1g" id="reg-Vi-O4I"/>
                         <outlet property="headerImgView" destination="lmy-lF-Xzu" id="azN-71-zs9"/>
                         <outlet property="scrollView" destination="WgJ-ss-Dq1" id="Pee-ww-YGX"/>
                         <outlet property="subtitleLbl" destination="LXC-Fk-QER" id="kCb-PU-oB2"/>

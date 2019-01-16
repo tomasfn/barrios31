@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.8.0)
+  - Alamofire (4.8.1)
   - AlamofireImage (3.5.0):
     - Alamofire (~> 4.8)
   - Gemini (1.3.1)
@@ -8,7 +8,13 @@ PODS:
   - GoogleMaps/Base (2.7.0)
   - GoogleMaps/Maps (2.7.0):
     - GoogleMaps/Base
-  - Kingfisher (5.0.1)
+  - ImageSlideshow (1.7.0):
+    - ImageSlideshow/Core (= 1.7.0)
+  - ImageSlideshow/Core (1.7.0)
+  - ImageSlideshow/SDWebImage (1.7.0):
+    - ImageSlideshow/Core
+    - SDWebImage (< 5.0, >= 3.7)
+  - Kingfisher (5.1.0)
   - Realm (3.11.0):
     - Realm/Headers (= 3.11.0)
   - Realm/Headers (3.11.0)
@@ -26,6 +32,8 @@ DEPENDENCIES:
   - AlamofireImage
   - Gemini
   - GoogleMaps
+  - ImageSlideshow (~> 1.6)
+  - ImageSlideshow/SDWebImage
   - Kingfisher
   - Realm (= 3.11.0)
   - RealmSwift (= 3.11.0)
@@ -40,6 +48,7 @@ SPEC REPOS:
     - AlamofireImage
     - Gemini
     - GoogleMaps
+    - ImageSlideshow
     - Kingfisher
     - Realm
     - RealmSwift
@@ -49,11 +58,12 @@ SPEC REPOS:
     - SVProgressHUD
 
 SPEC CHECKSUMS:
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
   Gemini: 25fd4ae5dcde4cbd136dac899faf38a1dddea1a8
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
-  Kingfisher: 4f771421b9208185217550528a06fd48756cb7c2
+  ImageSlideshow: f8eec5e37a980f60923b585ff23b0e140fd24018
+  Kingfisher: fcec238063d17404fca89bf0a850583211c4cbf6
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
   SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
@@ -61,6 +71,6 @@ SPEC CHECKSUMS:
   SimpleImageViewer: 34c3a2cde2d9ac022146772cefc27fca14b0c8b1
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 82c2151a2d32bf2d136a5d297a43de54df0f7456
+PODFILE CHECKSUM: 04a7f6058d86e1c1d2519ed4decc5ba0088e09cd
 
 COCOAPODS: 1.5.3

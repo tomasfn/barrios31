@@ -50,9 +50,9 @@ extension NavigationHelper {
         return mainStoryboard.instantiateViewController(withIdentifier: DisfrutaViewController.nameOfClass) as! DisfrutaViewController
     }
     
-//    class func participaViewController() -> ParticipaViewController {
-//        return mainStoryboard.instantiateViewController(withIdentifier: ParticipaViewController.nameOfClass) as! ParticipaViewController
-//    }
+    class func participaViewController() -> ParticipaViewController {
+        return mainStoryboard.instantiateViewController(withIdentifier: ParticipaViewController.nameOfClass) as! ParticipaViewController
+    }
     
 }
 

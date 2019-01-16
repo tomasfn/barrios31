@@ -11,7 +11,7 @@ import UIKit
 class DisfrutaDetailViewController: BaseViewController {
     
     @IBOutlet weak var headerImgView: UIImageView!
-    @IBOutlet weak var footerImgView: UIImageView!
+    @IBOutlet weak var carouselImageView: ImageCarouselView!
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var subtitleLbl: UILabel!
@@ -47,10 +47,15 @@ class DisfrutaDetailViewController: BaseViewController {
             headerImgView.kf.setImage(with: url)
         }
         
-        if let imgLink = item.imageSmartphoneLink {
-            let url = URL(string: imgLink)
-            footerImgView.kf.setImage(with: url)
+        let carousel = ImageCarouselView()
+        
+        if item.imagesCarousel.count > 0 {
+            for img in item.imagesCarousel {
+                carousel.appendImageUrl(imageUrl: img)
+            }
         }
+        
+        carouselImageView = carousel
         
         titleLbl.text = item.name
         subtitleLbl.text = item.shortDescription
@@ -73,7 +78,7 @@ class DisfrutaDetailViewController: BaseViewController {
         
         let startDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
         
-        let finishDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+        let finishDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]        
         
         let startData = NSMutableAttributedString(string: "\(item.started!) | ", attributes: startDataAttr)
         let endedData = NSMutableAttributedString(string: "\(item.ended!) \n \(item.schedule!)", attributes: finishDataAttr)

@@ -46,6 +46,23 @@ class APIManager: NSObject {
     }
   }
     
+    class func getParticipaCategorys(completionBlock: @escaping CategorysCompletionBlock) {
+        let url = apiServer + "participa/categorias"
+        Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+            if let data = response.data, response.error == nil {
+                do {
+                    let response = try JSONDecoder().decode([Category].self, from: data)
+                    completionBlock(response, nil)
+                } catch {
+                    completionBlock(nil, ErrorManager.serverError())
+                }
+            }
+            else {
+                completionBlock(nil, ErrorManager.serverError())
+            }
+        }
+    }
+    
     class func getDisfrutaCategorys(completionBlock: @escaping CategorysCompletionBlock) {
         let url = apiServer + "disfruta/categorias"
         Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
@@ -118,6 +135,27 @@ class APIManager: NSObject {
       }
     }
   }
+    
+class func getParticipa(completionBlock: @escaping DisfrutaCompletionBlock) {
+        let url = apiServer + "participa"
+        Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+            if let data = response.result.value, response.error == nil {
+                if let dic = data as? Dictionary<String, AnyObject> {
+                    if let array = dic["features"] as? Array<Dictionary<String, AnyObject>> {
+                        var dis = [DisfrutaItem]()
+                        for item in array {
+                            let obj = DisfrutaItem.init(JSON: item)
+                            dis.append(obj)
+                        }
+                        completionBlock(dis, nil)
+                    }
+                }
+            }
+            else {
+                completionBlock(nil, ErrorManager.serverError())
+            }
+        }
+    }
   
   class func getDisfrutaDetails(withId: String , completionBlock: @escaping DisfrutaDetailCompletionBlock) {
     let url = apiServer + "disfruta/detalle/\(withId)"

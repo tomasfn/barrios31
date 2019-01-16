@@ -41,7 +41,7 @@ class ConoceItem: Object {
                 imageLink = imgLink as! String
             }
             
-            imgLink = "http://barrio31.candoit.com.ar/api" + imageLink + accessToken
+            imgLink = "http://barrio31-test.candoit.com.ar/api" + imageLink + accessToken
             
         } else if UI_USER_INTERFACE_IDIOM() == .phone {
             
@@ -50,7 +50,7 @@ class ConoceItem: Object {
                 imageLink = imgLink as! String
             }
             
-            imgLink = "http://barrio31.candoit.com.ar/api" + imageLink + accessToken
+            imgLink = "http://barrio31-test.candoit.com.ar/api" + imageLink + accessToken
         }
     }
     

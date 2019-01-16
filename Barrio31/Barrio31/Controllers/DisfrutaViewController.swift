@@ -22,7 +22,8 @@ class DisfrutaViewController: BaseViewController {
 
   var items = [DisfrutaItem]()
   var details = [DisfrutaDetail]()
-  var currentDetail : DisfrutaDetail?
+    var selectedDetails = [DisfrutaDetail]()
+  var currentItem : DisfrutaItem?
 
 var lastInfoViewId: Int!
     
@@ -31,6 +32,9 @@ var lastInfoViewId: Int!
     
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
+    
+    let villa31 = CLLocation(latitude: -34.582800, longitude: -58.379679)
+    let regionRadius: CLLocationDistance = 1000
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -104,13 +108,18 @@ var lastInfoViewId: Int!
     
     override func viewDidAppear(_ animated: Bool) {
         setLocationConfig()
+        centerMapOnLocation(location: villa31)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.title = ""
-        
         sideMenuController?.cache(viewController: navigationController!, with: "disfrutaViewController")
+    }
+    
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
     }
     
     func setLocationConfig() {
@@ -230,6 +239,27 @@ var lastInfoViewId: Int!
         collectionView.alpha = 0.0
     }
   }
+    
+    @objc func showListAnimated () {
+        if listButton.isSelected == false {
+            listButton .isSelected = true
+            mapButton.isSelected = false
+            mapView.alpha = 0.0
+            infoView.alpha = 0.0
+            collectionView.alpha = 0.0
+            
+            UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
+                self.tableView.alpha = 1.0
+            }) { (isCompleted) in
+            }
+            
+//            UIView.animate(withDuration: 0.5, delay: 0.25, options: UIViewAnimationOptions(), animations: { () -> Void in
+//                self.tableView.alpha = 1.0
+//            }, completion: { (finished: Bool) -> Void in
+//
+//            })
+        }
+    }
   
   func loadData() {
     SVProgressHUD.show()
@@ -258,7 +288,7 @@ var lastInfoViewId: Int!
           if self.details.count == self.items.count , counter == 0 {
             SVProgressHUD.dismiss()
             self.tableView.reloadData()
-            self.addPins()
+            //self.addPins()
           }
           else {
             if counter != 0 {
@@ -278,7 +308,7 @@ var lastInfoViewId: Int!
     for item in items {
       if let coord = item.coordinate {
         if let det = details.first(where: { ($0.id == item.id)}) {
-          let ann = DisfrutaAnnotation.init(coordinate: coord, title: item.name!, subtitle: "", item: det)
+          let ann = DisfrutaAnnotation.init(coordinate: coord, title: item.name!, subtitle: "", item: item)
           mapView.addAnnotation(ann)
         }
        
@@ -291,6 +321,7 @@ var lastInfoViewId: Int!
     
     func addFilteredPins() {
         removeMapAnnotations()
+        selectedDetails.removeAll()
         for index in selectedIndexs {
             let category = categorys [index]
             for item in items {
@@ -298,7 +329,9 @@ var lastInfoViewId: Int!
                     if detail.categorySlug == category.slug {
                         if let coord = item.coordinate {
                             if let det = details.first(where: { ($0.id == item.id)}) {
-                                let ann = DisfrutaAnnotation.init(coordinate: coord, title: item.name!, subtitle: "", item: det)
+                                selectedDetails.append(detail)
+                                tableView.reloadData()
+                                let ann = DisfrutaAnnotation.init(coordinate: coord, title: item.name!, subtitle: "", item: item)
                                 mapView.addAnnotation(ann)
                             }
                         }
@@ -321,16 +354,28 @@ var lastInfoViewId: Int!
 //    //map.detail = infoView.detail
 //
 //    det.item = infoView.disfrutaDetail
-//    self.navigationController?.pushViewController(det, animated: true)
     
-    let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-    let controller = storyboard.instantiateViewController(withIdentifier: "DisfrutaDetailViewController") as! DisfrutaDetailViewController
-    controller.item = infoView.disfrutaDetail
+    if infoView.disfrutaItem.details.count == 1 {
+        
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "DisfrutaDetailViewController") as! DisfrutaDetailViewController
+        
+        controller.item = infoView.disfrutaItem.details.first
+        
+        self.navigationController?.pushViewController(controller, animated: true)
+        
+    } else {
+        showListAnimated()
+    }
+    
+    print("",infoView.disfrutaItem.details)
+    
+    //controller.item = infoView.disfrutaItem.details
     
     //let det = DisfrutaDetailViewController()
     //map.detail = infoView.detail
     //det.item = details[indexPath.row]
-    self.navigationController?.pushViewController(controller, animated: true)
+   // self.navigationController?.pushViewController(controller, animated: true)
     
   }
   
@@ -340,21 +385,21 @@ extension DisfrutaViewController : UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! DisfrutaTableViewCell
-    cell.dateLabel.text = details[indexPath.row].ended
-    cell.item = details[indexPath.row]
+    cell.dateLabel.text = selectedDetails[indexPath.row].ended
+    cell.item = selectedDetails[indexPath.row]
     cell.selectionStyle = .none
     return cell
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return items.count
+    return selectedDetails.count
   }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "DisfrutaDetailViewController") as! DisfrutaDetailViewController
-        controller.item = details[indexPath.row]
+        controller.item = selectedDetails[indexPath.row]
 
         //let det = DisfrutaDetailViewController()
         //map.detail = infoView.detail
@@ -382,17 +427,20 @@ extension DisfrutaViewController : MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
     if let ann = view as? CustomPointAnnotationView {
       print("Seleccionó \(String(describing: ann.item?.name))")
-      infoView.disfrutaDetail = ann.item
         
+        infoView.disfrutaItem = ann.item
+        selectedDetails = infoView.disfrutaItem.details
+        tableView.reloadData()
+
         UIView.animate(withDuration: 0.3) {
             self.infoView.alpha = 1
             
-            if self.infoView.disfrutaDetail.id != self.lastInfoViewId {
+            if self.infoView.disfrutaItem.id != self.lastInfoViewId {
                 self.infoView.center.y -= self.infoView.frame.height
             }
         }
         
-        lastInfoViewId = infoView.disfrutaDetail.id
+        lastInfoViewId = infoView.disfrutaItem.id
     }
   }
     
@@ -409,7 +457,7 @@ extension DisfrutaViewController : MKMapViewDelegate {
 }
 
 class CustomPointAnnotationView:  MKAnnotationView {
-  var item: DisfrutaDetail?
+  var item: DisfrutaItem?
 
   // Required for MKAnnotationView
   required init?(coder aDecoder: NSCoder) {
@@ -426,9 +474,9 @@ class DisfrutaAnnotation: NSObject, MKAnnotation {
   var coordinate: CLLocationCoordinate2D
   var title: String?
   var subtitle: String?
-  var item: DisfrutaDetail?
+  var item: DisfrutaItem?
   
-  init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, item: DisfrutaDetail) {
+  init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, item: DisfrutaItem) {
     self.coordinate = coordinate
     self.title = title
     self.subtitle = subtitle
