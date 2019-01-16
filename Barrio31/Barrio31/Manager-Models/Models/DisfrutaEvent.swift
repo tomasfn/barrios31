@@ -101,8 +101,7 @@ class DisfrutaDetail: Object {
         }
         
         if let categorySlugOK = JSON["categorySlug"] as? String {
-            let categorySl = categorySlugOK.replacingOccurrences(of: "se-", with: "", options: NSString.CompareOptions.literal, range: nil)
-            categorySlug = categorySl
+            categorySlug = categorySlugOK
         }
         
     }
