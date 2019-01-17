@@ -81,23 +81,23 @@ class DisfrutaDetail: Object {
         }
         
         if let imageLinkOK = JSON["imageLink"] as? String {
-            let imageUrlLink = "http://barrio31-test.candoit.com.ar/api" + imageLinkOK + accessToken
+            let imageUrlLink = "http://barrio31.candoit.com.ar/api" + imageLinkOK + accessToken
             imageLink = imageUrlLink
         }
         
         if let imageIpadLinkOK = JSON["imageIpadLink"] as? String {
-                let imageUrlLink = "http://barrio31-test.candoit.com.ar/api" + imageIpadLinkOK + accessToken
+                let imageUrlLink = "http://barrio31.candoit.com.ar/api" + imageIpadLinkOK + accessToken
             imageIpadLink = imageUrlLink
         }
         
         if let imageSmartphoneLinkOK = JSON["imageSmartphoneLink"] as? String {
-            let imageUrlLink = "http://barrio31-test.candoit.com.ar/api" + imageSmartphoneLinkOK + accessToken
+            let imageUrlLink = "http://barrio31.candoit.com.ar/api" + imageSmartphoneLinkOK + accessToken
             imageSmartphoneLink = imageUrlLink
         }
         
         if let imageCarouselOK = JSON["imagesCarousel"] as? [String] {
             for imageLink in imageCarouselOK {
-                let urlLink = "http://barrio31-test.candoit.com.ar/api" + imageLink + accessToken
+                let urlLink = "http://barrio31.candoit.com.ar/api" + imageLink + accessToken
                 imagesCarousel.append(urlLink)
             }
         }

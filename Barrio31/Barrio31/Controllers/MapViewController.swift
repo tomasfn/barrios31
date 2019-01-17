@@ -64,7 +64,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.title = ""
-        
         sideMenuController?.cache(viewController: navigationController!, with: "mapViewController")
     }
     

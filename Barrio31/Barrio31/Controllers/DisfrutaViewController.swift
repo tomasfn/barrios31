@@ -111,6 +111,11 @@ var lastInfoViewId: Int!
         centerMapOnLocation(location: villa31)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = "DISFRUTA"
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.title = ""

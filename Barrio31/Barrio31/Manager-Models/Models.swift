@@ -40,6 +40,12 @@ struct Category : Decodable {
       return UIImage.iconJobOff()
     case "habitat"?:
       return UIImage.iconHabitatOff()
+    case "cultura"?:
+        return UIImage.culturaOffImage()
+    case "deporte"?:
+        return UIImage.deporteOffImage()
+    case "gastronomia"?:
+        return UIImage.gastronomiaOffImage()
     case "parque-en-altura"?:
       return UIImage.iconParkOff()
     case "se-espacio-publico"?:
@@ -83,6 +89,12 @@ struct Category : Decodable {
         return UIImage.iconJobOn()
     case "habitat"?:
         return UIImage.iconHabitatOn()
+    case "cultura"?:
+        return UIImage.culturaOnImage()
+    case "deporte"?:
+        return UIImage.deporteOnImage()
+    case "gastronomia"?:
+        return UIImage.gastronomiaOnImage()
     case "parque-en-altura"?:
         return UIImage.iconParkOn()
     case "se-espacio-publico"?:

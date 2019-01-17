@@ -15,6 +15,12 @@ class MenuViewController: BaseViewController {
   var tableView: UITableView!
   let sections = ["Recorré" , "Disfrutá" , "Conocé" , "Participá"]
   let colors = [UIColor.hexStringToUIColor(hex: "de316a"),UIColor.hexStringToUIColor(hex: "f9a61d") , UIColor.hexStringToUIColor(hex: "1fc3f3"), UIColor.hexStringToUIColor(hex: "2fb463")]
+    
+    var recorre: MapViewController!
+    var disfruta: DisfrutaViewController!
+    var conoce: ConoceViewController!
+    var participa: ParticipaViewController!
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -131,17 +137,36 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     case 0:
         sideMenuController?.setContentViewController(with: "mapViewController")
     case 1:
-      let dis = DisfrutaViewController()
-      let nav = UINavigationController.init(rootViewController: dis)
+        
+        if disfruta == nil {
+      disfruta = DisfrutaViewController()
+      let nav = UINavigationController.init(rootViewController: disfruta)
       sideMenuController?.contentViewController = nav
+        } else {
+        sideMenuController?.setContentViewController(with: "disfrutaViewController")
+        }
+
     case 2:
-        let dis = ConoceViewController()
-        let nav = UINavigationController.init(rootViewController: dis)
+        
+        if conoce == nil {
+        conoce = ConoceViewController()
+        let nav = UINavigationController.init(rootViewController: conoce)
         sideMenuController?.contentViewController = nav
+            
+        } else {
+        sideMenuController?.setContentViewController(with: "conoceViewController")
+        }
+        
     case 3:
-        let dis = ParticipaViewController()
-        let nav = UINavigationController.init(rootViewController: dis)
+        
+        if participa == nil {
+        participa = ParticipaViewController()
+        let nav = UINavigationController.init(rootViewController: participa)
         sideMenuController?.contentViewController = nav
+            
+        } else {
+        sideMenuController?.setContentViewController(with: "participaViewController")
+        }
     default:
       return
     }

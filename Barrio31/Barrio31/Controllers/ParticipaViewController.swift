@@ -111,9 +111,15 @@ class ParticipaViewController: BaseViewController {
         centerMapOnLocation(location: villa31)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = "PARTICIPA"
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.title = ""
+        
         sideMenuController?.cache(viewController: navigationController!, with: "participaViewController")
     }
     

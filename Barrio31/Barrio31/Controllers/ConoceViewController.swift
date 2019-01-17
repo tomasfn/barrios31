@@ -25,6 +25,11 @@ class ConoceViewController: BaseViewController {
         
         sideMenuController?.cache(viewController: navigationController!, with: "conoceViewController")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = "CONOCE"
+    }
  
     override func viewDidLoad() {
         super.viewDidLoad()
