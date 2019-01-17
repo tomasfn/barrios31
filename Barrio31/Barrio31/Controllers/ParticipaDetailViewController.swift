@@ -175,7 +175,7 @@ class ParticipaDetailViewController: BaseViewController {
     
     @objc func shareItem() {
         //Set the default sharing message.
-        let message = "Vení a \(String(describing: item.name!)) de \(String(describing: item.schedule!))"
+        let message = "Vení a \(String(describing: item.name!)) los \(String(describing: item.day!)) de \(item.time!)"
         //Set the link to share.
         if let link = NSURL(string: "http://barrio31.candoit.com.ar/")
         {
