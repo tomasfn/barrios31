@@ -58,6 +58,7 @@
 		8AB35FEF219F11BB00E4394D /* Street.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FEE219F11BB00E4394D /* Street.swift */; };
 		8AB35FF2219F272600E4394D /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB35FF1219F272600E4394D /* PaddingLabel.swift */; };
 		8AD5466421C2CF42003D2C70 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5466321C2CF42003D2C70 /* UIImageView+Extensions.swift */; };
+		8AE6ADE421EFF02100251DA0 /* ParticipaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE6ADE321EFF02100251DA0 /* ParticipaDetailViewController.swift */; };
 		8AE8337D21C815BB00D9BA71 /* CachingPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8337C21C815BB00D9BA71 /* CachingPlayerItem.swift */; };
 		B9631DB48E780CD0E206A39A /* Pods_Barrio31.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87925E620ED962C1D59629D4 /* Pods_Barrio31.framework */; };
 /* End PBXBuildFile section */
@@ -117,6 +118,7 @@
 		8AB35FEE219F11BB00E4394D /* Street.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
 		8AB35FF1219F272600E4394D /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		8AD5466321C2CF42003D2C70 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		8AE6ADE321EFF02100251DA0 /* ParticipaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipaDetailViewController.swift; sourceTree = "<group>"; };
 		8AE8337C21C815BB00D9BA71 /* CachingPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingPlayerItem.swift; sourceTree = "<group>"; };
 		A5F59669DBE4A55B921151E8 /* Pods-Barrio31.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.release.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.release.xcconfig"; sourceTree = "<group>"; };
 		FAD8B302D123058E3BA65FD7 /* Pods-Barrio31.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Barrio31.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Barrio31/Pods-Barrio31.debug.xcconfig"; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				452CE2F1218C97A600590678 /* DisfrutaDetailViewController.swift */,
 				8A2DE8F621AC548F00D78161 /* ConoceViewController.swift */,
 				8AA529D021EFAD52004FDA59 /* ParticipaViewController.swift */,
+				8AE6ADE321EFF02100251DA0 /* ParticipaDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				45CF59102136E3FE00E2A858 /* Models.swift in Sources */,
 				450081A1217A68810036A086 /* DisfrutaViewController.swift in Sources */,
 				45151C31212DE69300222656 /* AppFonts.swift in Sources */,
+				8AE6ADE421EFF02100251DA0 /* ParticipaDetailViewController.swift in Sources */,
 				45F23A1E2135D9D400F22C1C /* APIManager.swift in Sources */,
 				8A3253AB21A469E40046CFAC /* CategoryHelper.swift in Sources */,
 				8A2DE8FD21AC59A100D78161 /* BaseTableViewCell.swift in Sources */,

@@ -358,7 +358,7 @@ class ParticipaViewController: BaseViewController {
         if infoView.disfrutaItem.details.count == 1 {
             
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "DisfrutaDetailViewController") as! DisfrutaDetailViewController
+            let controller = storyboard.instantiateViewController(withIdentifier: "ParticipaDetailViewController") as! ParticipaDetailViewController
             
             controller.item = infoView.disfrutaItem.details.first
             
@@ -398,7 +398,7 @@ extension ParticipaViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "DisfrutaDetailViewController") as! DisfrutaDetailViewController
+        let controller = storyboard.instantiateViewController(withIdentifier: "ParticipaDetailViewController") as! ParticipaDetailViewController
         controller.item = selectedDetails[indexPath.row]
         
         //let det = DisfrutaDetailViewController()

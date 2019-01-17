@@ -33,21 +33,18 @@ class ImageCarouselView: UIView {
         super.init(frame: frame)
     }
     
-    func appendImageUrl(imageUrl: String) {
-        imageSources.append(SDWebImageSource(url: URL(string: imageUrl)!))
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        configureImageSlideShow()
     }
     
     private func configureImageSlideShow() {
         
-        imageSlideShow = ImageSlideshow()
+        //imageSlideShow = ImageSlideshow()
         
         imageSlideShow.slideshowInterval = 5.0
         imageSlideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .under)
@@ -55,7 +52,7 @@ class ImageCarouselView: UIView {
         
         //imageSlideShow.backgroundColor = .white
         
-        pageControl.currentPageIndicatorTintColor = UIColor.black
+        pageControl.currentPageIndicatorTintColor = UIColor.white
         pageControl.pageIndicatorTintColor = UIColor.lightGray
         
         imageSlideShow.pageIndicator = pageControl

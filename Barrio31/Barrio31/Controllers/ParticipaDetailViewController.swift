@@ -1,16 +1,16 @@
 //
-//  DisfrutaDetailViewController.swift
+//  ParticipaDetailViewController.swift
 //  Barrio31
 //
-//  Created by air on 02/11/2018.
-//  Copyright © 2018 Carlos Garcia. All rights reserved.
+//  Created by Tomás Fernandez Nuñez on 16/01/2019.
+//  Copyright © 2019 Carlos Garcia. All rights reserved.
 //
 
 import UIKit
 import ImageSlideshow
 import SDWebImage
 
-class DisfrutaDetailViewController: BaseViewController {
+class ParticipaDetailViewController: BaseViewController {
     
     @IBOutlet weak var headerImgView: UIImageView!
     @IBOutlet weak var carouselImageView: ImageCarouselView!
@@ -27,7 +27,7 @@ class DisfrutaDetailViewController: BaseViewController {
     @IBOutlet weak var entryTypeLbl: UILabel!
     
     var item: DisfrutaDetail!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavbarItems()
@@ -38,17 +38,16 @@ class DisfrutaDetailViewController: BaseViewController {
         
         scrollView.delegate = self
         
-            if #available(iOS 11.0, *) {
-                scrollView.contentInsetAdjustmentBehavior = .never
-            } else {
-                // Fallback on earlier versions
-            }
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        } else {
+            // Fallback on earlier versions
+        }
         
         if let imgLink = item.imageLink {
             let url = URL(string: imgLink)
             headerImgView.kf.setImage(with: url)
         }
-        
         
         if item.imagesCarousel.count > 0 {
             var imageSources: [SDWebImageSource] = []
@@ -61,7 +60,6 @@ class DisfrutaDetailViewController: BaseViewController {
             carouselImageView.imageSlideShow.setImageInputs(imageSources)
         }
         
-        
         titleLbl.text = item.name
         subtitleLbl.text = item.shortDescription
         
@@ -73,30 +71,30 @@ class DisfrutaDetailViewController: BaseViewController {
         descriptionTxtView.text = item.longDescription
         descriptionTxtView.font = UIFont.MontserratSemiBold(fontSize: 16)
         
-        let startAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
-        
-        let finishAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
-        
-        let startAttributed = NSMutableAttributedString(string:"Inicio: ", attributes:startAttr)
-        
-        let finishAttributed = NSMutableAttributedString(string:"Finaliza: ", attributes:finishAttr)
-        
-        let startDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
-        
-        let finishDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]        
-        
-        let startData = NSMutableAttributedString(string: "\(item.started!) | ", attributes: startDataAttr)
-        let endedData = NSMutableAttributedString(string: "\(item.ended!) \n \(item.schedule!)", attributes: finishDataAttr)
-        
-        startAttributed.append(startData)
-        finishAttributed.append(endedData)
-        
-        startAttributed.append(finishAttributed)
-        datesLbl.attributedText = startAttributed
+//        let startAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+//
+//        let finishAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+//
+//        let startAttributed = NSMutableAttributedString(string:"Inicio: ", attributes:startAttr)
+//
+//        let finishAttributed = NSMutableAttributedString(string:"Finaliza: ", attributes:finishAttr)
+//
+//        let startDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+//
+//        let finishDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+//
+//        let startData = NSMutableAttributedString(string: "\(item.started!) | ", attributes: startDataAttr)
+//        let endedData = NSMutableAttributedString(string: "\(item.ended!) \n \(item.schedule!)", attributes: finishDataAttr)
+//
+//        startAttributed.append(startData)
+//        finishAttributed.append(endedData)
+//
+//        startAttributed.append(finishAttributed)
+//        datesLbl.attributedText = startAttributed
         
         let priceDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
         let priceAttr = NSMutableAttributedString(string: "\(item.price!)", attributes: priceDataAttr)
-
+        
         entryTypeLbl.attributedText = priceAttr
         
         descriptionTxtView.isScrollEnabled = false
@@ -153,7 +151,7 @@ class DisfrutaDetailViewController: BaseViewController {
         
         let buttonRight = UIButton()
         buttonRight.setImage(UIImage.shareImage(), for: UIControlState.normal)
-        buttonRight.addTarget(self, action:#selector(DisfrutaDetailViewController.shareItem), for:.touchUpInside)
+        buttonRight.addTarget(self, action:#selector(ParticipaDetailViewController.shareItem), for:.touchUpInside)
         buttonRight.anchorCenterSuperview()
         buttonRight.widthAnchor.constraint(equalToConstant: 37.0)
         buttonRight.heightAnchor.constraint(equalToConstant: 37.0)
@@ -163,7 +161,7 @@ class DisfrutaDetailViewController: BaseViewController {
         let buttonLeft = UIButton()
         buttonLeft.setImage(UIImage.cerrarImage(), for: UIControlState.normal)
         buttonLeft.contentMode = .scaleAspectFit
-        buttonLeft.addTarget(self, action:#selector(DisfrutaDetailViewController.goBack), for:.touchUpInside)
+        buttonLeft.addTarget(self, action:#selector(ParticipaDetailViewController.goBack), for:.touchUpInside)
         buttonLeft.anchorCenterSuperview()
         buttonLeft.widthAnchor.constraint(equalToConstant: 37.0)
         buttonLeft.heightAnchor.constraint(equalToConstant: 37.0)
@@ -189,21 +187,22 @@ class DisfrutaDetailViewController: BaseViewController {
     }
 }
 
-extension DisfrutaDetailViewController: UIScrollViewDelegate {
+extension ParticipaDetailViewController: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if scrollView.isAtTop {
             if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
                 print("down")
             } else {
-               //goBack()
+                //goBack()
             }
         }
     }
+    
 }
 
 //MARK: Configuring ImageCarouselView Presenter
-extension DisfrutaDetailViewController: ImageCarouselInteractionDelegate {
+extension ParticipaDetailViewController: ImageCarouselInteractionDelegate {
     
     func imageWasTapped(imageSlideShow: ImageSlideshow) {
         let fullScreenController = imageSlideShow.presentFullScreenController(from:  self)
