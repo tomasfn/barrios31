@@ -301,7 +301,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-montos" translatesAutoresizingMaskIntoConstraints="NO" id="RzN-3U-571">
-                                                        <rect key="frame" x="8" y="85" width="30" height="20"/>
+                                                        <rect key="frame" x="8" y="65" width="30" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="2lL-BF-1PE"/>
                                                             <constraint firstAttribute="width" constant="30" id="Zlj-Yi-AiS"/>
@@ -318,7 +318,7 @@
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="132" id="3bM-LM-Hej"/>
-                                                    <constraint firstItem="RzN-3U-571" firstAttribute="top" secondItem="Ulb-zv-t00" secondAttribute="bottom" constant="40" id="6mX-V8-jML"/>
+                                                    <constraint firstItem="RzN-3U-571" firstAttribute="top" secondItem="Ulb-zv-t00" secondAttribute="bottom" constant="20" id="6mX-V8-jML"/>
                                                     <constraint firstItem="ndE-fT-Kfo" firstAttribute="top" secondItem="Ht4-Aq-rEe" secondAttribute="bottom" constant="25" id="8TD-YK-DNF"/>
                                                     <constraint firstItem="ndE-fT-Kfo" firstAttribute="leading" secondItem="RzN-3U-571" secondAttribute="trailing" constant="8" id="EjK-nh-BJI"/>
                                                     <constraint firstItem="RzN-3U-571" firstAttribute="leading" secondItem="Srj-HK-a3Q" secondAttribute="leading" constant="8" id="HI3-qh-4jo"/>

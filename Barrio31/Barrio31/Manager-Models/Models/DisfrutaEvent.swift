@@ -21,6 +21,8 @@ class DisfrutaDetail: Object {
     @objc dynamic var started : String?
     @objc dynamic var ended : String?
     @objc dynamic var price : String?
+    @objc dynamic var day : String?
+    @objc dynamic var time : String?
     @objc dynamic var schedule : String?
     @objc dynamic var imageLink : String?
     @objc dynamic var imageIpadLink : String?
@@ -64,6 +66,14 @@ class DisfrutaDetail: Object {
         
         if let priceOK = JSON["price"] as? String {
             price = priceOK
+        }
+        
+        if let dayOK = JSON["day"] as? String {
+            day = dayOK
+        }
+        
+        if let timeOk = JSON["time"] as? String {
+            time = timeOk
         }
         
         if let scheduleOK = JSON["schedule"] as? String {

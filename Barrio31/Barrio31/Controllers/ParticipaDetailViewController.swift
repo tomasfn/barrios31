@@ -71,26 +71,26 @@ class ParticipaDetailViewController: BaseViewController {
         descriptionTxtView.text = item.longDescription
         descriptionTxtView.font = UIFont.MontserratSemiBold(fontSize: 16)
         
-//        let startAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
-//
-//        let finishAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
-//
-//        let startAttributed = NSMutableAttributedString(string:"Inicio: ", attributes:startAttr)
-//
-//        let finishAttributed = NSMutableAttributedString(string:"Finaliza: ", attributes:finishAttr)
-//
-//        let startDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
-//
-//        let finishDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
-//
-//        let startData = NSMutableAttributedString(string: "\(item.started!) | ", attributes: startDataAttr)
-//        let endedData = NSMutableAttributedString(string: "\(item.ended!) \n \(item.schedule!)", attributes: finishDataAttr)
-//
-//        startAttributed.append(startData)
-//        finishAttributed.append(endedData)
-//
-//        startAttributed.append(finishAttributed)
-//        datesLbl.attributedText = startAttributed
+        let startAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+
+        let finishAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+
+        let startAttributed = NSMutableAttributedString(string:"Día: ", attributes:startAttr)
+
+        let finishAttributed = NSMutableAttributedString(string:"Hora: ", attributes:finishAttr)
+
+        let startDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+
+        let finishDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
+
+        let startData = NSMutableAttributedString(string: "\(item.day!) | ", attributes: startDataAttr)
+        let endedData = NSMutableAttributedString(string: "\(item.time!)", attributes: finishDataAttr)
+
+        startAttributed.append(startData)
+        finishAttributed.append(endedData)
+
+        startAttributed.append(finishAttributed)
+        datesLbl.attributedText = startAttributed
         
         let priceDataAttr = [NSAttributedStringKey.font : UIFont.MontserratBold(fontSize: 14), NSAttributedStringKey.foregroundColor : UIColor.lightGray]
         let priceAttr = NSMutableAttributedString(string: "\(item.price!)", attributes: priceDataAttr)
