@@ -36,6 +36,8 @@ class ParticipaViewController: BaseViewController {
     let villa31 = CLLocation(latitude: -34.582800, longitude: -58.379679)
     let regionRadius: CLLocationDistance = 1000
     
+    private var mapLocationBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView = UITableView()
@@ -104,6 +106,11 @@ class ParticipaViewController: BaseViewController {
         getCategories()
         setupViews()
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addLocationMapBtn()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -184,6 +191,24 @@ class ParticipaViewController: BaseViewController {
         self.view.bringSubview(toFront: infoView)
     }
     
+    func addLocationMapBtn() {
+        if mapLocationBtn == nil {
+            
+            mapLocationBtn = UIButton(frame:CGRect(x: mapView.bounds.maxX - 80, y: collectionView.bounds.height - 60, width: 55, height: 55))
+            
+            mapLocationBtn.showsTouchWhenHighlighted = true
+            mapLocationBtn.setImage(UIImage.centerOnLocation(), for: .normal)
+            mapLocationBtn.setImage(UIImage.centerOnLocation()?.maskWithColor(color: .lightGray), for: .highlighted)
+            let tapB = UITapGestureRecognizer.init(target: self, action: #selector(MapViewController.centerOnUserLocation))
+            mapLocationBtn.addGestureRecognizer(tapB)
+            mapLocationBtn.roundView()
+            mapLocationBtn.contentMode = .scaleAspectFit
+            mapLocationBtn.backgroundColor = .white
+            
+            mapView.addSubview(mapLocationBtn)
+        }
+    }
+    
     func getCategories() {
         SVProgressHUD.show()
         APIManager.getParticipaCategorys { (cats, error) in
@@ -224,6 +249,11 @@ class ParticipaViewController: BaseViewController {
         UINavigationBar.appearance().titleTextAttributes  = titleTextAttributes
     }
     
+    @objc func centerOnUserLocation() {
+        if currentLocation != nil {
+            centerMapOnLocation(location: currentLocation!)
+        }
+    }
     
     @objc func mapButtonpressed () {
         if mapButton.isSelected == false {
@@ -254,10 +284,20 @@ class ParticipaViewController: BaseViewController {
             infoView.alpha = 0.0
             collectionView.alpha = 0.0
             
-            UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                self.tableView.alpha = 1.0
-            }) { (isCompleted) in
-            }
+            tableView.alpha = 1
+            tableView.transform = CGAffineTransform(scaleX: 0.8, y: 1.2)
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [],  animations: {
+                //use if you want to darken the background
+                //self.viewDim.alpha = 0.8
+                //go back to original form
+                self.tableView.transform = .identity
+            })
+            
+//            UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
+//                self.tableView.alpha = 1.0
+//            }) { (isCompleted) in
+//            }
             
             //            UIView.animate(withDuration: 0.5, delay: 0.25, options: UIViewAnimationOptions(), animations: { () -> Void in
             //                self.tableView.alpha = 1.0
@@ -418,8 +458,8 @@ extension ParticipaViewController : MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        if annotation.isKind(of: MKUserLocation.self) {
-            return MKAnnotationView()
+        if annotation is MKUserLocation {
+            return nil
         }
         
         let annotationView = CustomPointAnnotationView(annotation: annotation, reuseIdentifier: "Attraction")

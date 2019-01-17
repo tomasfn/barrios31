@@ -217,7 +217,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     }
     
     @objc func centerOnUserLocation() {
-        
         if currentLocation != nil {
             centerMapOnLocation(location: currentLocation!)
         }
@@ -373,8 +372,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         
         return p.contains(test)
     }
-    
-    
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let polygonRenderer = MKPolygonRenderer(overlay: overlay)
         
@@ -401,7 +399,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         return cell
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectedIndexs.contains(indexPath.item) {
             selectedIndexs.removeObject(indexPath.item)
@@ -421,7 +418,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
 }
 
 // MARK - CLLocationManagerDelegate
-
 extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
