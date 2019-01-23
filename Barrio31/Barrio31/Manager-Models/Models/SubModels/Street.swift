@@ -43,8 +43,8 @@ class Street: Object {
             }
         }
         
-        beforeLink = "http://barrio31.candoit.com.ar" + beforeEndpoint
-        afterLink = "http://barrio31.candoit.com.ar" + afterEndpoint
+        beforeLink = "http://barrio31.candoit.com.ar/api" + beforeEndpoint + accessToken
+        afterLink = "http://barrio31.candoit.com.ar/api" + afterEndpoint + accessToken
         
     }
 }

@@ -17,6 +17,8 @@ pod 'Gemini'
 pod 'SimpleImageViewer', '~> 1.1.1'
 pod 'GoogleMaps'
 pod 'SDWebImage'
+pod 'ImageSlideshow', '~> 1.6'
+pod 'ImageSlideshow/SDWebImage'
 
 end
 

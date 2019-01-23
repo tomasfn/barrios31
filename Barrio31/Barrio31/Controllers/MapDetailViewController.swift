@@ -511,7 +511,6 @@ class MapDetailViewController: BaseViewController {
         self.view.addSubview(infoView)
         infoView.backgroundColor = UIColor.white
         
-        
         let imgView = UIImageView()
         imgView.image = CategoryHelper.setImagePatternForCategory(categorySlug: detail.categorySlug!)
         imgView.contentMode = .scaleAspectFill

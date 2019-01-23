@@ -153,6 +153,45 @@ extension UIImage {
     class func splashImage() -> UIImage! {
         return UIImage(named: "splash")
     }
+    
+    
+    //MARK: Disfruta Detail ViewController
+    
+    class func shareImage() -> UIImage! {
+        return UIImage(named: "ic-share")
+    }
+    
+    class func cerrarImage() -> UIImage! {
+        return UIImage(named: "ic-cerrar")
+    }
+    
+    //MARK: Disfruta Categories
+    
+    class func culturaOnImage() -> UIImage! {
+        return UIImage(named: "cultura-activo")
+    }
+    
+    class func deporteOnImage() -> UIImage! {
+        return UIImage(named: "deporte-activo")
+    }
+    
+    class func gastronomiaOnImage() -> UIImage! {
+        return UIImage(named: "gastronomia-activo")
+    }
+    
+    class func culturaOffImage() -> UIImage! {
+        return UIImage(named: "cultura-inactivo")
+    }
+    
+    class func deporteOffImage() -> UIImage! {
+        return UIImage(named: "deporte-inactivo")
+    }
+    
+    class func gastronomiaOffImage() -> UIImage! {
+        return UIImage(named: "gastronomia-inactivo")
+    }
+    
+
 }
 
 

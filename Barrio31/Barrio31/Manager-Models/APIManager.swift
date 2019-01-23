@@ -15,12 +15,13 @@ typealias PolygonsCompletionBlock = ([Polygon]?, Error?) -> Void
 typealias PolygonsDetailCompletionBlock = (PolygonDetail?, Error?) -> Void
 typealias DisfrutaCompletionBlock = ([DisfrutaItem]?, Error?) -> Void
 typealias DisfrutaDetailCompletionBlock = (DisfrutaDetail?, Error?) -> Void
+typealias DisfrutaDetailsCompletionBlock = ([DisfrutaDetail]?, Error?) -> Void
 typealias AlamofireCompletionBlock = (AnyObject?, NSError?) -> Void
 
 
 public let accessToken = "?access_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.F0jfyuausMz2uHyzVWaXDExMGQfcgMAZRn-wVv540zCVlknYjSjg3fAatsru9HVOL7xiqpZcUB4eHQjlSIWpUw"//"http://64.251.25.64:8083/api" //
-public let apiServer = "http://barrio31.candoit.com.ar/api/"//"http://64.251.25.64:8083/api" //
-private var mainHeader = ["Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.F0jfyuausMz2uHyzVWaXDExMGQfcgMAZRn-wVv540zCVlknYjSjg3fAatsru9HVOL7xiqpZcUB4eHQjlSIWpUw"]
+public let apiServer = "http://barrio31-test.candoit.com.ar/api/"//"http://64.251.25.64:8083/api" //
+public var mainHeader = ["Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.F0jfyuausMz2uHyzVWaXDExMGQfcgMAZRn-wVv540zCVlknYjSjg3fAatsru9HVOL7xiqpZcUB4eHQjlSIWpUw"]
 private let acceptedContentTypes = ["audio/mp3", "audio/mpeg", "image/png", "image/jpeg", "application/json", "text/html"]
 
 
@@ -44,6 +45,23 @@ class APIManager: NSObject {
       }
     }
   }
+    
+    class func getParticipaCategorys(completionBlock: @escaping CategorysCompletionBlock) {
+        let url = apiServer + "participa/categorias"
+        Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+            if let data = response.data, response.error == nil {
+                do {
+                    let response = try JSONDecoder().decode([Category].self, from: data)
+                    completionBlock(response, nil)
+                } catch {
+                    completionBlock(nil, ErrorManager.serverError())
+                }
+            }
+            else {
+                completionBlock(nil, ErrorManager.serverError())
+            }
+        }
+    }
     
     class func getDisfrutaCategorys(completionBlock: @escaping CategorysCompletionBlock) {
         let url = apiServer + "disfruta/categorias"
@@ -117,14 +135,36 @@ class APIManager: NSObject {
       }
     }
   }
+    
+class func getParticipa(completionBlock: @escaping DisfrutaCompletionBlock) {
+        let url = apiServer + "participa"
+        Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+            if let data = response.result.value, response.error == nil {
+                if let dic = data as? Dictionary<String, AnyObject> {
+                    if let array = dic["features"] as? Array<Dictionary<String, AnyObject>> {
+                        var dis = [DisfrutaItem]()
+                        for item in array {
+                            let obj = DisfrutaItem.init(JSON: item)
+                            dis.append(obj)
+                        }
+                        completionBlock(dis, nil)
+                    }
+                }
+            }
+            else {
+                completionBlock(nil, ErrorManager.serverError())
+            }
+        }
+    }
   
   class func getDisfrutaDetails(withId: String , completionBlock: @escaping DisfrutaDetailCompletionBlock) {
     let url = apiServer + "disfruta/detalle/\(withId)"
+    
     Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
       if let data = response.data, response.error == nil {
         do {
-          let response = try JSONDecoder().decode(DisfrutaDetail.self, from: data)
-          completionBlock(response, nil)
+            let details = DisfrutaDetail(JSON: response.result.value as! [String : AnyObject])
+            completionBlock(details, nil)
         } catch {
           completionBlock(nil, ErrorManager.serverError())
         }

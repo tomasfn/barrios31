@@ -42,6 +42,18 @@ extension NavigationHelper {
         return mainStoryboard.instantiateViewController(withIdentifier: MapViewController.nameOfClass) as! MapViewController
     }
     
+    class func conoceViewController() -> ConoceViewController {
+        return mainStoryboard.instantiateViewController(withIdentifier: ConoceViewController.nameOfClass) as! ConoceViewController
+    }
+    
+    class func disfrutaViewController() -> DisfrutaViewController {
+        return mainStoryboard.instantiateViewController(withIdentifier: DisfrutaViewController.nameOfClass) as! DisfrutaViewController
+    }
+    
+    class func participaViewController() -> ParticipaViewController {
+        return mainStoryboard.instantiateViewController(withIdentifier: ParticipaViewController.nameOfClass) as! ParticipaViewController
+    }
+    
 }
 
 //MARK: NavigationControllers

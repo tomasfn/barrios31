@@ -27,7 +27,7 @@ class CategoryCell: UICollectionViewCell {
       }
       label.text = item!.name?.uppercased()
         
-        //Ugly resolution as client requested
+        //Ugly solution as client requested
         if item?.name == "Infraestructura" {
             label.text = "INFRAESTRU..."
         }

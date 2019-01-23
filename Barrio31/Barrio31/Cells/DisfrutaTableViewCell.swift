@@ -14,19 +14,25 @@ class DisfrutaTableViewCell: UITableViewCell {
   
   var item : DisfrutaDetail? {
     didSet {
-      dateLabel.text = (item?.started)! + " - " + (item?.ended)!
+
+        if let started = item?.started {
+            dateLabel.text = started + " - " + (item?.ended)!
+        }
+        
       nameLabel.text = item?.name
       dateLabel.sizeToFit()
       descriptionLabel.text = item?.shortDescription
       priceLabel.text = item?.price
       imageView?.contentMode = .scaleAspectFit
       if let imgLink = item?.imageLink {
-        let url = "http://barrio31.candoit.com.ar/api" + imgLink
-        Alamofire.request(url).responseImage { response in
-          if let image = response.result.value {
-            self.imgView.image = image
-          }
-        }
+        let url = URL(string: imgLink)
+        imgView.kf.setImage(with: url)
+        
+//        downloader.download(urlRequest) { response in
+//            if let image = response.result.value {
+//                self.imgView.image = image
+//            }
+//        }
       }
     }
   }

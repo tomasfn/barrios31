@@ -45,10 +45,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         // Do any additional setup after loading the view, typically from a nib.
         setupViews()
         setUpAppearance()
-        
-        
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,7 +64,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.title = ""
-        
         sideMenuController?.cache(viewController: navigationController!, with: "mapViewController")
     }
     
@@ -108,7 +104,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         flowLayout.scrollDirection = .horizontal
         flowLayout.estimatedItemSize = .init(100, 80)
         flowLayout.minimumInteritemSpacing = 0
-        
         
         // minimumLineSpacing para los items debajo
         flowLayout.minimumLineSpacing = 0
@@ -222,7 +217,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     }
     
     @objc func centerOnUserLocation() {
-        
         if currentLocation != nil {
             centerMapOnLocation(location: currentLocation!)
         }
@@ -378,8 +372,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         
         return p.contains(test)
     }
-    
-    
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let polygonRenderer = MKPolygonRenderer(overlay: overlay)
         
@@ -406,7 +399,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         return cell
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectedIndexs.contains(indexPath.item) {
             selectedIndexs.removeObject(indexPath.item)
@@ -426,7 +418,6 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
 }
 
 // MARK - CLLocationManagerDelegate
-
 extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
