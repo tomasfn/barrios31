@@ -27,6 +27,8 @@
 		4542CCE8212C4FDE00EE5D3F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542CCE7212C4FDE00EE5D3F /* MapViewController.swift */; };
 		4542CCED212C4FE400EE5D3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCEC212C4FE400EE5D3F /* Assets.xcassets */; };
 		4542CCF0212C4FE400EE5D3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4542CCEE212C4FE400EE5D3F /* LaunchScreen.storyboard */; };
+		456BF06B21E78E7D0003A3B2 /* StreetCollectionSwipeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456BF06A21E78E7D0003A3B2 /* StreetCollectionSwipeViewCell.swift */; };
+		456BF06D21E7935F0003A3B2 /* DroneCollectionSwipeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456BF06C21E7935F0003A3B2 /* DroneCollectionSwipeViewCell.swift */; };
 		45CB1076214ADF2900E856E2 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CB1072214ADF2700E856E2 /* Montserrat-Bold.ttf */; };
 		45CB1077214ADF2900E856E2 /* Chalet NewYorkNineteenEighty.otf in Resources */ = {isa = PBXBuildFile; fileRef = 45CB1073214ADF2800E856E2 /* Chalet NewYorkNineteenEighty.otf */; };
 		45CB1078214ADF2900E856E2 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45CB1074214ADF2800E856E2 /* Montserrat-Regular.ttf */; };
@@ -82,6 +84,8 @@
 		4542CCEC212C4FE400EE5D3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4542CCEF212C4FE400EE5D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4542CCF1212C4FE400EE5D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		456BF06A21E78E7D0003A3B2 /* StreetCollectionSwipeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetCollectionSwipeViewCell.swift; sourceTree = "<group>"; };
+		456BF06C21E7935F0003A3B2 /* DroneCollectionSwipeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneCollectionSwipeViewCell.swift; sourceTree = "<group>"; };
 		45CB1072214ADF2700E856E2 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		45CB1073214ADF2800E856E2 /* Chalet NewYorkNineteenEighty.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chalet NewYorkNineteenEighty.otf"; sourceTree = "<group>"; };
 		45CB1074214ADF2800E856E2 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 			children = (
 				8A6275CF21A5A07B0000B4C8 /* StreetCollectionViewCell.swift */,
 				8A6275D121A5B59D0000B4C8 /* DroneCollectionViewCell.swift */,
+				456BF06A21E78E7D0003A3B2 /* StreetCollectionSwipeViewCell.swift */,
+				456BF06C21E7935F0003A3B2 /* DroneCollectionSwipeViewCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -527,6 +533,7 @@
 				8AB35FE2219F08F500E4394D /* Protocols.swift in Sources */,
 				45151C3C212DF65100222656 /* ReusableView.swift in Sources */,
 				8A2C728B21B03089000FF24C /* ConoceItem.swift in Sources */,
+				456BF06D21E7935F0003A3B2 /* DroneCollectionSwipeViewCell.swift in Sources */,
 				453CB2662167B85B00DEF65B /* MapDetailViewController.swift in Sources */,
 				8A6275D021A5A07B0000B4C8 /* StreetCollectionViewCell.swift in Sources */,
 				453CB268216BDE9400DEF65B /* MenuViewController.swift in Sources */,
@@ -536,6 +543,7 @@
 				8A2C728621AF4E86000FF24C /* NavigationHelper.swift in Sources */,
 				452CE2F2218C97A600590678 /* DisfrutaDetailViewController.swift in Sources */,
 				452CE2EE218C8C3D00590678 /* InfoView.swift in Sources */,
+				456BF06B21E78E7D0003A3B2 /* StreetCollectionSwipeViewCell.swift in Sources */,
 				8A2DE8F721AC548F00D78161 /* ConoceViewController.swift in Sources */,
 				452CE2F0218C8C8100590678 /* CategoryCell.swift in Sources */,
 				45151C32212DE69300222656 /* AppImages.swift in Sources */,
