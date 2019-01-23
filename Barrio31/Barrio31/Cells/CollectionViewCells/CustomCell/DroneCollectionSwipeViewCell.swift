@@ -40,7 +40,7 @@ class DroneCollectionSwipeViewCell: GeminiCell {
         didSet {
             if imageArray.count > 1 {
                 setupImages(imageArray)
-                setIndicatorLbls()
+                setIndicatorImage()
             }
         }
     }
@@ -99,6 +99,23 @@ class DroneCollectionSwipeViewCell: GeminiCell {
         return v
     }()
     
+    @IBInspectable
+    public var thumbIm: UIImage = UIImage(){
+        didSet {
+            
+            thumbImage.image = thumbIm
+            
+        }
+    }
+    fileprivate lazy var thumbImage: UIImageView = {
+        let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
+        //iv.clipsToBounds = true
+        return iv
+    }()
+
+    
     fileprivate lazy var line: UIView = {
         let v = UIView()
         v.backgroundColor = UIColor.white
@@ -138,49 +155,16 @@ class DroneCollectionSwipeViewCell: GeminiCell {
     ///////
     
     
-    func setIndicatorLbls() {
-        
-        pageControl = UIPageControl()
-        pageControl.isUserInteractionEnabled = false
-        pageControl.numberOfPages = pageCounter
-        pageControl.currentPage = 0
-        
-        addSubview(pageControl)
-        if #available(iOS 11.0, *) {
-            pageControl.anchor(safeAreaLayoutGuide.topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor , size : .init(0, 40))
-        } else {
-            // Fallback on earlier versions
-            pageControl.anchor(topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor , size : .init(0, 40))
-        }
-        
-        pageControl.currentPageIndicatorTintColor = .white
-        pageControl.pageIndicatorTintColor = .lightGray
-        pageControl.isHidden = true
-        
-        ayerLabel = UILabel()
-        ayerLabel.text = "AYER"
-        ayerLabel.textColor = UIColor.white
-        ayerLabel.textAlignment = .center
-        ayerLabel.font = UIFont.chalet(fontSize: 16)
-        addSubview(ayerLabel)
-        
-        ayerLabel.anchor(pageControl.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, size : .init(width/3, 30))
-        
-        mañanaLabel = UILabel()
-        //Setting the current state of Item
+    
+    func setIndicatorImage()->UIImageView{
         if state == "FUTURE" {
-            mañanaLabel.text = "MAÑANA"
-        } else {
-            mañanaLabel.text = "HOY"
+            thumbImage.image = UIImage(named: "ic-ayer-manana")
+        }else{
+            thumbImage.image = UIImage(named: "ic-ayer-hoy")
         }
-        
-        mañanaLabel.alpha = 0.5
-        mañanaLabel.textColor = UIColor.white
-        mañanaLabel.textAlignment = .center
-        mañanaLabel.font = UIFont.chalet(fontSize: 16)
-        addSubview(mañanaLabel)
-        mañanaLabel.anchor(pageControl.bottomAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, size : .init(width/3, 30))
+        return thumbImage
     }
+    
     
     func setupImages(_ images: [UIImage]){
         
@@ -192,26 +176,26 @@ class DroneCollectionSwipeViewCell: GeminiCell {
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
             
+            imageView4.frame = CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
             imageView3 = imageView
             imageView4 = imageView
             
             
             scrollView.addSubview(imageView4)
-            
+                addSubview(imageView3)
         }
         
-
-        scrollView.fillSuperview()
         scrollView.backgroundColor = UIColor.black
         scrollView.delegate = self
         
-        scrollView.addSubview(image2Wrapper)
+//        scrollView.addSubview(image2Wrapper)
+  
         image2Wrapper.addSubview(imageView3)
         addSubview(image2Wrapper)
         addSubview(thumbWrapper2)
         
-        
     }
+    
     
     func setLabelAlpha() {
         if ayerLabel.alpha == 0.5 {
@@ -257,7 +241,7 @@ extension DroneCollectionSwipeViewCell {
         addSubview(image2Wrapper)
         
         thumbWrapper2.addSubview(line)
-        thumbWrapper2.addSubview(thumb)
+        thumbWrapper2.addSubview(setIndicatorImage())
         addSubview(thumbWrapper2)
         
         
@@ -289,29 +273,26 @@ extension DroneCollectionSwipeViewCell {
         NSLayoutConstraint.activate([
             thumbWrapper2.topAnchor.constraint(equalTo: image2Wrapper.topAnchor, constant: 0),
             thumbWrapper2.bottomAnchor.constraint(equalTo: image2Wrapper.bottomAnchor, constant: 0),
-            thumbWrapper2.leadingAnchor.constraint(equalTo: image2Wrapper.leadingAnchor, constant: -20),
-            thumbWrapper2.widthAnchor.constraint(equalToConstant: 40)
+            thumbWrapper2.leadingAnchor.constraint(equalTo: image2Wrapper.leadingAnchor, constant: -35),
+            thumbWrapper2.widthAnchor.constraint(equalToConstant: 65)
             ])
         
         NSLayoutConstraint.activate([
             line.centerXAnchor.constraint(equalTo: thumbWrapper2.centerXAnchor, constant: 0),
             line.centerYAnchor.constraint(equalTo: thumbWrapper2.centerYAnchor, constant: 0),
-            line.widthAnchor.constraint(equalTo: thumbWrapper2.widthAnchor, multiplier: 0.2),
-            line.heightAnchor.constraint(equalTo: thumbWrapper2.widthAnchor, multiplier: 50)
+            line.widthAnchor.constraint(equalTo: thumbWrapper2.widthAnchor, multiplier: 0.1),
+            line.heightAnchor.constraint(equalTo: thumbWrapper2.widthAnchor, multiplier: 40)
             ])
-        
         
         NSLayoutConstraint.activate([
-            thumb.centerXAnchor.constraint(equalTo: thumbWrapper2.centerXAnchor, constant: 0),
-            thumb.centerYAnchor.constraint(equalTo: thumbWrapper2.centerYAnchor, constant: 0),
-            thumb.widthAnchor.constraint(equalTo: thumbWrapper2.widthAnchor, multiplier: 1),
-            thumb.heightAnchor.constraint(equalTo: thumbWrapper2.widthAnchor, multiplier: 1)
+            thumbImage.centerXAnchor.constraint(equalTo: thumbWrapper2.centerXAnchor, constant: 0),
+            thumbImage.centerYAnchor.constraint(equalTo: thumbWrapper2.centerYAnchor, constant: 0),
+            thumbImage.widthAnchor.constraint(equalTo: thumbWrapper2.widthAnchor, constant: 0),
+            thumbImage.heightAnchor.constraint(equalTo: thumbWrapper2.widthAnchor, constant: 0)
             ])
+    
         
         leading.constant = frame.width / 1.1
-        
-        
-        thumb.layer.cornerRadius = 20
         
         imageView3.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
         

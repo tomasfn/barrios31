@@ -313,17 +313,8 @@ extension StreetCollectionSwipeViewCell {
             line.heightAnchor.constraint(equalTo: thumbWrapper.widthAnchor, multiplier: 40)
             ])
         
-        
-//        NSLayoutConstraint.activate([
-//            thumb.centerXAnchor.constraint(equalTo: thumbWrapper.centerXAnchor, constant: 0),
-//            thumb.centerYAnchor.constraint(equalTo: thumbWrapper.centerYAnchor, constant: 0),
-//            thumb.widthAnchor.constraint(equalTo: thumbWrapper.widthAnchor, multiplier: 1),
-//            thumb.heightAnchor.constraint(equalTo: thumbWrapper.widthAnchor, multiplier: 1)
-//            ])
 
         leading.constant = frame.width / 1.1
-
-//        thumb.layer.cornerRadius = 20
         
         imageView1.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
 
