@@ -103,7 +103,6 @@ class StreetCollectionViewCell: GeminiCell {
             
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(StreetCollectionViewCell.scrollViewTapped))
             scrollView.addGestureRecognizer(tap)
-            
             scrollView.addSubview(imageView)
         }
         
