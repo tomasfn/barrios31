@@ -384,6 +384,7 @@ class MapDetailViewController: BaseViewController {
                     queue.async (group: group) {
                         self.self.streetBeforeImg = image
                         group.leave()
+                        
                     }
                 }
             }
@@ -462,8 +463,18 @@ class MapDetailViewController: BaseViewController {
         collectionView = GeminiCollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.delegate   = self
         collectionView.dataSource = self
+        
+        // PROBANDO SWIPEVIEW en ipad .... 
+        if UIDevice.current.userInterfaceIdiom == .pad {
+        collectionView.register(StreetCollectionSwipeViewCell.self, forCellWithReuseIdentifier: "StreetCollectionViewCell")
+        collectionView.register(DroneCollectionSwipeViewCell.self, forCellWithReuseIdentifier: "DroneCollectionViewCell")
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
         collectionView.register(StreetCollectionViewCell.self, forCellWithReuseIdentifier: "StreetCollectionViewCell")
         collectionView.register(DroneCollectionViewCell.self, forCellWithReuseIdentifier: "DroneCollectionViewCell")
+        }
+        
         collectionView.backgroundColor = UIColor(patternImage: CategoryHelper.setImagePatternForCategory(categorySlug: detail.categorySlug!))
         collectionView.decelerationRate = UIScrollViewDecelerationRateNormal
 
@@ -655,7 +666,7 @@ class MapDetailViewController: BaseViewController {
         if UIDevice.current.userInterfaceIdiom == .pad{
             
             // ******************* INFOSIZE *********************
-            infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: nil, padding: .init(top: -150, left: 10, bottom: -15, right: -10), size: .init(400, 0))
+            infoView.anchor(view.centerYAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: nil, padding: .init(top: -150, left: 15, bottom: -15, right: -10), size: .init(400, 0))
         }
         
         if UIDevice.current.userInterfaceIdiom == .phone{
@@ -736,21 +747,41 @@ extension MapDetailViewController : UICollectionViewDelegate, UICollectionViewDa
         
         if indexPath.item == 0
         {
-            // Configure For Street Cell
-            let cellStreet = collectionView.dequeueReusableCell(withReuseIdentifier: "StreetCollectionViewCell", for: indexPath) as! StreetCollectionViewCell
-            cellStreet.state = detail.state
-            cellStreet.imageArray = streetImageArray
             
-            cell = cellStreet
+            if UIDevice.current.userInterfaceIdiom == .pad {
+            // Configure For Street Cell
+                let cellStreet = collectionView.dequeueReusableCell(withReuseIdentifier: "StreetCollectionViewCell", for: indexPath) as! StreetCollectionSwipeViewCell
+                cellStreet.state = detail.state
+                cellStreet.imageArray = streetImageArray
+                cell = cellStreet
+            }
+            
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                // Configure For Street Cell
+                let cellStreet = collectionView.dequeueReusableCell(withReuseIdentifier: "StreetCollectionViewCell", for: indexPath) as! StreetCollectionViewCell
+                
+                cellStreet.state = detail.state
+                cellStreet.imageArray = streetImageArray
+                cell = cellStreet
+            }
         }
         else
         {
+            if UIDevice.current.userInterfaceIdiom == .pad{
             // Configure For Drone Cell
-            let cellDrone = collectionView.dequeueReusableCell(withReuseIdentifier: "DroneCollectionViewCell", for: indexPath) as! DroneCollectionViewCell
-            cellDrone.state = detail.state
-            cellDrone.imageArray = droneImageArray
+                let cellDrone = collectionView.dequeueReusableCell(withReuseIdentifier: "DroneCollectionViewCell", for: indexPath) as! DroneCollectionSwipeViewCell
+                cellDrone.state = detail.state
+                cellDrone.imageArray = droneImageArray
+                cell = cellDrone
+            }
             
-            cell = cellDrone
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                let cellDrone = collectionView.dequeueReusableCell(withReuseIdentifier: "DroneCollectionViewCell", for: indexPath) as! DroneCollectionViewCell
+                cellDrone.state = detail.state
+                cellDrone.imageArray = droneImageArray
+                cell = cellDrone
+            }
+            
         }
         
         self.collectionView.animateCell(cell)
