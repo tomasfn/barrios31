@@ -12,6 +12,14 @@ import RealmSwift
 typealias PolygonDetailsJSON = [String : AnyObject]
 
 class PolygonDetail: Object {
+    
+    func nullToNil(value : AnyObject?) -> AnyObject? {
+        if value is NSNull {
+            return nil
+        } else {
+            return value
+        }
+    }
 
     @objc dynamic var id: Int = -1
     @objc dynamic var name : String?

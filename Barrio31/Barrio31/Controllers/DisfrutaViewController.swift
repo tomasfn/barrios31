@@ -550,6 +550,14 @@ extension DisfrutaViewController: UICollectionViewDataSource , UICollectionViewD
         return self.categorys.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let widthCollectionView = collectionView.frame.width
+        let widthCell = Double(widthCollectionView) / Double(categorys.count)
+        
+        return CGSize(width: widthCell, height: 32)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath ) as! CategoryCell

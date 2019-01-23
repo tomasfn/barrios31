@@ -212,9 +212,10 @@ class ParticipaViewController: BaseViewController {
     func getCategories() {
         SVProgressHUD.show()
         APIManager.getParticipaCategorys { (cats, error) in
-            if let _ = cats {
-                self.categorys = cats!
+            if let categories = cats {
+                self.categorys = categories
                 self.collectionView.reloadData()
+                SVProgressHUD.dismiss()
             }
             else {
                 //Show Error
@@ -328,7 +329,7 @@ class ParticipaViewController: BaseViewController {
         for item in items {
             counter = counter - 1
             //print("\(counter)")
-            APIManager.getDisfrutaDetails(withId: "\(String(describing: item.id))") { (disf, error) in
+            APIManager.getParticipaDetails(withId: "\(String(describing: item.id))") { (disf, error) in
                 if error == nil {
                     self.details.append(disf!)
                     if self.details.count == self.items.count , counter == 0 {

@@ -28,7 +28,7 @@ private let acceptedContentTypes = ["audio/mp3", "audio/mpeg", "image/png", "ima
 class APIManager: NSObject {
   
   // MARK: REcorre services
-  
+    
   class func getRecorreCategorys(completionBlock: @escaping CategorysCompletionBlock) {
     let url = apiServer + "recorre/categorias"
     Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
@@ -175,6 +175,24 @@ class func getParticipa(completionBlock: @escaping DisfrutaCompletionBlock) {
     }
   }
     
+    class func getParticipaDetails(withId: String , completionBlock: @escaping DisfrutaDetailCompletionBlock) {
+        let url = apiServer + "participa/detalle/\(withId)"
+        
+        Alamofire.request(url, method: .get, parameters: nil, headers: mainHeader).validate(contentType: acceptedContentTypes).responseJSON { response in
+            if let data = response.data, response.error == nil {
+                do {
+                    let details = DisfrutaDetail(JSON: response.result.value as! [String : AnyObject])
+                    completionBlock(details, nil)
+                } catch {
+                    completionBlock(nil, ErrorManager.serverError())
+                }
+            }
+            else {
+                completionBlock(nil, ErrorManager.serverError())
+            }
+        }
+    }
+    
     class func getAllConoceItems(completionBlock: @escaping ConoceItemsCompletionBlock) {
         
         let endpoint = "conoce\(accessToken)"
@@ -227,7 +245,7 @@ extension APIManager {
     private class func makeRequestWithMethod(method: Alamofire.HTTPMethod, toEndpoint endpoint: String!, withParameters parameters: [String : AnyObject]? = nil, andHeaders headers: [String : String]? = nil, showActivityIndicator: Bool, completionBlock: AlamofireCompletionBlock?) {
         
         
-        let url = apiServer + endpoint
+        let url = "http://barrio31.candoit.com.ar/api/" + endpoint
         
         let acceptedContentTypes = ["audio/mp3", "audio/mpeg", "image/png", "image/jpeg", "application/json", "text/html"]
         
