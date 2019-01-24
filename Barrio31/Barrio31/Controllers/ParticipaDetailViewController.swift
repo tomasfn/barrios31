@@ -115,6 +115,7 @@ class ParticipaDetailViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         setNavBarDefault()
+        UIApplication.shared.statusBarView?.backgroundColor = .clear
     }
     
     override func viewDidLayoutSubviews() {
@@ -175,7 +176,13 @@ class ParticipaDetailViewController: BaseViewController {
     
     @objc func shareItem() {
         //Set the default sharing message.
-        let message = "Vení a \(String(describing: item.name!)) los \(String(describing: item.day!)) de \(item.time!)"
+        
+        var message = ""
+        
+        if let name = item.name, let day = item.day, let time = item.time {
+            message = "Vení a \(name) los \(day) de \(time)"
+        }
+        
         //Set the link to share.
         if let link = NSURL(string: "http://barrio31.candoit.com.ar/")
         {
@@ -188,6 +195,29 @@ class ParticipaDetailViewController: BaseViewController {
 }
 
 extension ParticipaDetailViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var offset = scrollView.contentOffset.y / 150
+        if offset > 1 {
+            offset = 1
+            
+            let color = UIColor(red:0.92, green:0.92, blue:0.92, alpha:offset)
+            self.navigationController?.navigationBar.tintColor = .lightGray
+            self.navigationController?.navigationBar.backgroundColor = color
+            UIApplication.shared.statusBarView?.backgroundColor = color
+            self.navigationController?.navigationBar.layoutIfNeeded()
+
+        } else {
+            let color = UIColor(red:0.92, green:0.92, blue:0.92, alpha:offset)
+            self.navigationController?.navigationBar.tintColor = UIColor.white
+            self.navigationController?.navigationBar.backgroundColor = color
+            UIApplication.shared.statusBarView?.backgroundColor = color
+            self.navigationController?.navigationBar.layoutIfNeeded()
+        }
+        
+        
+    }
+    
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if scrollView.isAtTop {

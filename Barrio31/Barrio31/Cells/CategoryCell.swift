@@ -72,12 +72,27 @@ class CategoryCell: UICollectionViewCell {
     addSubview(container)
     addSubview(imgView)
     addSubview(label)
-    container.anchor(topAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor,size: .init(100, 80.0))
+    
+    // 1. request an UITraitCollection instance
+    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+    
+    // 2. check the idiom
+    switch (deviceIdiom) {
+        
+    case .pad:
+        container.anchor(topAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor,size: .init(250, 80.0))
+    case .phone:
+        container.anchor(topAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor,size: .init(100, 80.0))
+    case .tv:
+        print("tvOS style UI")
+    default:
+        print("Unspecified UI idiom")
+    }
     
     //label.anchor(imgView.bottomAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor)
     label.anchor(nil, leading: nil, bottom:bottomAnchor, trailing:nil,size: .init(88, 30.0))
     label.anchorCenterXToSuperview()
-    imgView.anchor(topAnchor, leading: leadingAnchor, bottom:label.topAnchor, trailing:trailingAnchor , padding: .init(top: 5, left: 5, bottom: -5, right: -5))
+    imgView.anchor(topAnchor, leading: leadingAnchor, bottom:label.topAnchor, trailing:trailingAnchor , padding: .init(top: 10, left: 5, bottom: -5, right: -5))
     imgView.anchorCenterXToSuperview()
   }
   
