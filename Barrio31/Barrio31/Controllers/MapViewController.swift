@@ -393,6 +393,11 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath ) as! CategoryCell
         let item = categorys[indexPath.item]
+        
+        if categorys.count < 5 {
+        cell.resizeWidth(categoryFloat: CGFloat(categorys.count))
+        }
+        
         cell.isPressed = selectedIndexs.contains(indexPath.item)
         cell.item = item
         

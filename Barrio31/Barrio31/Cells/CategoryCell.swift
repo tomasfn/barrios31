@@ -35,6 +35,8 @@ class CategoryCell: UICollectionViewCell {
   }
   
   var isPressed = false
+    
+    var categoriesQty: CGFloat?
   
   let imgView: UIImageView = {
     let iv = UIImageView()
@@ -60,6 +62,8 @@ class CategoryCell: UICollectionViewCell {
     label.numberOfLines = 0
     return label
   }()
+    
+    let screenRect = UIScreen.main.bounds
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -75,19 +79,22 @@ class CategoryCell: UICollectionViewCell {
     
     // 1. request an UITraitCollection instance
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-    
+        
     // 2. check the idiom
     switch (deviceIdiom) {
         
     case .pad:
-        container.anchor(topAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor,size: .init(250, 80.0))
+        width = 250
     case .phone:
-        container.anchor(topAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor,size: .init(100, 80.0))
+        width = 100
     case .tv:
         print("tvOS style UI")
     default:
         print("Unspecified UI idiom")
     }
+    
+    container.anchor(topAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor,size: .init(width, 80.0))
+
     
     //label.anchor(imgView.bottomAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor)
     label.anchor(nil, leading: nil, bottom:bottomAnchor, trailing:nil,size: .init(88, 30.0))
@@ -99,5 +106,14 @@ class CategoryCell: UICollectionViewCell {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+    
+    func resizeWidth(categoryFloat: CGFloat) {
+        
+        let screenWidth = screenRect.size.width
+                
+        width = screenWidth / categoryFloat
+        
+        container.anchor(topAnchor, leading: leadingAnchor, bottom:bottomAnchor, trailing:trailingAnchor,size: .init(width, 80.0))        
+    }
   
 }
