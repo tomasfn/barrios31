@@ -110,6 +110,7 @@ class ParticipaViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        collectionView.reloadData()
         addLocationMapBtn()
     }
     
@@ -525,8 +526,11 @@ extension ParticipaViewController: UICollectionViewDataSource , UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath ) as! CategoryCell
         let item = categorys[indexPath.item]
+        
+        cell.resizeWidth(categoryFloat: CGFloat(categorys.count))
         cell.isPressed = selectedIndexs.contains(indexPath.item)
         cell.item = item
         

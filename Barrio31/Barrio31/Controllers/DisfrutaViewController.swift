@@ -110,6 +110,7 @@ var lastInfoViewId: Int!
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        collectionView.reloadData()
         addLocationMapBtn()
     }
     
@@ -556,6 +557,7 @@ extension DisfrutaViewController: UICollectionViewDataSource , UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath ) as! CategoryCell
         let item = categorys[indexPath.item]
         
+        cell.resizeWidth(categoryFloat: CGFloat(categorys.count))
         cell.isPressed = selectedIndexs.contains(indexPath.item)
         cell.item = item
         
