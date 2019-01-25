@@ -132,7 +132,6 @@ class DroneCollectionSwipeViewCell: GeminiCell {
     }()
     
     lazy fileprivate var setupLeadingAndOriginRect: Void = {
-        //self.leading.constant = self.frame.width / 1.1
         self.layoutIfNeeded()
         self.originRect = self.image2Wrapper.frame
     }()
@@ -152,9 +151,7 @@ class DroneCollectionSwipeViewCell: GeminiCell {
         _ = setupLeadingAndOriginRect
     }
     
-    ///////
-    
-    
+    // ************
     
     func setIndicatorImage()->UIImageView{
         if state == "FUTURE" {
@@ -165,35 +162,30 @@ class DroneCollectionSwipeViewCell: GeminiCell {
         return thumbImage
     }
     
+    // ************
     
     func setupImages(_ images: [UIImage]){
         
         for i in 0..<images.count {
-            let imageView = UIImageView()
-            imageView.image = images[i]
-            let xPosition = UIScreen.main.bounds.width * CGFloat(i)
-            imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
             
-            imageView4.frame = CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
-            imageView3 = imageView
-            imageView4 = imageView
+            imageView3.image = images[0]
+            imageView4.image = images[1]
             
+            let xPosition = UIScreen.main.bounds.width * CGFloat()
+            image2Wrapper.frame = CGRect(x: xPosition, y: 0, width: self.frame.width, height: self.frame.height)
             
-            scrollView.addSubview(imageView4)
-                addSubview(imageView3)
+            imageView3.frame = CGRect(x: xPosition, y: 0, width: image2Wrapper.frame.width, height: image2Wrapper.frame.height)
+            
+            imageView4.frame = CGRect(x: xPosition, y: 0, width: image2Wrapper.frame.width, height: image2Wrapper.frame.height)
         }
         
-        scrollView.backgroundColor = UIColor.black
+        scrollView.fillSuperview()
         scrollView.delegate = self
-        
-//        scrollView.addSubview(image2Wrapper)
-  
-        image2Wrapper.addSubview(imageView3)
+        scrollView.resizeScrollViewContentSize()
+        addSubview(imageView3)
+        image2Wrapper.addSubview(imageView4)
         addSubview(image2Wrapper)
         addSubview(thumbWrapper2)
-        
     }
     
     
@@ -214,8 +206,6 @@ extension DroneCollectionSwipeViewCell: UIScrollViewDelegate {
         }
         
         func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-            // Change the page indicator
-            
             if pageCounter > 1 {
                 if currentIndex == 0 {
                     currentIndex = 1
@@ -223,7 +213,6 @@ extension DroneCollectionSwipeViewCell: UIScrollViewDelegate {
                     currentIndex = 0
                 }
             }
-            
         }
 }
 
@@ -233,12 +222,10 @@ extension DroneCollectionSwipeViewCell {
         
         scrollView.addSubview(image2Wrapper)
         image2Wrapper.addSubview(imageView3)
-        
         scrollView.addSubview(thumbWrapper2)
         
-        addSubview(scrollView)
         addSubview(imageView4)
-        addSubview(image2Wrapper)
+        addSubview(scrollView)
         
         thumbWrapper2.addSubview(line)
         thumbWrapper2.addSubview(setIndicatorImage())
@@ -295,6 +282,7 @@ extension DroneCollectionSwipeViewCell {
         leading.constant = frame.width / 1.1
         
         imageView3.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+        imageView3.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1).isActive = true
         
         let tap = UIPanGestureRecognizer(target: self, action: #selector(gesture(sender:)))
         thumbWrapper2.isUserInteractionEnabled = true
@@ -317,6 +305,3 @@ extension DroneCollectionSwipeViewCell {
         }
     }
 }
-
-
-

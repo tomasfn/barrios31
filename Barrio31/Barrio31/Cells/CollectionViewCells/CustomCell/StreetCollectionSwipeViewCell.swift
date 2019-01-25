@@ -58,7 +58,6 @@ public class StreetCollectionSwipeViewCell: GeminiCell {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
         return iv
     }()
     
@@ -120,7 +119,6 @@ public class StreetCollectionSwipeViewCell: GeminiCell {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
-        //iv.clipsToBounds = true
         return iv
     }()
     
@@ -155,23 +153,15 @@ public class StreetCollectionSwipeViewCell: GeminiCell {
 
     // ************
     
-
-    
     func setIndicatorImage()->UIImageView{
         
         if state == "FUTURE" {
-            
             thumbImage.image = UIImage(named: "ic-ayer-manana")
-            
         }else{
-            
             thumbImage.image = UIImage(named: "ic-ayer-hoy")
-    
         }
-        
         return thumbImage
     }
-    
     
     // *****************
     
@@ -179,39 +169,29 @@ public class StreetCollectionSwipeViewCell: GeminiCell {
     func setupImages(_ images: [UIImage]){
 
         for i in 0..<images.count {
-            let imageView = UIImageView()
-            imageView.image = images[i]
-            let xPosition = UIScreen.main.bounds.width * CGFloat()
-            imageView.frame = CGRect(x: xPosition, y: 0, width: scrollView.frame.width , height: scrollView.frame.height)
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-            
-            imageView2.frame = CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
-            imageView1 = imageView
-            imageView2 = imageView
 
-            scrollView.addSubview(imageView1)
-            addSubview(imageView1)
+            imageView1.image = images[0]
+            imageView2.image = images[1]
+            
+            let xPosition = UIScreen.main.bounds.width * CGFloat()
+            image1Wrapper.frame = CGRect(x: xPosition, y: 0, width: self.frame.width, height: self.frame.height)
+        
+            imageView1.frame = CGRect(x: xPosition, y: 0, width: image1Wrapper.frame.width, height: image1Wrapper.frame.height)
+        
+            imageView2.frame = CGRect(x: xPosition, y: 0, width: image1Wrapper.frame.width, height: image1Wrapper.frame.height)
+
         }
 
-
-//        scrollView.fillSuperview()
-        scrollView.backgroundColor = UIColor.black
-        scrollView.alpha = 0.5
+        scrollView.fillSuperview()
         scrollView.delegate = self
-        
-//        scrollView.addSubview(image1Wrapper)
-        
-       
+        scrollView.resizeScrollViewContentSize()
+        addSubview(imageView1)
         image1Wrapper.addSubview(imageView2)
         addSubview(image1Wrapper)
         addSubview(thumbWrapper)
         
-//        initialize()
-
     }
     
-
     func setLabelAlpha() {
         if ayerLabel.alpha == 0.5 {
             ayerLabel.alpha = 1
@@ -225,14 +205,11 @@ public class StreetCollectionSwipeViewCell: GeminiCell {
 
 extension StreetCollectionSwipeViewCell: UIScrollViewDelegate {
     
-    
     private func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
     }
     
     private func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Change the page indicator
-        
         if pageCounter > 1 {
             if currentIndex == 0 {
                 currentIndex = 1
@@ -254,15 +231,9 @@ extension StreetCollectionSwipeViewCell {
 
         addSubview(imageView2)
         addSubview(scrollView)
-        addSubview(image1Wrapper)
 
         thumbWrapper.addSubview(line)
-        //thumbImage.image = imageIndicator()
-//        thumbImage.frame = CGRect(x: 0, y: 0, width: 350, height: 640)
         thumbWrapper.addSubview(setIndicatorImage())
-
-        //thumbWrapper.addSubview(thumb)
-
         addSubview(thumbWrapper)
 
         
@@ -281,13 +252,15 @@ extension StreetCollectionSwipeViewCell {
             image1Wrapper.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             image1Wrapper.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             image1Wrapper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            
             leading
             ])
         
         NSLayoutConstraint.activate([
             imageView1.topAnchor.constraint(equalTo: image1Wrapper.topAnchor, constant: 0),
             imageView1.bottomAnchor.constraint(equalTo: image1Wrapper.bottomAnchor, constant: 0),
-            imageView1.trailingAnchor.constraint(equalTo: image1Wrapper.trailingAnchor, constant: 0)
+            imageView1.trailingAnchor.constraint(equalTo: image1Wrapper.trailingAnchor, constant: 0),
+            imageView1.leadingAnchor.constraint(equalTo: image1Wrapper.leadingAnchor, constant: 0)
             ])
         
         
@@ -310,26 +283,20 @@ extension StreetCollectionSwipeViewCell {
             line.centerXAnchor.constraint(equalTo: thumbWrapper.centerXAnchor, constant: 0),
             line.centerYAnchor.constraint(equalTo: thumbWrapper.centerYAnchor, constant: 0),
             line.widthAnchor.constraint(equalTo: thumbWrapper.widthAnchor, multiplier: 0.1),
-            line.heightAnchor.constraint(equalTo: thumbWrapper.widthAnchor, multiplier: 40)
+            line.heightAnchor.constraint(equalTo: thumbWrapper.widthAnchor, multiplier: 30)
             ])
         
 
         leading.constant = frame.width / 1.1
         
         imageView1.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+        imageView1.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1).isActive = true
 
-        
         let tap = UIPanGestureRecognizer(target: self, action: #selector(gesture(sender:)))
-
-//        let swipe = UIPanGestureRecognizer(target: self, action: #selector(scrollViewSwipped(_:)))
-        
         thumbWrapper.isUserInteractionEnabled = true
         thumbWrapper.addGestureRecognizer(tap)
 
-        // thumbWrapper.addGestureRecognizer(swipe)
-  
     }
-    
     
     @objc func gesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self)
@@ -345,7 +312,6 @@ extension StreetCollectionSwipeViewCell {
         default: break
         }
     }
-    
 }
 
 
