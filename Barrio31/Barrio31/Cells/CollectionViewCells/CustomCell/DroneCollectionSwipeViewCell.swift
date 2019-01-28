@@ -14,6 +14,7 @@ import Gemini
 class DroneCollectionSwipeViewCell: GeminiCell {
     
     fileprivate var leading: NSLayoutConstraint!
+    fileprivate var trailing: NSLayoutConstraint!
     fileprivate var originRect: CGRect!
     
     
@@ -242,11 +243,12 @@ extension DroneCollectionSwipeViewCell {
         
         
         leading = image2Wrapper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0)
+        trailing = image2Wrapper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
         
         NSLayoutConstraint.activate([
             image2Wrapper.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             image2Wrapper.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            image2Wrapper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            trailing,
             leading
             ])
         
@@ -295,8 +297,8 @@ extension DroneCollectionSwipeViewCell {
         switch sender.state {
         case .began, .changed:
             var newLeading = originRect.origin.x + translation.x
-            newLeading = max(newLeading, 20)
-            newLeading = min(frame.width - 20, newLeading)
+            newLeading = max(newLeading, 50)
+            newLeading = min(frame.width - 50, newLeading)
             leading.constant = newLeading
             layoutIfNeeded()
         case .ended, .cancelled:

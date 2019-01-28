@@ -303,8 +303,8 @@ extension StreetCollectionSwipeViewCell {
         switch sender.state {
         case .began, .changed:
             var newLeading = originRect.origin.x + translation.x
-            newLeading = max(newLeading, 20)
-            newLeading = min(frame.width - 20, newLeading)
+            newLeading = max(newLeading, 50)
+            newLeading = min(frame.width - 50, newLeading)
             leading.constant = newLeading
             layoutIfNeeded()
         case .ended, .cancelled:
