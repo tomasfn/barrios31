@@ -58,6 +58,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        collectionView.reloadData()
         addLocationAndLayerBtns()
     }
     
@@ -102,7 +103,23 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         collectionView.dataSource = self
         
         flowLayout.scrollDirection = .horizontal
-        flowLayout.estimatedItemSize = .init(100, 80)
+        
+        // 1. request an UITraitCollection instance
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        
+        // 2. check the idiom
+        switch (deviceIdiom) {
+            
+        case .pad:
+            flowLayout.estimatedItemSize = .init(250, 80)
+        case .phone:
+            flowLayout.estimatedItemSize = .init(100, 80)
+        case .tv:
+            print("tvOS style UI")
+        default:
+            print("Unspecified UI idiom")
+        }
+        
         flowLayout.minimumInteritemSpacing = 0
         
         // minimumLineSpacing para los items debajo
@@ -411,7 +428,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
             selectedIndexs.append(indexPath.item)
         }
         drawMap()
-        collectionView.reloadData()
+        collectionView.reloadData()   
     }
     
     @objc func infoViewPressed () {
