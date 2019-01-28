@@ -732,6 +732,7 @@ extension MapDetailViewController : UICollectionViewDelegate, UICollectionViewDa
             .cubeAnimation()
             .shadowEffect(.fadeIn)
         
+        collectionView.isPagingEnabled = true
         collectionView.bounces = false
     }
     

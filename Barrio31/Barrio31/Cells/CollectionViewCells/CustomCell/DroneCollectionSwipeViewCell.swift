@@ -175,9 +175,9 @@ class DroneCollectionSwipeViewCell: GeminiCell {
             let xPosition = UIScreen.main.bounds.width * CGFloat()
             image2Wrapper.frame = CGRect(x: xPosition, y: 0, width: self.frame.width, height: self.frame.height)
             
-            imageView3.frame = CGRect(x: xPosition, y: 0, width: image2Wrapper.frame.width, height: image2Wrapper.frame.height)
-            
-            imageView4.frame = CGRect(x: xPosition, y: 0, width: image2Wrapper.frame.width, height: image2Wrapper.frame.height)
+//            imageView3.frame = CGRect(x: xPosition, y: 0, width: image2Wrapper.frame.width, height: image2Wrapper.frame.height)
+//            
+//            imageView4.frame = CGRect(x: xPosition, y: 0, width: image2Wrapper.frame.width, height: image2Wrapper.frame.height)
         }
         
         scrollView.fillSuperview()
@@ -223,7 +223,6 @@ extension DroneCollectionSwipeViewCell {
         
         scrollView.addSubview(image2Wrapper)
         image2Wrapper.addSubview(imageView3)
-        scrollView.addSubview(thumbWrapper2)
         
         addSubview(imageView4)
         addSubview(scrollView)

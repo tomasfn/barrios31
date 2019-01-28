@@ -58,6 +58,7 @@ public class StreetCollectionSwipeViewCell: GeminiCell {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
         return iv
     }()
     
@@ -176,9 +177,9 @@ public class StreetCollectionSwipeViewCell: GeminiCell {
             let xPosition = UIScreen.main.bounds.width * CGFloat()
             image1Wrapper.frame = CGRect(x: xPosition, y: 0, width: self.frame.width, height: self.frame.height)
         
-            imageView1.frame = CGRect(x: xPosition, y: 0, width: image1Wrapper.frame.width, height: image1Wrapper.frame.height)
-        
-            imageView2.frame = CGRect(x: xPosition, y: 0, width: image1Wrapper.frame.width, height: image1Wrapper.frame.height)
+//            imageView1.frame = CGRect(x: xPosition, y: 0, width: image1Wrapper.frame.width, height: image1Wrapper.frame.height)
+//
+//            imageView2.frame = CGRect(x: xPosition, y: 0, width: image1Wrapper.frame.width, height: image1Wrapper.frame.height)
 
         }
 
@@ -227,7 +228,6 @@ extension StreetCollectionSwipeViewCell {
         
         scrollView.addSubview(image1Wrapper)
         image1Wrapper.addSubview(imageView1)
-        scrollView.addSubview(thumbWrapper)
 
         addSubview(imageView2)
         addSubview(scrollView)
