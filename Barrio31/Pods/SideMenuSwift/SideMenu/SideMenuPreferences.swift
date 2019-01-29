@@ -99,7 +99,8 @@ public struct SideMenuPreferences {
         public var defaultCacheKey: String?
         
         /// The supported orientations of side menu controller. Default is `.portrait`.
-        public var supportedOrientations: UIInterfaceOrientationMask = .portrait
+        public var supportedIphoneOrientations: UIInterfaceOrientationMask = .portrait
+        public var supportedPadOrientation: UIInterfaceOrientationMask = .landscape
     }
     
     public var basic = Configuration()

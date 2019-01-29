@@ -632,7 +632,12 @@ open class SideMenuController: UIViewController {
     // MARK: Orientation
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-       return preferences.basic.supportedOrientations
+  
+        if UIDevice.current.userInterfaceIdiom == .pad{
+            return preferences.basic.supportedPadOrientation
+        }else{
+            return preferences.basic.supportedIphoneOrientations
+        }
     }
     
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
