@@ -443,6 +443,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         let map = MapDetailViewController()
         map.detail = infoView.detail
         self.navigationController?.pushViewController(map, animated: true)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
 }

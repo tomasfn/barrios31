@@ -55,7 +55,7 @@ class MenuViewController: BaseViewController {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         label.font = UIFont.chalet(fontSize: 14)
         label.textColor = UIColor(red:0.96, green:0.59, blue:0.17, alpha:1.0)
-        label.text = "Descarga a local"
+        label.text = "Descargar"
         label.frame.origin.x = customView.bounds.minX + 20
         label.frame.origin.y = customView.bounds.maxY
         label.sizeToFit()
