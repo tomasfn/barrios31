@@ -434,6 +434,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
             selectedIndexs.removeObject(indexPath.item)
         }else {
             selectedIndexs.append(indexPath.item)
+            print ("**************\(selectedIndexs)**************")
         }
         drawMap()
         collectionView.reloadData()   

@@ -19,7 +19,7 @@ import SDWebImage
 class MapDetailViewController: BaseViewController {
     
     var detail : PolygonDetail!
-    
+    var infoDetailView: InfoView!
     var droneBeforeImg: UIImage!
     var droneAfterImg: UIImage!
     var streetBeforeImg: UIImage!
@@ -95,11 +95,20 @@ class MapDetailViewController: BaseViewController {
         videoButton.titleLabel?.font =  UIFont.chalet(fontSize: 16)
         videoButton.setImage(#imageLiteral(resourceName: "ic-video"), for: .normal)
         videoButton.imageEdgeInsets = .init(top: 0, left: -40, bottom: 0, right: 0)
-       
         bottomView.addSubview(videoButton)
         videoButton.addTarget(self, action: #selector(MapDetailViewController.videoPressed), for: .touchUpInside)
         videoButton.anchor(bottomView.topAnchor, leading: infoButton.trailingAnchor, bottom: nil, trailing: nil, size : .init(view.width/2, 60))
         
+
+        if  detail.videoUrl == nil && detail.shortDescription == "" {
+            if detail.videoUrl == nil && detail.shortDescription == nil{
+            videoButton.isEnabled = false
+            infoButton.isEnabled = false
+            }else{
+                videoButton.isEnabled = false
+                infoButton.isEnabled = false
+            }
+        }
         
         view.isUserInteractionEnabled = true
     }
@@ -308,9 +317,14 @@ class MapDetailViewController: BaseViewController {
     // Info View
     @objc func infoPressed() {
         if infoView == nil {
-            createInfoView()
-        }else {
-            
+            if detail.shortDescription == "" || detail.shortDescription == nil{
+                SVProgressHUD.showError(withStatus: "No hay info disponible")
+            }
+            else {
+                createInfoView()
+            }
+        }
+            else {
             UIView.animate(withDuration: 0.3) {
                 self.infoView.alpha = 1.0
             }
