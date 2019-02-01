@@ -185,6 +185,7 @@ class ParticipaViewController: BaseViewController {
             collectionView.anchor(view.topAnchor, leading: view.leadingAnchor, bottom:mapView.topAnchor, trailing: view.trailingAnchor)
         }
         
+        collectionView.bounces = false
         collectionView.backgroundColor = UIColor.white
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "collectionCell")

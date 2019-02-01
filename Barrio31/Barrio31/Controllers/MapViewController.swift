@@ -412,7 +412,7 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
         let item = categorys[indexPath.item]
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-        cell.resizeWidth(categoryFloat: CGFloat(categorys.count))
+            cell.resizeWidth(categoryFloat: CGFloat(categorys.count))
         }
         
         if UIDevice.current.userInterfaceIdiom == .phone {
@@ -421,6 +421,8 @@ class MapViewController: BaseViewController , UICollectionViewDataSource , UICol
                 }
         }
         
+        collectionView.bounces = false
+
         cell.isPressed = selectedIndexs.contains(indexPath.item)
         cell.item = item
         
