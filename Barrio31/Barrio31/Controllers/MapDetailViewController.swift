@@ -320,7 +320,7 @@ class MapDetailViewController: BaseViewController {
             if detail.shortDescription == "" || detail.shortDescription == nil{
                 SVProgressHUD.showError(withStatus: "No hay info disponible")
             }
-            else {
+            else { 
                 createInfoView()
             }
         }

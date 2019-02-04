@@ -232,8 +232,8 @@ extension StreetCollectionSwipeViewCell {
         addSubview(imageView2)
         addSubview(scrollView)
 
-        thumbWrapper.addSubview(line)
         thumbWrapper.addSubview(setIndicatorImage())
+        thumbWrapper.addSubview(line)
         addSubview(thumbWrapper)
 
         

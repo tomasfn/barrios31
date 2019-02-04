@@ -227,8 +227,8 @@ extension DroneCollectionSwipeViewCell {
         addSubview(imageView4)
         addSubview(scrollView)
         
-        thumbWrapper2.addSubview(line)
         thumbWrapper2.addSubview(setIndicatorImage())
+        thumbWrapper2.addSubview(line)
         addSubview(thumbWrapper2)
         
         
